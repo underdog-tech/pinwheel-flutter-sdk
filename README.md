@@ -1,6 +1,6 @@
 # Flutter plugin for the Pinwheel SDK
 
-The Flutter plugin for [Pinwheel's Link SDK]() is a wrapper for the native Android and iOS SDKs and 
+The Flutter plugin for [Pinwheel's Link SDK](https://docs.getpinwheel.com/) is a wrapper for the native Android and iOS SDKs and 
 supports Link version 2.3.1.
 
 ## Build requirements
