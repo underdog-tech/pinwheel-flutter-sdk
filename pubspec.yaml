@@ -1,7 +1,8 @@
 name: pinwheel
 description: A flutter plugin for the Pinwheel Link SDK.
 version: 0.0.1
-homepage: https://www.pinwheelapi.com/
+homepage: https://github.com/underdog-tech/pinwheel-flutter-sdk
+documentation: https://github.com/underdog-tech/pinwheel-flutter-sdk
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
