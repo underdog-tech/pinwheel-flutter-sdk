@@ -1,16 +1,11 @@
-# pinwheel_example
+# Pinwheel Flutter SDK Example
 
-Demonstrates how to use the pinwheel plugin.
+This example app is a working demo of the `PinwheelLink` `StatefulWidget`. To use it, you will need to add your API secret to [lib/main.dart](./lib/main.dart).
 
-## Getting Started
+```
+const String API_SECRET = "";
+```
 
-This project is a starting point for a Flutter application.
+**Do not include your API secret in your app. You should fetch the Link token from your server.** To learn more about Link tokens, see the [Implementation Overview](https://docs.getpinwheel.com/docs/api/docs/introduction/Getting-Started.md#implementation-overview) section of our docs site.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For PinwheelLink implementation details, take a look at the repository's [README](../README.md). 
