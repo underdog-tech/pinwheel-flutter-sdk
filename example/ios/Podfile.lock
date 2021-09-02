@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - pinwheel (0.0.1):
+  - pinwheel (0.0.3):
     - Flutter
     - PinwheelSDK (= 2.3.6)
   - PinwheelSDK (2.3.6)
@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  pinwheel: fe5d0d72f7fac482483340a38e8b7486f72159a0
+  pinwheel: 882909f4154f75f8b94bf5c93cc09daf0f8b5e98
   PinwheelSDK: 15d692a41b44f293b7ef9047a709ee2a19667daa
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
