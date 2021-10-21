@@ -119,7 +119,6 @@ class Pinwheel {
       case 'onSuccess':
         try {
           var result = _standardSerializers.deserializeWith(PinwheelSuccessPayload.serializer, json.decode(call.arguments))!;
-          print(result);
           if (_onSuccess != null) {
             _onSuccess!(result);
           }
@@ -130,7 +129,6 @@ class Pinwheel {
       case 'onLogin':
         try {
           var result = _standardSerializers.deserializeWith(PinwheelLoginPayload.serializer, json.decode(call.arguments))!;
-          print(result);
           if (_onLogin != null) {
             _onLogin!(result);
           }
@@ -141,7 +139,6 @@ class Pinwheel {
       case 'onLoginAttempt':
         try {
           var result = _standardSerializers.deserializeWith(PinwheelLoginAttemptPayload.serializer, json.decode(call.arguments))!;
-          print(result);
           if (_onLoginAttempt != null) {
             _onLoginAttempt!(result);
           }

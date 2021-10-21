@@ -96,6 +96,10 @@ class BankingState extends State<Banking> {
     print(payload);
   }
 
+  _onLoginAttempt(PinwheelLoginAttemptPayload payload) {
+    print(payload);
+  }
+
   Future<void> handleButtonPress() async {
     TokenAttributes attributes = TokenAttributes(
       account_number: "304119574487",
@@ -124,6 +128,7 @@ class BankingState extends State<Banking> {
       onEvent: _onEvent,
       onSuccess: _onSuccess,
       onLogin: _onLogin,
+      onLoginAttempt: _onLoginAttempt,
     );
     Navigator.push(
       context,
