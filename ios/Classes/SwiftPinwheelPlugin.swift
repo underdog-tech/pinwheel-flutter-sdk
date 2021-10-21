@@ -122,6 +122,11 @@ extension FLNativeView: PinwheelDelegate {
                 let eventData = try! JSONEncoder().encode(event)
                 eventString = String(data: eventData, encoding: .utf8)!
             }
+        case .loginAttempt:
+            if let event = event as? PinwheelLoginAttemptPayload {
+                let eventData = try! JSONEncoder().encode(event)
+                eventString = String(data: eventData, encoding: .utf8)!
+            }
         case .inputAmount:
             if let event = event as? PinwheelAmountPayload {
                 let eventData = try! JSONEncoder().encode(event)
@@ -188,5 +193,15 @@ extension FLNativeView: PinwheelDelegate {
                 payload = jsonString
         }
         _channel?.invokeMethod("onLogin", arguments: payload)
+    }
+    
+    public func onLoginAttempt(_ result: PinwheelLoginAttemptPayload) {
+        var payload: String?
+        if let jsonData = try? JSONEncoder().encode(result),
+            let jsonString = String(data: jsonData, encoding: .utf8) {
+            
+                payload = jsonString
+        }
+        _channel?.invokeMethod("onLoginAttempt", arguments: payload)
     }
 }

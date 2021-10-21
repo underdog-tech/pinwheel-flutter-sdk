@@ -13,6 +13,7 @@ typedef PinwheelErrorCallback = void Function(PinwheelError error);
 typedef PinwheelEventCallback = void Function(String name, PinwheelEventPayload? payload);
 typedef PinwheelSuccessCallback = void Function(PinwheelSuccessPayload payload);
 typedef PinwheelLoginCallback = void Function(PinwheelLoginPayload payload);
+typedef PinwheelLoginAttemptCallback = void Function(PinwheelLoginAttemptPayload payload);
 
 class Pinwheel {
   static const MethodChannel _channel =
@@ -26,6 +27,7 @@ class Pinwheel {
   PinwheelEventCallback? _onEvent;
   PinwheelSuccessCallback? _onSuccess;
   PinwheelLoginCallback? _onLogin;
+  PinwheelLoginAttemptCallback? _onLoginAttempt;
 
   Pinwheel(
     int id,
@@ -33,7 +35,8 @@ class Pinwheel {
     PinwheelExitCallback? onExit,
     PinwheelEventCallback? onEvent,
     PinwheelSuccessCallback? onSuccess,
-    PinwheelLoginCallback? onLogin
+    PinwheelLoginCallback? onLogin,
+    PinwheelLoginAttemptCallback? onLoginAttempt
   ) {
 
     _channel.setMethodCallHandler(_handleMethod);
@@ -42,6 +45,7 @@ class Pinwheel {
     _onEvent = onEvent;
     _onSuccess = onSuccess;
     _onLogin = onLogin;
+    _onLoginAttempt = onLoginAttempt;
   }
 
   Future<dynamic> _handleMethod(MethodCall call) async {
@@ -65,6 +69,9 @@ class Pinwheel {
                   break;
                 case 'login':
                   payload = _standardSerializers.deserializeWith(PinwheelLoginPayload.serializer, json.decode(payloadString))!;
+                  break;
+                case 'login_attempt':
+                  payload = _standardSerializers.deserializeWith(PinwheelLoginAttemptPayload.serializer, json.decode(payloadString))!;
                   break;
                 case 'exit':
                   payload = _standardSerializers.deserializeWith(PinwheelSelectedEmployerPayload.serializer, json.decode(payloadString))!;
@@ -131,6 +138,17 @@ class Pinwheel {
           print(error);
         }
         break;
+      case 'onLoginAttempt':
+        try {
+          var result = _standardSerializers.deserializeWith(PinwheelLoginAttemptPayload.serializer, json.decode(call.arguments))!;
+          print(result);
+          if (_onLoginAttempt != null) {
+            _onLoginAttempt!(result);
+          }
+        } catch(error) {
+          print(error);
+        }
+        break;
     }
   }
 }
@@ -142,6 +160,7 @@ class PinwheelLink extends StatefulWidget {
   final PinwheelEventCallback? onEvent;
   final PinwheelSuccessCallback? onSuccess;
   final PinwheelLoginCallback? onLogin;
+  final PinwheelLoginAttemptCallback? onLoginAttempt;
 
   const PinwheelLink ({ 
     Key? key, 
@@ -150,7 +169,8 @@ class PinwheelLink extends StatefulWidget {
     this.onError,
     this.onEvent,
     this.onSuccess,
-    this.onLogin
+    this.onLogin,
+    this.onLoginAttempt
   }): super(key: key);
 
   @override
@@ -213,7 +233,8 @@ class PinwheelLinkState extends State<PinwheelLink> {
       widget.onExit,
       widget.onEvent,
       widget.onSuccess,
-      widget.onLogin
+      widget.onLogin,
+      widget.onLoginAttempt,
     );
   }
 }

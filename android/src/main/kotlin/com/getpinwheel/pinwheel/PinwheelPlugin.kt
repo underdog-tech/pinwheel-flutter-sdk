@@ -69,6 +69,12 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
       channel.invokeMethod("onLogin", gson.toJson(result))
     }
   }
+  
+  override fun onLoginAttempt(result: PinwheelLoginAttemptPayload) {
+    Handler(Looper.getMainLooper()).post {
+      channel.invokeMethod("onLoginAttempt", gson.toJson(result))
+    }
+  }
 
   override fun onError(error: PinwheelError) {
     Handler(Looper.getMainLooper()).post {
