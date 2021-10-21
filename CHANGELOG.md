@@ -1,3 +1,6 @@
+## 2.3.0
+Added support for login_attempt event.
+
 ## 0.0.3
 Added proguard R8 rule to protect Android Plugin classes from being removed.
 
