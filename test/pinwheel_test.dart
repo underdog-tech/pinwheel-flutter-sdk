@@ -18,7 +18,7 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    Pinwheel(23);
-    expect("hello", "hello");
+    // Pinwheel(23);
+    // expect("hello", "hello");
   });
 }
