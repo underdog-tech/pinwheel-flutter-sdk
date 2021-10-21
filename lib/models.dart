@@ -49,6 +49,15 @@ abstract class PinwheelLoginPayload implements PinwheelEventPayload, Built<Pinwh
   static Serializer<PinwheelLoginPayload> get serializer => _$pinwheelLoginPayloadSerializer;
 }
 
+abstract class PinwheelLoginAttemptPayload implements PinwheelEventPayload, Built<PinwheelLoginAttemptPayload, PinwheelLoginAttemptPayloadBuilder> {
+  String get platformId;
+
+  PinwheelLoginAttemptPayload._();
+
+  factory PinwheelLoginAttemptPayload([updates(PinwheelLoginAttemptPayloadBuilder b)]) = _$PinwheelLoginAttemptPayload;
+  static Serializer<PinwheelLoginAttemptPayload> get serializer => _$pinwheelLoginAttemptPayloadSerializer;
+}
+
 abstract class PinwheelParams implements PinwheelEventPayload, Built<PinwheelParams, PinwheelParamsBuilder> {
   PinwheelAmountPayload? get amount;
 

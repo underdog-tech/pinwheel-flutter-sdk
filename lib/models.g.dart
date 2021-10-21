@@ -14,6 +14,9 @@ Serializer<PinwheelExitPayload> _$pinwheelExitPayloadSerializer =
     new _$PinwheelExitPayloadSerializer();
 Serializer<PinwheelLoginPayload> _$pinwheelLoginPayloadSerializer =
     new _$PinwheelLoginPayloadSerializer();
+Serializer<PinwheelLoginAttemptPayload>
+    _$pinwheelLoginAttemptPayloadSerializer =
+    new _$PinwheelLoginAttemptPayloadSerializer();
 Serializer<PinwheelParams> _$pinwheelParamsSerializer =
     new _$PinwheelParamsSerializer();
 Serializer<PinwheelSelectedEmployerPayload>
@@ -235,6 +238,52 @@ class _$PinwheelLoginPayloadSerializer
           result.accountId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'platformId':
+          result.platformId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelLoginAttemptPayloadSerializer
+    implements StructuredSerializer<PinwheelLoginAttemptPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelLoginAttemptPayload,
+    _$PinwheelLoginAttemptPayload
+  ];
+  @override
+  final String wireName = 'PinwheelLoginAttemptPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelLoginAttemptPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'platformId',
+      serializers.serialize(object.platformId,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelLoginAttemptPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PinwheelLoginAttemptPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
         case 'platformId':
           result.platformId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -928,6 +977,93 @@ class PinwheelLoginPayloadBuilder
             accountId: BuiltValueNullFieldError.checkNotNull(
                 accountId, 'PinwheelLoginPayload', 'accountId'),
             platformId: platformId);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelLoginAttemptPayload extends PinwheelLoginAttemptPayload {
+  @override
+  final String platformId;
+
+  factory _$PinwheelLoginAttemptPayload(
+          [void Function(PinwheelLoginAttemptPayloadBuilder)? updates]) =>
+      (new PinwheelLoginAttemptPayloadBuilder()..update(updates)).build();
+
+  _$PinwheelLoginAttemptPayload._({required this.platformId}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        platformId, 'PinwheelLoginAttemptPayload', 'platformId');
+  }
+
+  @override
+  PinwheelLoginAttemptPayload rebuild(
+          void Function(PinwheelLoginAttemptPayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelLoginAttemptPayloadBuilder toBuilder() =>
+      new PinwheelLoginAttemptPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelLoginAttemptPayload &&
+        platformId == other.platformId;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, platformId.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('PinwheelLoginAttemptPayload')
+          ..add('platformId', platformId))
+        .toString();
+  }
+}
+
+class PinwheelLoginAttemptPayloadBuilder
+    implements
+        Builder<PinwheelLoginAttemptPayload,
+            PinwheelLoginAttemptPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelLoginAttemptPayload? _$v;
+
+  String? _platformId;
+  String? get platformId => _$this._platformId;
+  set platformId(covariant String? platformId) =>
+      _$this._platformId = platformId;
+
+  PinwheelLoginAttemptPayloadBuilder();
+
+  PinwheelLoginAttemptPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _platformId = $v.platformId;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelLoginAttemptPayload other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$PinwheelLoginAttemptPayload;
+  }
+
+  @override
+  void update(void Function(PinwheelLoginAttemptPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$PinwheelLoginAttemptPayload build() {
+    final _$result = _$v ??
+        new _$PinwheelLoginAttemptPayload._(
+            platformId: BuiltValueNullFieldError.checkNotNull(
+                platformId, 'PinwheelLoginAttemptPayload', 'platformId'));
     replace(_$result);
     return _$result;
   }

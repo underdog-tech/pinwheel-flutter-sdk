@@ -9,6 +9,7 @@ part 'serializers.g.dart';
   PinwheelError,
   PinwheelExitPayload,
   PinwheelLoginPayload,
+  PinwheelLoginAttemptPayload,
   PinwheelParams,
   PinwheelSelectedEmployerPayload,
   PinwheelSelectedPlatformPayload,
