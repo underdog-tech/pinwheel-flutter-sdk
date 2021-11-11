@@ -89,6 +89,7 @@ abstract class PinwheelSelectedPlatformPayload implements PinwheelEventPayload, 
 
 abstract class PinwheelSuccessPayload implements PinwheelEventPayload, Built<PinwheelSuccessPayload, PinwheelSuccessPayloadBuilder> {
   String get accountId;
+  String get platformId;
   String get job;
   PinwheelParams get params;
 

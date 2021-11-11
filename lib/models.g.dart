@@ -465,6 +465,9 @@ class _$PinwheelSuccessPayloadSerializer
       'accountId',
       serializers.serialize(object.accountId,
           specifiedType: const FullType(String)),
+      'platformId',
+      serializers.serialize(object.platformId,
+          specifiedType: const FullType(String)),
       'job',
       serializers.serialize(object.job, specifiedType: const FullType(String)),
       'params',
@@ -489,6 +492,10 @@ class _$PinwheelSuccessPayloadSerializer
       switch (key) {
         case 'accountId':
           result.accountId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'platformId':
+          result.platformId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
         case 'job':
@@ -1382,6 +1389,8 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
   @override
   final String accountId;
   @override
+  final String platformId;
+  @override
   final String job;
   @override
   final PinwheelParams params;
@@ -1391,10 +1400,15 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
       (new PinwheelSuccessPayloadBuilder()..update(updates)).build();
 
   _$PinwheelSuccessPayload._(
-      {required this.accountId, required this.job, required this.params})
+      {required this.accountId,
+      required this.platformId,
+      required this.job,
+      required this.params})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         accountId, 'PinwheelSuccessPayload', 'accountId');
+    BuiltValueNullFieldError.checkNotNull(
+        platformId, 'PinwheelSuccessPayload', 'platformId');
     BuiltValueNullFieldError.checkNotNull(job, 'PinwheelSuccessPayload', 'job');
     BuiltValueNullFieldError.checkNotNull(
         params, 'PinwheelSuccessPayload', 'params');
@@ -1414,20 +1428,23 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
     if (identical(other, this)) return true;
     return other is PinwheelSuccessPayload &&
         accountId == other.accountId &&
+        platformId == other.platformId &&
         job == other.job &&
         params == other.params;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, accountId.hashCode), job.hashCode), params.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, accountId.hashCode), platformId.hashCode), job.hashCode),
+        params.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('PinwheelSuccessPayload')
           ..add('accountId', accountId)
+          ..add('platformId', platformId)
           ..add('job', job)
           ..add('params', params))
         .toString();
@@ -1443,6 +1460,11 @@ class PinwheelSuccessPayloadBuilder
   String? _accountId;
   String? get accountId => _$this._accountId;
   set accountId(covariant String? accountId) => _$this._accountId = accountId;
+
+  String? _platformId;
+  String? get platformId => _$this._platformId;
+  set platformId(covariant String? platformId) =>
+      _$this._platformId = platformId;
 
   String? _job;
   String? get job => _$this._job;
@@ -1460,6 +1482,7 @@ class PinwheelSuccessPayloadBuilder
     final $v = _$v;
     if ($v != null) {
       _accountId = $v.accountId;
+      _platformId = $v.platformId;
       _job = $v.job;
       _params = $v.params.toBuilder();
       _$v = null;
@@ -1486,6 +1509,8 @@ class PinwheelSuccessPayloadBuilder
           new _$PinwheelSuccessPayload._(
               accountId: BuiltValueNullFieldError.checkNotNull(
                   accountId, 'PinwheelSuccessPayload', 'accountId'),
+              platformId: BuiltValueNullFieldError.checkNotNull(
+                  platformId, 'PinwheelSuccessPayload', 'platformId'),
               job: BuiltValueNullFieldError.checkNotNull(
                   job, 'PinwheelSuccessPayload', 'job'),
               params: params.build());
