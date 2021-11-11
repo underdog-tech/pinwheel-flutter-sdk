@@ -1,3 +1,6 @@
+## 2.3.1
+Added support for platformId field in success event payload.
+
 ## 2.3.0
 Added support for login_attempt event.
 
