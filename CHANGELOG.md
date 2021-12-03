@@ -1,16 +1,45 @@
-## 2.3.1
-Added support for platformId field in success event payload.
+# Change Log
 
-## 2.3.0
-Added support for login_attempt event.
+All notable changes to this project will be documented in this file.
 
-## 0.0.3
-Added proguard R8 rule to protect Android Plugin classes from being removed.
+## 2.3.x Releases
+- `2.3.x` Releases - [2.3.0](#230) | [2.3.1](#231) | [2.3.2](#232)
 
-## 0.0.2
-Update iOS dependency to [2.3.6](https://github.com/underdog-tech/pinwheel-ios-sdk/releases)
-Update Android dependency to [2.3.11](https://github.com/underdog-tech/pinwheel-android-sdk/releases)
+## 0.0.x Releases
+- `0.0.x` Releases - [0.0.1](#001) | [0.0.2](#002) | [0.0.3](#003)
 
-## 0.0.1
+---
 
-* Beta release
+### 2.3.2
+
+#### Added
+- Add support for input_required event.
+  - Added by [Robby Abaya](https://github.com/rawbee) in Pull Request [#16](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/16).
+
+### 2.3.1
+
+#### Added
+- Add support for platformId in success event payload.
+  - Added by [Robby Abaya](https://github.com/rawbee) in Pull Request [#14](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/14).
+
+### 2.3.0
+
+#### Added
+- Add support for login_attempt to example app.
+  - Added by [Robby Abaya](https://github.com/rawbee) in Pull Request [#12](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/12).
+- Add support for login attempt event
+  - Added by [Robby Abaya](https://github.com/rawbee) in Pull Request [#11](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/11).
+
+### 0.0.3
+
+#### Added
+- Added proguard R8 rule to protect Android Plugin classes from being removed.
+
+### 0.0.2
+
+#### Updated
+- Update iOS dependency to [2.3.6](https://github.com/underdog-tech/pinwheel-ios-sdk/releases)
+- Update Android dependency to [2.3.11](https://github.com/underdog-tech/pinwheel-android-sdk/releases)
+
+### 0.0.1
+Beta release
