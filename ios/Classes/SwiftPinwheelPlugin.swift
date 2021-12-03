@@ -103,7 +103,7 @@ extension FLNativeView: PinwheelDelegate {
         var argument: String?
         switch name {
         case .open:
-            // noop
+            // no payload
             break
         case .selectEmployer:
             if let event = event as? PinwheelSelectedEmployerPayload {
@@ -132,6 +132,9 @@ extension FLNativeView: PinwheelDelegate {
                 let eventData = try! JSONEncoder().encode(event)
                 eventString = String(data: eventData, encoding: .utf8)!
             }
+        case .inputRequired:
+            // no payload
+            break
         case .exit:
             if let event = event as? PinwheelExitPayload {
                 let eventData = try! JSONEncoder().encode(event)
