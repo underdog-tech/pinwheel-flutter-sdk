@@ -10,6 +10,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+### [2.3.3](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.3.3)
+
+#### Updated
+- Updated to use Flutter 3.0.0
+  - Added by [Robby Abaya](https://github.com/rawbee) in Pull Request [#18](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/18).
+
 ### [2.3.2](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.3.2)
 
 #### Added
