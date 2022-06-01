@@ -1,27 +1,24 @@
 package com.getpinwheel.pinwheel
 
-import androidx.annotation.NonNull
-import android.view.View
-import android.graphics.Color
 import android.content.Context
+import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
-import io.flutter.embedding.engine.plugins.FlutterPlugin
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
-import io.flutter.plugin.common.PluginRegistry.Registrar
-import io.flutter.plugin.platform.PlatformView
-import io.flutter.plugin.platform.PlatformViewFactory
-import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
+import android.view.View
+import android.webkit.WebView
+import android.widget.TextView
+import androidx.annotation.NonNull
+import com.google.gson.Gson
 import com.underdog_tech.pinwheel_android.Pinwheel
 import com.underdog_tech.pinwheel_android.PinwheelEventListener
 import com.underdog_tech.pinwheel_android.model.*
-import android.webkit.WebView
-import org.json.JSONObject
-import com.google.gson.Gson
-
-import android.widget.TextView
+import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.*
+import io.flutter.plugin.common.MethodChannel.MethodCallHandler
+import io.flutter.plugin.common.MethodChannel.Result
+import io.flutter.plugin.platform.PlatformView
+import io.flutter.plugin.platform.PlatformViewFactory
+import org.json.JSONObject
 
 data class PinwheelEventChannelArgument(
   val name: String,
@@ -147,9 +144,9 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
 }
 
 class NativeViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(JSONMessageCodec.INSTANCE) {
-  override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
+  override fun create(context: Context?, viewId: Int, args: Any?): PlatformView {
     val creationParams = args as JSONObject?
-    return NativeView(context, messenger, viewId, creationParams)
+    return NativeView(context!!, messenger, viewId, creationParams)
   }
 }
 

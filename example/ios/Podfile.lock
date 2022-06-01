@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/pinwheel/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   pinwheel: 386d0f138efc288dbc33ab2753ee024c8dc47850
   PinwheelSDK: 3f12912c5ab9d76a95c6f461f88a967cf01cf5e0
 
