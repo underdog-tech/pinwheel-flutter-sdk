@@ -10,6 +10,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+### [2.3.4](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.3.4)
+
+#### Updated
+- Updated to use built_value 8.3.2
+  - Added by [Robby Abaya](https://github.com/rawbee) in Pull Request [#18](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/20).
+- Updated models
+  - Added by [Robby Abaya](https://github.com/rawbee) in Pull Request [#18](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/21).
+
 ### [2.3.3](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.3.3)
 
 #### Updated
