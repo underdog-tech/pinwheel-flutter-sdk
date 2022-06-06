@@ -64,17 +64,17 @@ class _$PinwheelAmountPayloadSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'unit':
           result.unit = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'value':
           result.value = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double;
+              specifiedType: const FullType(double))! as double;
           break;
       }
     }
@@ -116,25 +116,25 @@ class _$PinwheelErrorSerializer implements StructuredSerializer<PinwheelError> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'type':
           result.type = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'code':
           result.code = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'message':
           result.message = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'pendingRetry':
           result.pendingRetry = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
       }
     }
@@ -177,7 +177,7 @@ class _$PinwheelExitPayloadSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -230,17 +230,17 @@ class _$PinwheelLoginPayloadSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'accountId':
           result.accountId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'platformId':
           result.platformId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -280,13 +280,13 @@ class _$PinwheelLoginAttemptPayloadSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'platformId':
           result.platformId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -325,7 +325,7 @@ class _$PinwheelParamsSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -375,17 +375,17 @@ class _$PinwheelSelectedEmployerPayloadSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'selectedEmployerId':
           result.selectedEmployerId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'selectedEmployerName':
           result.selectedEmployerName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -428,17 +428,17 @@ class _$PinwheelSelectedPlatformPayloadSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'selectedPlatformId':
           result.selectedPlatformId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'selectedPlatformName':
           result.selectedPlatformName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -486,21 +486,21 @@ class _$PinwheelSuccessPayloadSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'accountId':
           result.accountId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'platformId':
           result.platformId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'job':
           result.job = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'params':
           result.params.replace(serializers.deserialize(value,
@@ -551,17 +551,17 @@ class _$PinwheelEventChannelArgumentSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'name':
           result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'payload':
           result.payload = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -583,14 +583,14 @@ class _$PinwheelAmountPayload extends PinwheelAmountPayload {
 
   factory _$PinwheelAmountPayload(
           [void Function(PinwheelAmountPayloadBuilder)? updates]) =>
-      (new PinwheelAmountPayloadBuilder()..update(updates)).build();
+      (new PinwheelAmountPayloadBuilder()..update(updates))._build();
 
   _$PinwheelAmountPayload._({required this.unit, required this.value})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        unit, 'PinwheelAmountPayload', 'unit');
+        unit, r'PinwheelAmountPayload', 'unit');
     BuiltValueNullFieldError.checkNotNull(
-        value, 'PinwheelAmountPayload', 'value');
+        value, r'PinwheelAmountPayload', 'value');
   }
 
   @override
@@ -617,7 +617,7 @@ class _$PinwheelAmountPayload extends PinwheelAmountPayload {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('PinwheelAmountPayload')
+    return (newBuiltValueToStringHelper(r'PinwheelAmountPayload')
           ..add('unit', unit)
           ..add('value', value))
         .toString();
@@ -662,13 +662,15 @@ class PinwheelAmountPayloadBuilder
   }
 
   @override
-  _$PinwheelAmountPayload build() {
+  PinwheelAmountPayload build() => _build();
+
+  _$PinwheelAmountPayload _build() {
     final _$result = _$v ??
         new _$PinwheelAmountPayload._(
             unit: BuiltValueNullFieldError.checkNotNull(
-                unit, 'PinwheelAmountPayload', 'unit'),
+                unit, r'PinwheelAmountPayload', 'unit'),
             value: BuiltValueNullFieldError.checkNotNull(
-                value, 'PinwheelAmountPayload', 'value'));
+                value, r'PinwheelAmountPayload', 'value'));
     replace(_$result);
     return _$result;
   }
@@ -685,7 +687,7 @@ class _$PinwheelError extends PinwheelError {
   final bool pendingRetry;
 
   factory _$PinwheelError([void Function(PinwheelErrorBuilder)? updates]) =>
-      (new PinwheelErrorBuilder()..update(updates)).build();
+      (new PinwheelErrorBuilder()..update(updates))._build();
 
   _$PinwheelError._(
       {required this.type,
@@ -693,11 +695,11 @@ class _$PinwheelError extends PinwheelError {
       required this.message,
       required this.pendingRetry})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(type, 'PinwheelError', 'type');
-    BuiltValueNullFieldError.checkNotNull(code, 'PinwheelError', 'code');
-    BuiltValueNullFieldError.checkNotNull(message, 'PinwheelError', 'message');
+    BuiltValueNullFieldError.checkNotNull(type, r'PinwheelError', 'type');
+    BuiltValueNullFieldError.checkNotNull(code, r'PinwheelError', 'code');
+    BuiltValueNullFieldError.checkNotNull(message, r'PinwheelError', 'message');
     BuiltValueNullFieldError.checkNotNull(
-        pendingRetry, 'PinwheelError', 'pendingRetry');
+        pendingRetry, r'PinwheelError', 'pendingRetry');
   }
 
   @override
@@ -726,7 +728,7 @@ class _$PinwheelError extends PinwheelError {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('PinwheelError')
+    return (newBuiltValueToStringHelper(r'PinwheelError')
           ..add('type', type)
           ..add('code', code)
           ..add('message', message)
@@ -784,17 +786,19 @@ class PinwheelErrorBuilder
   }
 
   @override
-  _$PinwheelError build() {
+  PinwheelError build() => _build();
+
+  _$PinwheelError _build() {
     final _$result = _$v ??
         new _$PinwheelError._(
             type: BuiltValueNullFieldError.checkNotNull(
-                type, 'PinwheelError', 'type'),
+                type, r'PinwheelError', 'type'),
             code: BuiltValueNullFieldError.checkNotNull(
-                code, 'PinwheelError', 'code'),
+                code, r'PinwheelError', 'code'),
             message: BuiltValueNullFieldError.checkNotNull(
-                message, 'PinwheelError', 'message'),
+                message, r'PinwheelError', 'message'),
             pendingRetry: BuiltValueNullFieldError.checkNotNull(
-                pendingRetry, 'PinwheelError', 'pendingRetry'));
+                pendingRetry, r'PinwheelError', 'pendingRetry'));
     replace(_$result);
     return _$result;
   }
@@ -806,7 +810,7 @@ class _$PinwheelExitPayload extends PinwheelExitPayload {
 
   factory _$PinwheelExitPayload(
           [void Function(PinwheelExitPayloadBuilder)? updates]) =>
-      (new PinwheelExitPayloadBuilder()..update(updates)).build();
+      (new PinwheelExitPayloadBuilder()..update(updates))._build();
 
   _$PinwheelExitPayload._({this.error}) : super._();
 
@@ -832,7 +836,7 @@ class _$PinwheelExitPayload extends PinwheelExitPayload {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('PinwheelExitPayload')
+    return (newBuiltValueToStringHelper(r'PinwheelExitPayload')
           ..add('error', error))
         .toString();
   }
@@ -872,7 +876,9 @@ class PinwheelExitPayloadBuilder
   }
 
   @override
-  _$PinwheelExitPayload build() {
+  PinwheelExitPayload build() => _build();
+
+  _$PinwheelExitPayload _build() {
     _$PinwheelExitPayload _$result;
     try {
       _$result = _$v ?? new _$PinwheelExitPayload._(error: _error?.build());
@@ -883,7 +889,7 @@ class PinwheelExitPayloadBuilder
         _error?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'PinwheelExitPayload', _$failedField, e.toString());
+            r'PinwheelExitPayload', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -900,12 +906,12 @@ class _$PinwheelLoginPayload extends PinwheelLoginPayload {
 
   factory _$PinwheelLoginPayload(
           [void Function(PinwheelLoginPayloadBuilder)? updates]) =>
-      (new PinwheelLoginPayloadBuilder()..update(updates)).build();
+      (new PinwheelLoginPayloadBuilder()..update(updates))._build();
 
   _$PinwheelLoginPayload._({required this.accountId, this.platformId})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        accountId, 'PinwheelLoginPayload', 'accountId');
+        accountId, r'PinwheelLoginPayload', 'accountId');
   }
 
   @override
@@ -932,7 +938,7 @@ class _$PinwheelLoginPayload extends PinwheelLoginPayload {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('PinwheelLoginPayload')
+    return (newBuiltValueToStringHelper(r'PinwheelLoginPayload')
           ..add('accountId', accountId)
           ..add('platformId', platformId))
         .toString();
@@ -978,11 +984,13 @@ class PinwheelLoginPayloadBuilder
   }
 
   @override
-  _$PinwheelLoginPayload build() {
+  PinwheelLoginPayload build() => _build();
+
+  _$PinwheelLoginPayload _build() {
     final _$result = _$v ??
         new _$PinwheelLoginPayload._(
             accountId: BuiltValueNullFieldError.checkNotNull(
-                accountId, 'PinwheelLoginPayload', 'accountId'),
+                accountId, r'PinwheelLoginPayload', 'accountId'),
             platformId: platformId);
     replace(_$result);
     return _$result;
@@ -995,11 +1003,11 @@ class _$PinwheelLoginAttemptPayload extends PinwheelLoginAttemptPayload {
 
   factory _$PinwheelLoginAttemptPayload(
           [void Function(PinwheelLoginAttemptPayloadBuilder)? updates]) =>
-      (new PinwheelLoginAttemptPayloadBuilder()..update(updates)).build();
+      (new PinwheelLoginAttemptPayloadBuilder()..update(updates))._build();
 
   _$PinwheelLoginAttemptPayload._({required this.platformId}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        platformId, 'PinwheelLoginAttemptPayload', 'platformId');
+        platformId, r'PinwheelLoginAttemptPayload', 'platformId');
   }
 
   @override
@@ -1025,7 +1033,7 @@ class _$PinwheelLoginAttemptPayload extends PinwheelLoginAttemptPayload {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('PinwheelLoginAttemptPayload')
+    return (newBuiltValueToStringHelper(r'PinwheelLoginAttemptPayload')
           ..add('platformId', platformId))
         .toString();
   }
@@ -1066,11 +1074,13 @@ class PinwheelLoginAttemptPayloadBuilder
   }
 
   @override
-  _$PinwheelLoginAttemptPayload build() {
+  PinwheelLoginAttemptPayload build() => _build();
+
+  _$PinwheelLoginAttemptPayload _build() {
     final _$result = _$v ??
         new _$PinwheelLoginAttemptPayload._(
             platformId: BuiltValueNullFieldError.checkNotNull(
-                platformId, 'PinwheelLoginAttemptPayload', 'platformId'));
+                platformId, r'PinwheelLoginAttemptPayload', 'platformId'));
     replace(_$result);
     return _$result;
   }
@@ -1081,7 +1091,7 @@ class _$PinwheelParams extends PinwheelParams {
   final PinwheelAmountPayload? amount;
 
   factory _$PinwheelParams([void Function(PinwheelParamsBuilder)? updates]) =>
-      (new PinwheelParamsBuilder()..update(updates)).build();
+      (new PinwheelParamsBuilder()..update(updates))._build();
 
   _$PinwheelParams._({this.amount}) : super._();
 
@@ -1106,7 +1116,7 @@ class _$PinwheelParams extends PinwheelParams {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('PinwheelParams')
+    return (newBuiltValueToStringHelper(r'PinwheelParams')
           ..add('amount', amount))
         .toString();
   }
@@ -1147,7 +1157,9 @@ class PinwheelParamsBuilder
   }
 
   @override
-  _$PinwheelParams build() {
+  PinwheelParams build() => _build();
+
+  _$PinwheelParams _build() {
     _$PinwheelParams _$result;
     try {
       _$result = _$v ?? new _$PinwheelParams._(amount: _amount?.build());
@@ -1158,7 +1170,7 @@ class PinwheelParamsBuilder
         _amount?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'PinwheelParams', _$failedField, e.toString());
+            r'PinwheelParams', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -1176,15 +1188,15 @@ class _$PinwheelSelectedEmployerPayload
 
   factory _$PinwheelSelectedEmployerPayload(
           [void Function(PinwheelSelectedEmployerPayloadBuilder)? updates]) =>
-      (new PinwheelSelectedEmployerPayloadBuilder()..update(updates)).build();
+      (new PinwheelSelectedEmployerPayloadBuilder()..update(updates))._build();
 
   _$PinwheelSelectedEmployerPayload._(
       {required this.selectedEmployerId, required this.selectedEmployerName})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(selectedEmployerId,
-        'PinwheelSelectedEmployerPayload', 'selectedEmployerId');
+        r'PinwheelSelectedEmployerPayload', 'selectedEmployerId');
     BuiltValueNullFieldError.checkNotNull(selectedEmployerName,
-        'PinwheelSelectedEmployerPayload', 'selectedEmployerName');
+        r'PinwheelSelectedEmployerPayload', 'selectedEmployerName');
   }
 
   @override
@@ -1212,7 +1224,7 @@ class _$PinwheelSelectedEmployerPayload
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('PinwheelSelectedEmployerPayload')
+    return (newBuiltValueToStringHelper(r'PinwheelSelectedEmployerPayload')
           ..add('selectedEmployerId', selectedEmployerId)
           ..add('selectedEmployerName', selectedEmployerName))
         .toString();
@@ -1260,16 +1272,18 @@ class PinwheelSelectedEmployerPayloadBuilder
   }
 
   @override
-  _$PinwheelSelectedEmployerPayload build() {
+  PinwheelSelectedEmployerPayload build() => _build();
+
+  _$PinwheelSelectedEmployerPayload _build() {
     final _$result = _$v ??
         new _$PinwheelSelectedEmployerPayload._(
             selectedEmployerId: BuiltValueNullFieldError.checkNotNull(
                 selectedEmployerId,
-                'PinwheelSelectedEmployerPayload',
+                r'PinwheelSelectedEmployerPayload',
                 'selectedEmployerId'),
             selectedEmployerName: BuiltValueNullFieldError.checkNotNull(
                 selectedEmployerName,
-                'PinwheelSelectedEmployerPayload',
+                r'PinwheelSelectedEmployerPayload',
                 'selectedEmployerName'));
     replace(_$result);
     return _$result;
@@ -1285,15 +1299,15 @@ class _$PinwheelSelectedPlatformPayload
 
   factory _$PinwheelSelectedPlatformPayload(
           [void Function(PinwheelSelectedPlatformPayloadBuilder)? updates]) =>
-      (new PinwheelSelectedPlatformPayloadBuilder()..update(updates)).build();
+      (new PinwheelSelectedPlatformPayloadBuilder()..update(updates))._build();
 
   _$PinwheelSelectedPlatformPayload._(
       {required this.selectedPlatformId, required this.selectedPlatformName})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(selectedPlatformId,
-        'PinwheelSelectedPlatformPayload', 'selectedPlatformId');
+        r'PinwheelSelectedPlatformPayload', 'selectedPlatformId');
     BuiltValueNullFieldError.checkNotNull(selectedPlatformName,
-        'PinwheelSelectedPlatformPayload', 'selectedPlatformName');
+        r'PinwheelSelectedPlatformPayload', 'selectedPlatformName');
   }
 
   @override
@@ -1321,7 +1335,7 @@ class _$PinwheelSelectedPlatformPayload
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('PinwheelSelectedPlatformPayload')
+    return (newBuiltValueToStringHelper(r'PinwheelSelectedPlatformPayload')
           ..add('selectedPlatformId', selectedPlatformId)
           ..add('selectedPlatformName', selectedPlatformName))
         .toString();
@@ -1369,16 +1383,18 @@ class PinwheelSelectedPlatformPayloadBuilder
   }
 
   @override
-  _$PinwheelSelectedPlatformPayload build() {
+  PinwheelSelectedPlatformPayload build() => _build();
+
+  _$PinwheelSelectedPlatformPayload _build() {
     final _$result = _$v ??
         new _$PinwheelSelectedPlatformPayload._(
             selectedPlatformId: BuiltValueNullFieldError.checkNotNull(
                 selectedPlatformId,
-                'PinwheelSelectedPlatformPayload',
+                r'PinwheelSelectedPlatformPayload',
                 'selectedPlatformId'),
             selectedPlatformName: BuiltValueNullFieldError.checkNotNull(
                 selectedPlatformName,
-                'PinwheelSelectedPlatformPayload',
+                r'PinwheelSelectedPlatformPayload',
                 'selectedPlatformName'));
     replace(_$result);
     return _$result;
@@ -1397,7 +1413,7 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
 
   factory _$PinwheelSuccessPayload(
           [void Function(PinwheelSuccessPayloadBuilder)? updates]) =>
-      (new PinwheelSuccessPayloadBuilder()..update(updates)).build();
+      (new PinwheelSuccessPayloadBuilder()..update(updates))._build();
 
   _$PinwheelSuccessPayload._(
       {required this.accountId,
@@ -1406,12 +1422,13 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
       required this.params})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        accountId, 'PinwheelSuccessPayload', 'accountId');
+        accountId, r'PinwheelSuccessPayload', 'accountId');
     BuiltValueNullFieldError.checkNotNull(
-        platformId, 'PinwheelSuccessPayload', 'platformId');
-    BuiltValueNullFieldError.checkNotNull(job, 'PinwheelSuccessPayload', 'job');
+        platformId, r'PinwheelSuccessPayload', 'platformId');
     BuiltValueNullFieldError.checkNotNull(
-        params, 'PinwheelSuccessPayload', 'params');
+        job, r'PinwheelSuccessPayload', 'job');
+    BuiltValueNullFieldError.checkNotNull(
+        params, r'PinwheelSuccessPayload', 'params');
   }
 
   @override
@@ -1442,7 +1459,7 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('PinwheelSuccessPayload')
+    return (newBuiltValueToStringHelper(r'PinwheelSuccessPayload')
           ..add('accountId', accountId)
           ..add('platformId', platformId)
           ..add('job', job)
@@ -1502,17 +1519,19 @@ class PinwheelSuccessPayloadBuilder
   }
 
   @override
-  _$PinwheelSuccessPayload build() {
+  PinwheelSuccessPayload build() => _build();
+
+  _$PinwheelSuccessPayload _build() {
     _$PinwheelSuccessPayload _$result;
     try {
       _$result = _$v ??
           new _$PinwheelSuccessPayload._(
               accountId: BuiltValueNullFieldError.checkNotNull(
-                  accountId, 'PinwheelSuccessPayload', 'accountId'),
+                  accountId, r'PinwheelSuccessPayload', 'accountId'),
               platformId: BuiltValueNullFieldError.checkNotNull(
-                  platformId, 'PinwheelSuccessPayload', 'platformId'),
+                  platformId, r'PinwheelSuccessPayload', 'platformId'),
               job: BuiltValueNullFieldError.checkNotNull(
-                  job, 'PinwheelSuccessPayload', 'job'),
+                  job, r'PinwheelSuccessPayload', 'job'),
               params: params.build());
     } catch (_) {
       late String _$failedField;
@@ -1521,7 +1540,7 @@ class PinwheelSuccessPayloadBuilder
         params.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'PinwheelSuccessPayload', _$failedField, e.toString());
+            r'PinwheelSuccessPayload', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -1538,12 +1557,12 @@ class _$PinwheelEventChannelArgument extends PinwheelEventChannelArgument {
 
   factory _$PinwheelEventChannelArgument(
           [void Function(PinwheelEventChannelArgumentBuilder)? updates]) =>
-      (new PinwheelEventChannelArgumentBuilder()..update(updates)).build();
+      (new PinwheelEventChannelArgumentBuilder()..update(updates))._build();
 
   _$PinwheelEventChannelArgument._({required this.name, this.payload})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        name, 'PinwheelEventChannelArgument', 'name');
+        name, r'PinwheelEventChannelArgument', 'name');
   }
 
   @override
@@ -1570,7 +1589,7 @@ class _$PinwheelEventChannelArgument extends PinwheelEventChannelArgument {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('PinwheelEventChannelArgument')
+    return (newBuiltValueToStringHelper(r'PinwheelEventChannelArgument')
           ..add('name', name)
           ..add('payload', payload))
         .toString();
@@ -1615,15 +1634,17 @@ class PinwheelEventChannelArgumentBuilder
   }
 
   @override
-  _$PinwheelEventChannelArgument build() {
+  PinwheelEventChannelArgument build() => _build();
+
+  _$PinwheelEventChannelArgument _build() {
     final _$result = _$v ??
         new _$PinwheelEventChannelArgument._(
             name: BuiltValueNullFieldError.checkNotNull(
-                name, 'PinwheelEventChannelArgument', 'name'),
+                name, r'PinwheelEventChannelArgument', 'name'),
             payload: payload);
     replace(_$result);
     return _$result;
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
