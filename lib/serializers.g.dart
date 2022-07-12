@@ -7,10 +7,12 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(PinhweelAllocation.serializer)
       ..add(PinwheelAmountPayload.serializer)
       ..add(PinwheelError.serializer)
       ..add(PinwheelEventChannelArgument.serializer)
       ..add(PinwheelExitPayload.serializer)
+      ..add(PinwheelInputAllocationPayload.serializer)
       ..add(PinwheelLoginAttemptPayload.serializer)
       ..add(PinwheelLoginPayload.serializer)
       ..add(PinwheelParams.serializer)

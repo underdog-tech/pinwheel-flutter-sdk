@@ -132,6 +132,11 @@ extension FLNativeView: PinwheelDelegate {
                 let eventData = try! JSONEncoder().encode(event)
                 eventString = String(data: eventData, encoding: .utf8)!
             }
+        case .inputAllocation:
+            if let event = event as? PinwheelInputAllocationPayload {
+                let eventData = try! JSONEncoder().encode(event)
+                eventString = String(data: eventData, encoding: .utf8)!
+            }
         case .inputRequired:
             // no payload
             break
