@@ -6,6 +6,11 @@ part of 'models.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializer<PinhweelAllocation> _$pinhweelAllocationSerializer =
+    new _$PinhweelAllocationSerializer();
+Serializer<PinwheelInputAllocationPayload>
+    _$pinwheelInputAllocationPayloadSerializer =
+    new _$PinwheelInputAllocationPayloadSerializer();
 Serializer<PinwheelAmountPayload> _$pinwheelAmountPayloadSerializer =
     new _$PinwheelAmountPayloadSerializer();
 Serializer<PinwheelError> _$pinwheelErrorSerializer =
@@ -30,6 +35,117 @@ Serializer<PinwheelSuccessPayload> _$pinwheelSuccessPayloadSerializer =
 Serializer<PinwheelEventChannelArgument>
     _$pinwheelEventChannelArgumentSerializer =
     new _$PinwheelEventChannelArgumentSerializer();
+
+class _$PinhweelAllocationSerializer
+    implements StructuredSerializer<PinhweelAllocation> {
+  @override
+  final Iterable<Type> types = const [PinhweelAllocation, _$PinhweelAllocation];
+  @override
+  final String wireName = 'PinhweelAllocation';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinhweelAllocation object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'type',
+      serializers.serialize(object.type, specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.value;
+    if (value != null) {
+      result
+        ..add('value')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    return result;
+  }
+
+  @override
+  PinhweelAllocation deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PinhweelAllocationBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'type':
+          result.type = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelInputAllocationPayloadSerializer
+    implements StructuredSerializer<PinwheelInputAllocationPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelInputAllocationPayload,
+    _$PinwheelInputAllocationPayload
+  ];
+  @override
+  final String wireName = 'PinwheelInputAllocationPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelInputAllocationPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'action',
+      serializers.serialize(object.action,
+          specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.allocation;
+    if (value != null) {
+      result
+        ..add('allocation')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(PinhweelAllocation)));
+    }
+    return result;
+  }
+
+  @override
+  PinwheelInputAllocationPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PinwheelInputAllocationPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'action':
+          result.action = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'allocation':
+          result.allocation.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(PinhweelAllocation))!
+              as PinhweelAllocation);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
 
 class _$PinwheelAmountPayloadSerializer
     implements StructuredSerializer<PinwheelAmountPayload> {
@@ -573,6 +689,216 @@ class _$PinwheelEventChannelArgumentSerializer
 abstract class PinwheelEventPayloadBuilder {
   void replace(PinwheelEventPayload other);
   void update(void Function(PinwheelEventPayloadBuilder) updates);
+}
+
+class _$PinhweelAllocation extends PinhweelAllocation {
+  @override
+  final String type;
+  @override
+  final double? value;
+
+  factory _$PinhweelAllocation(
+          [void Function(PinhweelAllocationBuilder)? updates]) =>
+      (new PinhweelAllocationBuilder()..update(updates))._build();
+
+  _$PinhweelAllocation._({required this.type, this.value}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(type, r'PinhweelAllocation', 'type');
+  }
+
+  @override
+  PinhweelAllocation rebuild(
+          void Function(PinhweelAllocationBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinhweelAllocationBuilder toBuilder() =>
+      new PinhweelAllocationBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinhweelAllocation &&
+        type == other.type &&
+        value == other.value;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, type.hashCode), value.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinhweelAllocation')
+          ..add('type', type)
+          ..add('value', value))
+        .toString();
+  }
+}
+
+class PinhweelAllocationBuilder
+    implements
+        Builder<PinhweelAllocation, PinhweelAllocationBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinhweelAllocation? _$v;
+
+  String? _type;
+  String? get type => _$this._type;
+  set type(covariant String? type) => _$this._type = type;
+
+  double? _value;
+  double? get value => _$this._value;
+  set value(covariant double? value) => _$this._value = value;
+
+  PinhweelAllocationBuilder();
+
+  PinhweelAllocationBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _type = $v.type;
+      _value = $v.value;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinhweelAllocation other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$PinhweelAllocation;
+  }
+
+  @override
+  void update(void Function(PinhweelAllocationBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinhweelAllocation build() => _build();
+
+  _$PinhweelAllocation _build() {
+    final _$result = _$v ??
+        new _$PinhweelAllocation._(
+            type: BuiltValueNullFieldError.checkNotNull(
+                type, r'PinhweelAllocation', 'type'),
+            value: value);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelInputAllocationPayload extends PinwheelInputAllocationPayload {
+  @override
+  final String action;
+  @override
+  final PinhweelAllocation? allocation;
+
+  factory _$PinwheelInputAllocationPayload(
+          [void Function(PinwheelInputAllocationPayloadBuilder)? updates]) =>
+      (new PinwheelInputAllocationPayloadBuilder()..update(updates))._build();
+
+  _$PinwheelInputAllocationPayload._({required this.action, this.allocation})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        action, r'PinwheelInputAllocationPayload', 'action');
+  }
+
+  @override
+  PinwheelInputAllocationPayload rebuild(
+          void Function(PinwheelInputAllocationPayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelInputAllocationPayloadBuilder toBuilder() =>
+      new PinwheelInputAllocationPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelInputAllocationPayload &&
+        action == other.action &&
+        allocation == other.allocation;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, action.hashCode), allocation.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelInputAllocationPayload')
+          ..add('action', action)
+          ..add('allocation', allocation))
+        .toString();
+  }
+}
+
+class PinwheelInputAllocationPayloadBuilder
+    implements
+        Builder<PinwheelInputAllocationPayload,
+            PinwheelInputAllocationPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelInputAllocationPayload? _$v;
+
+  String? _action;
+  String? get action => _$this._action;
+  set action(covariant String? action) => _$this._action = action;
+
+  PinhweelAllocationBuilder? _allocation;
+  PinhweelAllocationBuilder get allocation =>
+      _$this._allocation ??= new PinhweelAllocationBuilder();
+  set allocation(covariant PinhweelAllocationBuilder? allocation) =>
+      _$this._allocation = allocation;
+
+  PinwheelInputAllocationPayloadBuilder();
+
+  PinwheelInputAllocationPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _action = $v.action;
+      _allocation = $v.allocation?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelInputAllocationPayload other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$PinwheelInputAllocationPayload;
+  }
+
+  @override
+  void update(void Function(PinwheelInputAllocationPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelInputAllocationPayload build() => _build();
+
+  _$PinwheelInputAllocationPayload _build() {
+    _$PinwheelInputAllocationPayload _$result;
+    try {
+      _$result = _$v ??
+          new _$PinwheelInputAllocationPayload._(
+              action: BuiltValueNullFieldError.checkNotNull(
+                  action, r'PinwheelInputAllocationPayload', 'action'),
+              allocation: _allocation?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'allocation';
+        _allocation?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'PinwheelInputAllocationPayload', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
 }
 
 class _$PinwheelAmountPayload extends PinwheelAmountPayload {
