@@ -10,6 +10,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+### [2.3.6](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.3.6)
+
+#### Updated
+- Updated Android project
+  - Added by [Robby Abaya](https://github.com/rawbee) in Pull Request [#18](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/25).
+
 ### [2.3.5](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.3.5)
 
 #### Added
