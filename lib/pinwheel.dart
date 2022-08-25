@@ -73,6 +73,12 @@ class Pinwheel {
                 case 'login_attempt':
                   payload = _standardSerializers.deserializeWith(PinwheelLoginAttemptPayload.serializer, json.decode(payloadString))!;
                   break;
+                case 'input_amount':
+                  payload = _standardSerializers.deserializeWith(PinwheelAmountPayload.serializer, json.decode(payloadString));
+                  break;
+                case 'input_allocation':
+                  payload = _standardSerializers.deserializeWith(PinwheelInputAllocationPayload.serializer, json.decode(payloadString));
+                  break;
                 case 'exit':
                   payload = _standardSerializers.deserializeWith(PinwheelSelectedEmployerPayload.serializer, json.decode(payloadString))!;
                   break;

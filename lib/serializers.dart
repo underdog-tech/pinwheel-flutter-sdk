@@ -5,7 +5,9 @@ part 'serializers.g.dart';
 
 // ignore: unnecessary_const
 @SerializersFor(const [
+  PinhweelAllocation,
   PinwheelAmountPayload,
+  PinwheelInputAllocationPayload,
   PinwheelError,
   PinwheelExitPayload,
   PinwheelLoginPayload,

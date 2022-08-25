@@ -81,7 +81,7 @@ class BankingState extends State<Banking> {
   }
 
   _onEvent(String name, PinwheelEventPayload? payload) {
-    print(payload);
+    print("name: ${name}, payload: ${payload}");
   }
 
   _onError(PinwheelError error) {

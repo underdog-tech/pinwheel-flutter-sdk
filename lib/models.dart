@@ -10,6 +10,24 @@ abstract class PinwheelEventPayload extends Object {
   PinwheelEventPayloadBuilder toBuilder();
 }
 
+abstract class PinhweelAllocation implements PinwheelEventPayload, Built<PinhweelAllocation, PinhweelAllocationBuilder> {
+  String get type;
+  double? get value;
+
+  PinhweelAllocation._();
+  factory PinhweelAllocation([updates(PinhweelAllocationBuilder b)]) = _$PinhweelAllocation;
+  static Serializer<PinhweelAllocation> get serializer => _$pinhweelAllocationSerializer;
+}
+
+abstract class PinwheelInputAllocationPayload implements PinwheelEventPayload, Built<PinwheelInputAllocationPayload, PinwheelInputAllocationPayloadBuilder> {
+  String get action;
+  PinhweelAllocation? get allocation;
+
+  PinwheelInputAllocationPayload._();
+  factory PinwheelInputAllocationPayload([updates(PinwheelInputAllocationPayloadBuilder b)]) = _$PinwheelInputAllocationPayload;
+  static Serializer<PinwheelInputAllocationPayload> get serializer => _$pinwheelInputAllocationPayloadSerializer;
+}
+
 abstract class PinwheelAmountPayload implements PinwheelEventPayload, Built<PinwheelAmountPayload, PinwheelAmountPayloadBuilder> {
   String get unit;
   double get value;
