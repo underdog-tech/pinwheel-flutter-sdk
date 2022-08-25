@@ -108,6 +108,10 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
         val obj = PinwheelEventChannelArgument("login", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
+      PinwheelEventType.LOGIN_ATTEMPT -> {
+        val obj = PinwheelEventChannelArgument("login_attempt", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
       PinwheelEventType.INPUT_AMOUNT -> {
         val obj = PinwheelEventChannelArgument("input_amount", gson.toJson(payload))
         argument = gson.toJson(obj)
@@ -120,23 +124,18 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
         val obj = PinwheelEventChannelArgument("input_required", null)
         argument = gson.toJson(obj)
       }
-
       PinwheelEventType.EXIT -> {
         val obj = PinwheelEventChannelArgument("exit", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
-
       PinwheelEventType.SUCCESS -> {
         val obj = PinwheelEventChannelArgument("success", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
-
       PinwheelEventType.ERROR -> {
         val obj = PinwheelEventChannelArgument("error", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
-
-
     }
 
     Handler(Looper.getMainLooper()).post {

@@ -2,7 +2,7 @@ group 'com.getpinwheel.pinwheel'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.6.0'
+    ext.kotlin_version = '1.7.10'
     repositories {
         google()
         jcenter()
@@ -33,7 +33,7 @@ android {
     }
     defaultConfig {
         minSdkVersion 22
-        targetSdkVersion 30
+        targetSdkVersion 31
         consumerProguardFiles "consumer-rules.pro"
     }
 }
