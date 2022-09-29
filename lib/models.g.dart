@@ -6,6 +6,8 @@ part of 'models.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializer<PinwheelTarget> _$pinwheelTargetSerializer =
+    new _$PinwheelTargetSerializer();
 Serializer<PinhweelAllocation> _$pinhweelAllocationSerializer =
     new _$PinhweelAllocationSerializer();
 Serializer<PinwheelInputAllocationPayload>
@@ -36,6 +38,59 @@ Serializer<PinwheelEventChannelArgument>
     _$pinwheelEventChannelArgumentSerializer =
     new _$PinwheelEventChannelArgumentSerializer();
 
+class _$PinwheelTargetSerializer
+    implements StructuredSerializer<PinwheelTarget> {
+  @override
+  final Iterable<Type> types = const [PinwheelTarget, _$PinwheelTarget];
+  @override
+  final String wireName = 'PinwheelTarget';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, PinwheelTarget object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'accountType',
+      serializers.serialize(object.accountType,
+          specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.accountName;
+    if (value != null) {
+      result
+        ..add('accountName')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  PinwheelTarget deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PinwheelTargetBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'accountType':
+          result.accountType = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'accountName':
+          result.accountName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$PinhweelAllocationSerializer
     implements StructuredSerializer<PinhweelAllocation> {
   @override
@@ -59,6 +114,13 @@ class _$PinhweelAllocationSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
+    value = object.target;
+    if (value != null) {
+      result
+        ..add('target')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(PinwheelTarget)));
+    }
     return result;
   }
 
@@ -81,6 +143,11 @@ class _$PinhweelAllocationSerializer
         case 'value':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
+          break;
+        case 'target':
+          result.target.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(PinwheelTarget))!
+              as PinwheelTarget);
           break;
       }
     }
@@ -691,17 +758,118 @@ abstract class PinwheelEventPayloadBuilder {
   void update(void Function(PinwheelEventPayloadBuilder) updates);
 }
 
+class _$PinwheelTarget extends PinwheelTarget {
+  @override
+  final String accountType;
+  @override
+  final String? accountName;
+
+  factory _$PinwheelTarget([void Function(PinwheelTargetBuilder)? updates]) =>
+      (new PinwheelTargetBuilder()..update(updates))._build();
+
+  _$PinwheelTarget._({required this.accountType, this.accountName})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        accountType, r'PinwheelTarget', 'accountType');
+  }
+
+  @override
+  PinwheelTarget rebuild(void Function(PinwheelTargetBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelTargetBuilder toBuilder() =>
+      new PinwheelTargetBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelTarget &&
+        accountType == other.accountType &&
+        accountName == other.accountName;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, accountType.hashCode), accountName.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelTarget')
+          ..add('accountType', accountType)
+          ..add('accountName', accountName))
+        .toString();
+  }
+}
+
+class PinwheelTargetBuilder
+    implements
+        Builder<PinwheelTarget, PinwheelTargetBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelTarget? _$v;
+
+  String? _accountType;
+  String? get accountType => _$this._accountType;
+  set accountType(covariant String? accountType) =>
+      _$this._accountType = accountType;
+
+  String? _accountName;
+  String? get accountName => _$this._accountName;
+  set accountName(covariant String? accountName) =>
+      _$this._accountName = accountName;
+
+  PinwheelTargetBuilder();
+
+  PinwheelTargetBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _accountType = $v.accountType;
+      _accountName = $v.accountName;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelTarget other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$PinwheelTarget;
+  }
+
+  @override
+  void update(void Function(PinwheelTargetBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelTarget build() => _build();
+
+  _$PinwheelTarget _build() {
+    final _$result = _$v ??
+        new _$PinwheelTarget._(
+            accountType: BuiltValueNullFieldError.checkNotNull(
+                accountType, r'PinwheelTarget', 'accountType'),
+            accountName: accountName);
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$PinhweelAllocation extends PinhweelAllocation {
   @override
   final String type;
   @override
   final double? value;
+  @override
+  final PinwheelTarget? target;
 
   factory _$PinhweelAllocation(
           [void Function(PinhweelAllocationBuilder)? updates]) =>
       (new PinhweelAllocationBuilder()..update(updates))._build();
 
-  _$PinhweelAllocation._({required this.type, this.value}) : super._() {
+  _$PinhweelAllocation._({required this.type, this.value, this.target})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(type, r'PinhweelAllocation', 'type');
   }
 
@@ -719,19 +887,22 @@ class _$PinhweelAllocation extends PinhweelAllocation {
     if (identical(other, this)) return true;
     return other is PinhweelAllocation &&
         type == other.type &&
-        value == other.value;
+        value == other.value &&
+        target == other.target;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, type.hashCode), value.hashCode));
+    return $jf(
+        $jc($jc($jc(0, type.hashCode), value.hashCode), target.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'PinhweelAllocation')
           ..add('type', type)
-          ..add('value', value))
+          ..add('value', value)
+          ..add('target', target))
         .toString();
   }
 }
@@ -750,6 +921,12 @@ class PinhweelAllocationBuilder
   double? get value => _$this._value;
   set value(covariant double? value) => _$this._value = value;
 
+  PinwheelTargetBuilder? _target;
+  PinwheelTargetBuilder get target =>
+      _$this._target ??= new PinwheelTargetBuilder();
+  set target(covariant PinwheelTargetBuilder? target) =>
+      _$this._target = target;
+
   PinhweelAllocationBuilder();
 
   PinhweelAllocationBuilder get _$this {
@@ -757,6 +934,7 @@ class PinhweelAllocationBuilder
     if ($v != null) {
       _type = $v.type;
       _value = $v.value;
+      _target = $v.target?.toBuilder();
       _$v = null;
     }
     return this;
@@ -777,11 +955,25 @@ class PinhweelAllocationBuilder
   PinhweelAllocation build() => _build();
 
   _$PinhweelAllocation _build() {
-    final _$result = _$v ??
-        new _$PinhweelAllocation._(
-            type: BuiltValueNullFieldError.checkNotNull(
-                type, r'PinhweelAllocation', 'type'),
-            value: value);
+    _$PinhweelAllocation _$result;
+    try {
+      _$result = _$v ??
+          new _$PinhweelAllocation._(
+              type: BuiltValueNullFieldError.checkNotNull(
+                  type, r'PinhweelAllocation', 'type'),
+              value: value,
+              target: _target?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'target';
+        _target?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'PinhweelAllocation', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
