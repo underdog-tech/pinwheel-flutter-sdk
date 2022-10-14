@@ -10,3 +10,6 @@ doc/api
 android/gradlew
 android/gradlew.bat
 android/gradle/wrapper/gradle-wrapper.jar
+
+# Phylum Integration
+.phylum_project
