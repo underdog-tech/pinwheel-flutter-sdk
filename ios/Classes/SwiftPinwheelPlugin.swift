@@ -156,6 +156,19 @@ extension FLNativeView: PinwheelDelegate {
                 eventString = String(data: eventData, encoding: .utf8)!
             }
         }
+        case .ddFormBegin:
+            //no payload
+            break
+        case .ddFormCreate:
+            if let event = event as? PinwheelError {
+                let eventData = try! JSONEncoder().encode(event)
+                eventString = String(data: eventData, encoding: .utf8)!
+            }
+        }
+        case .ddFormDownload:
+            //no payload
+            break
+        }
         
         let obj = PinwheelEventChannelArgument(name: name.rawValue, payload: eventString)
         let jsonData = try! JSONEncoder().encode(obj)

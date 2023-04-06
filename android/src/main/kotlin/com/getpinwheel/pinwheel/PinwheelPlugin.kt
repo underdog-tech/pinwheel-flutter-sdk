@@ -136,6 +136,18 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
         val obj = PinwheelEventChannelArgument("error", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
+      PinwheelEventType.DD_FORM_BEGIN -> {
+        val obj = PinwheelEventChannelArgument("dd_form_begin", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.DD_FORM_CREATE -> {
+        val obj = PinwheelEventChannelArgument("dd_form_create", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.DD_FORM_DOWNLOAD -> {
+        val obj = PinwheelEventChannelArgument("dd_form_download", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
     }
 
     Handler(Looper.getMainLooper()).post {
