@@ -9,8 +9,9 @@ import android.webkit.WebView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import com.google.gson.Gson
-import com.underdog_tech.pinwheel_android.Pinwheel
+import com.underdog_tech.pinwheel_android.PinwheelViewGroupManager
 import com.underdog_tech.pinwheel_android.PinwheelEventListener
+import com.underdog_tech.pinwheel_android.PinwheelFrameLayout
 import com.underdog_tech.pinwheel_android.model.*
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.*
@@ -136,6 +137,12 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
         val obj = PinwheelEventChannelArgument("error", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
+
+      PinwheelEventType.CARD_SWITCH_BEGIN -> TODO()
+      PinwheelEventType.DD_FORM_BEGIN -> TODO()
+      PinwheelEventType.DD_FORM_CREATE -> TODO()
+      PinwheelEventType.DD_FORM_DOWNLOAD -> TODO()
+      PinwheelEventType.SCREEN_TRANSITION -> TODO()
     }
 
     Handler(Looper.getMainLooper()).post {
@@ -153,12 +160,12 @@ class NativeViewFactory(private val messenger: BinaryMessenger) : PlatformViewFa
 
 internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int, creationParams: JSONObject?) : PlatformView {
   private val pinwheelEventListener: PinwheelEventListener
-  private var webView: WebView?
+  private var pinwheelView: PinwheelFrameLayout
   private var textView: TextView
   private var token: String?
 
   override fun getView(): View {
-    val result = webView
+    val result = pinwheelView
     if (result != null) {
       return result
     }
@@ -178,10 +185,7 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
       token = ""
     }
 
-    webView = WebView(context)
-    webView?.let {
-      Pinwheel.init(it, readLinkToken(), pinwheelEventListener)
-    }
+    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener)
 
     textView = TextView(context)
     textView.textSize = 36f
