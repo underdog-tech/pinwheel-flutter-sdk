@@ -185,7 +185,7 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
       token = ""
     }
 
-    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener)
+    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener, "react native", "3.0.0")
 
     textView = TextView(context)
     textView.textSize = 36f
