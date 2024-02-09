@@ -105,15 +105,6 @@ abstract class PinwheelSelectedPlatformPayload implements PinwheelEventPayload, 
   static Serializer<PinwheelSelectedPlatformPayload> get serializer => _$pinwheelSelectedPlatformPayloadSerializer;
 }
 
-abstract class PinwheelDDFormCreatePayload implements PinwheelEventPayload, Built<PinwheelDDFormCreatePayload, PinwheelDDFormCreatePayloadBuilder> {
-  String get url;
-
-  PinwheelDDFormCreatePayload._();
-
-  factory PinwheelDDFormCreatePayload([updates(PinwheelDDFormCreatePayloadBuilder b)]) = _$PinwheelDDFormCreatePayload;
-  static Serializer<PinwheelDDFormCreatePayload> get serializer => _$pinwheelDDFormCreatePayloadSerializer;
-}
-
 abstract class PinwheelSuccessPayload implements PinwheelEventPayload, Built<PinwheelSuccessPayload, PinwheelSuccessPayloadBuilder> {
   String get accountId;
   String get platformId;
@@ -134,4 +125,26 @@ abstract class PinwheelEventChannelArgument implements Built<PinwheelEventChanne
 
   factory PinwheelEventChannelArgument([updates(PinwheelEventChannelArgumentBuilder b)]) = _$PinwheelEventChannelArgument;
   static Serializer<PinwheelEventChannelArgument> get serializer => _$pinwheelEventChannelArgumentSerializer;
+}
+
+abstract class PinwheelDDFormCreatePayload implements PinwheelEventPayload, Built<PinwheelDDFormCreatePayload, PinwheelDDFormCreatePayloadBuilder> {
+  String get url;
+
+  PinwheelDDFormCreatePayload._();
+
+  factory PinwheelDDFormCreatePayload([updates(PinwheelDDFormCreatePayloadBuilder b)]) = _$PinwheelDDFormCreatePayload;
+  static Serializer<PinwheelDDFormCreatePayload> get serializer => _$pinwheelDDFormCreatePayloadSerializer;
+}
+
+abstract class PinwheelScreenTransitionPayload implements PinwheelEventPayload, Built<PinwheelScreenTransitionPayload, PinwheelScreenTransitionPayloadBuilder> {
+  String get screenName;
+  String? get selectedEmployerId;
+  String? get selectedEmployerName;
+  String? get selectedPlatformId;
+  String? get selectedPlatformName;
+
+  PinwheelScreenTransitionPayload._();
+
+  factory PinwheelScreenTransitionPayload([updates(PinwheelScreenTransitionPayloadBuilder b)]) = _$PinwheelScreenTransitionPayload;
+  static Serializer<PinwheelScreenTransitionPayload> get serializer => _$pinwheelScreenTransitionPayloadSerializer;
 }

@@ -30,14 +30,17 @@ Serializer<PinwheelSelectedEmployerPayload>
 Serializer<PinwheelSelectedPlatformPayload>
     _$pinwheelSelectedPlatformPayloadSerializer =
     new _$PinwheelSelectedPlatformPayloadSerializer();
-Serializer<PinwheelDDFormCreatePayload>
-    _$pinwheelDDFormCreatePayloadSerializer =
-    new _$PinwheelDDFormCreatePayloadSerializer();
 Serializer<PinwheelSuccessPayload> _$pinwheelSuccessPayloadSerializer =
     new _$PinwheelSuccessPayloadSerializer();
 Serializer<PinwheelEventChannelArgument>
     _$pinwheelEventChannelArgumentSerializer =
     new _$PinwheelEventChannelArgumentSerializer();
+Serializer<PinwheelDDFormCreatePayload>
+    _$pinwheelDDFormCreatePayloadSerializer =
+    new _$PinwheelDDFormCreatePayloadSerializer();
+Serializer<PinwheelScreenTransitionPayload>
+    _$pinwheelScreenTransitionPayloadSerializer =
+    new _$PinwheelScreenTransitionPayloadSerializer();
 
 class _$PinhweelAllocationSerializer
     implements StructuredSerializer<PinhweelAllocation> {
@@ -566,51 +569,6 @@ class _$PinwheelSelectedPlatformPayloadSerializer
   }
 }
 
-class _$PinwheelDDFormCreatePayloadSerializer
-    implements StructuredSerializer<PinwheelDDFormCreatePayload> {
-  @override
-  final Iterable<Type> types = const [
-    PinwheelDDFormCreatePayload,
-    _$PinwheelDDFormCreatePayload
-  ];
-  @override
-  final String wireName = 'PinwheelDDFormCreatePayload';
-
-  @override
-  Iterable<Object?> serialize(
-      Serializers serializers, PinwheelDDFormCreatePayload object,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'url',
-      serializers.serialize(object.url, specifiedType: const FullType(String)),
-    ];
-
-    return result;
-  }
-
-  @override
-  PinwheelDDFormCreatePayload deserialize(
-      Serializers serializers, Iterable<Object?> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelDDFormCreatePayloadBuilder();
-
-    final iterator = serialized.iterator;
-    while (iterator.moveNext()) {
-      final key = iterator.current! as String;
-      iterator.moveNext();
-      final Object? value = iterator.current;
-      switch (key) {
-        case 'url':
-          result.url = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
-          break;
-      }
-    }
-
-    return result.build();
-  }
-}
-
 class _$PinwheelSuccessPayloadSerializer
     implements StructuredSerializer<PinwheelSuccessPayload> {
   @override
@@ -725,6 +683,141 @@ class _$PinwheelEventChannelArgumentSerializer
           break;
         case 'payload':
           result.payload = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelDDFormCreatePayloadSerializer
+    implements StructuredSerializer<PinwheelDDFormCreatePayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelDDFormCreatePayload,
+    _$PinwheelDDFormCreatePayload
+  ];
+  @override
+  final String wireName = 'PinwheelDDFormCreatePayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelDDFormCreatePayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'url',
+      serializers.serialize(object.url, specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelDDFormCreatePayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PinwheelDDFormCreatePayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'url':
+          result.url = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelScreenTransitionPayloadSerializer
+    implements StructuredSerializer<PinwheelScreenTransitionPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelScreenTransitionPayload,
+    _$PinwheelScreenTransitionPayload
+  ];
+  @override
+  final String wireName = 'PinwheelScreenTransitionPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelScreenTransitionPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'screenName',
+      serializers.serialize(object.screenName,
+          specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.selectedEmployerId;
+    if (value != null) {
+      result
+        ..add('selectedEmployerId')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.selectedEmployerName;
+    if (value != null) {
+      result
+        ..add('selectedEmployerName')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.selectedPlatformId;
+    if (value != null) {
+      result
+        ..add('selectedPlatformId')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.selectedPlatformName;
+    if (value != null) {
+      result
+        ..add('selectedPlatformName')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  PinwheelScreenTransitionPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PinwheelScreenTransitionPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'screenName':
+          result.screenName = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'selectedEmployerId':
+          result.selectedEmployerId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'selectedEmployerName':
+          result.selectedEmployerName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'selectedPlatformId':
+          result.selectedPlatformId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'selectedPlatformName':
+          result.selectedPlatformName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
       }
@@ -1810,96 +1903,6 @@ class PinwheelSelectedPlatformPayloadBuilder
   }
 }
 
-class _$PinwheelDDFormCreatePayload extends PinwheelDDFormCreatePayload {
-  @override
-  final String url;
-
-  factory _$PinwheelDDFormCreatePayload(
-          [void Function(PinwheelDDFormCreatePayloadBuilder)? updates]) =>
-      (new PinwheelDDFormCreatePayloadBuilder()..update(updates))._build();
-
-  _$PinwheelDDFormCreatePayload._({required this.url}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        url, r'PinwheelDDFormCreatePayload', 'url');
-  }
-
-  @override
-  PinwheelDDFormCreatePayload rebuild(
-          void Function(PinwheelDDFormCreatePayloadBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  PinwheelDDFormCreatePayloadBuilder toBuilder() =>
-      new PinwheelDDFormCreatePayloadBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is PinwheelDDFormCreatePayload && url == other.url;
-  }
-
-  @override
-  int get hashCode {
-    var _$hash = 0;
-    _$hash = $jc(_$hash, url.hashCode);
-    _$hash = $jf(_$hash);
-    return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'PinwheelDDFormCreatePayload')
-          ..add('url', url))
-        .toString();
-  }
-}
-
-class PinwheelDDFormCreatePayloadBuilder
-    implements
-        Builder<PinwheelDDFormCreatePayload,
-            PinwheelDDFormCreatePayloadBuilder>,
-        PinwheelEventPayloadBuilder {
-  _$PinwheelDDFormCreatePayload? _$v;
-
-  String? _url;
-  String? get url => _$this._url;
-  set url(covariant String? url) => _$this._url = url;
-
-  PinwheelDDFormCreatePayloadBuilder();
-
-  PinwheelDDFormCreatePayloadBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _url = $v.url;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(covariant PinwheelDDFormCreatePayload other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$PinwheelDDFormCreatePayload;
-  }
-
-  @override
-  void update(void Function(PinwheelDDFormCreatePayloadBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  PinwheelDDFormCreatePayload build() => _build();
-
-  _$PinwheelDDFormCreatePayload _build() {
-    final _$result = _$v ??
-        new _$PinwheelDDFormCreatePayload._(
-            url: BuiltValueNullFieldError.checkNotNull(
-                url, r'PinwheelDDFormCreatePayload', 'url'));
-    replace(_$result);
-    return _$result;
-  }
-}
-
 class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
   @override
   final String accountId;
@@ -2149,6 +2152,243 @@ class PinwheelEventChannelArgumentBuilder
             name: BuiltValueNullFieldError.checkNotNull(
                 name, r'PinwheelEventChannelArgument', 'name'),
             payload: payload);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelDDFormCreatePayload extends PinwheelDDFormCreatePayload {
+  @override
+  final String url;
+
+  factory _$PinwheelDDFormCreatePayload(
+          [void Function(PinwheelDDFormCreatePayloadBuilder)? updates]) =>
+      (new PinwheelDDFormCreatePayloadBuilder()..update(updates))._build();
+
+  _$PinwheelDDFormCreatePayload._({required this.url}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        url, r'PinwheelDDFormCreatePayload', 'url');
+  }
+
+  @override
+  PinwheelDDFormCreatePayload rebuild(
+          void Function(PinwheelDDFormCreatePayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelDDFormCreatePayloadBuilder toBuilder() =>
+      new PinwheelDDFormCreatePayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelDDFormCreatePayload && url == other.url;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, url.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelDDFormCreatePayload')
+          ..add('url', url))
+        .toString();
+  }
+}
+
+class PinwheelDDFormCreatePayloadBuilder
+    implements
+        Builder<PinwheelDDFormCreatePayload,
+            PinwheelDDFormCreatePayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelDDFormCreatePayload? _$v;
+
+  String? _url;
+  String? get url => _$this._url;
+  set url(covariant String? url) => _$this._url = url;
+
+  PinwheelDDFormCreatePayloadBuilder();
+
+  PinwheelDDFormCreatePayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _url = $v.url;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelDDFormCreatePayload other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$PinwheelDDFormCreatePayload;
+  }
+
+  @override
+  void update(void Function(PinwheelDDFormCreatePayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelDDFormCreatePayload build() => _build();
+
+  _$PinwheelDDFormCreatePayload _build() {
+    final _$result = _$v ??
+        new _$PinwheelDDFormCreatePayload._(
+            url: BuiltValueNullFieldError.checkNotNull(
+                url, r'PinwheelDDFormCreatePayload', 'url'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelScreenTransitionPayload
+    extends PinwheelScreenTransitionPayload {
+  @override
+  final String screenName;
+  @override
+  final String? selectedEmployerId;
+  @override
+  final String? selectedEmployerName;
+  @override
+  final String? selectedPlatformId;
+  @override
+  final String? selectedPlatformName;
+
+  factory _$PinwheelScreenTransitionPayload(
+          [void Function(PinwheelScreenTransitionPayloadBuilder)? updates]) =>
+      (new PinwheelScreenTransitionPayloadBuilder()..update(updates))._build();
+
+  _$PinwheelScreenTransitionPayload._(
+      {required this.screenName,
+      this.selectedEmployerId,
+      this.selectedEmployerName,
+      this.selectedPlatformId,
+      this.selectedPlatformName})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        screenName, r'PinwheelScreenTransitionPayload', 'screenName');
+  }
+
+  @override
+  PinwheelScreenTransitionPayload rebuild(
+          void Function(PinwheelScreenTransitionPayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelScreenTransitionPayloadBuilder toBuilder() =>
+      new PinwheelScreenTransitionPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelScreenTransitionPayload &&
+        screenName == other.screenName &&
+        selectedEmployerId == other.selectedEmployerId &&
+        selectedEmployerName == other.selectedEmployerName &&
+        selectedPlatformId == other.selectedPlatformId &&
+        selectedPlatformName == other.selectedPlatformName;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, screenName.hashCode);
+    _$hash = $jc(_$hash, selectedEmployerId.hashCode);
+    _$hash = $jc(_$hash, selectedEmployerName.hashCode);
+    _$hash = $jc(_$hash, selectedPlatformId.hashCode);
+    _$hash = $jc(_$hash, selectedPlatformName.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelScreenTransitionPayload')
+          ..add('screenName', screenName)
+          ..add('selectedEmployerId', selectedEmployerId)
+          ..add('selectedEmployerName', selectedEmployerName)
+          ..add('selectedPlatformId', selectedPlatformId)
+          ..add('selectedPlatformName', selectedPlatformName))
+        .toString();
+  }
+}
+
+class PinwheelScreenTransitionPayloadBuilder
+    implements
+        Builder<PinwheelScreenTransitionPayload,
+            PinwheelScreenTransitionPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelScreenTransitionPayload? _$v;
+
+  String? _screenName;
+  String? get screenName => _$this._screenName;
+  set screenName(covariant String? screenName) =>
+      _$this._screenName = screenName;
+
+  String? _selectedEmployerId;
+  String? get selectedEmployerId => _$this._selectedEmployerId;
+  set selectedEmployerId(covariant String? selectedEmployerId) =>
+      _$this._selectedEmployerId = selectedEmployerId;
+
+  String? _selectedEmployerName;
+  String? get selectedEmployerName => _$this._selectedEmployerName;
+  set selectedEmployerName(covariant String? selectedEmployerName) =>
+      _$this._selectedEmployerName = selectedEmployerName;
+
+  String? _selectedPlatformId;
+  String? get selectedPlatformId => _$this._selectedPlatformId;
+  set selectedPlatformId(covariant String? selectedPlatformId) =>
+      _$this._selectedPlatformId = selectedPlatformId;
+
+  String? _selectedPlatformName;
+  String? get selectedPlatformName => _$this._selectedPlatformName;
+  set selectedPlatformName(covariant String? selectedPlatformName) =>
+      _$this._selectedPlatformName = selectedPlatformName;
+
+  PinwheelScreenTransitionPayloadBuilder();
+
+  PinwheelScreenTransitionPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _screenName = $v.screenName;
+      _selectedEmployerId = $v.selectedEmployerId;
+      _selectedEmployerName = $v.selectedEmployerName;
+      _selectedPlatformId = $v.selectedPlatformId;
+      _selectedPlatformName = $v.selectedPlatformName;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelScreenTransitionPayload other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$PinwheelScreenTransitionPayload;
+  }
+
+  @override
+  void update(void Function(PinwheelScreenTransitionPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelScreenTransitionPayload build() => _build();
+
+  _$PinwheelScreenTransitionPayload _build() {
+    final _$result = _$v ??
+        new _$PinwheelScreenTransitionPayload._(
+            screenName: BuiltValueNullFieldError.checkNotNull(
+                screenName, r'PinwheelScreenTransitionPayload', 'screenName'),
+            selectedEmployerId: selectedEmployerId,
+            selectedEmployerName: selectedEmployerName,
+            selectedPlatformId: selectedPlatformId,
+            selectedPlatformName: selectedPlatformName);
     replace(_$result);
     return _$result;
   }
