@@ -105,6 +105,15 @@ abstract class PinwheelSelectedPlatformPayload implements PinwheelEventPayload, 
   static Serializer<PinwheelSelectedPlatformPayload> get serializer => _$pinwheelSelectedPlatformPayloadSerializer;
 }
 
+abstract class PinwheelDDFormCreatePayload implements PinwheelEventPayload, Built<PinwheelDDFormCreatePayload, PinwheelDDFormCreatePayloadBuilder> {
+  String get url;
+
+  PinwheelDDFormCreatePayload._();
+
+  factory PinwheelDDFormCreatePayload([updates(PinwheelDDFormCreatePayloadBuilder b)]) = _$PinwheelDDFormCreatePayload;
+  static Serializer<PinwheelDDFormCreatePayload> get serializer => _$pinwheelDDFormCreatePayloadSerializer;
+}
+
 abstract class PinwheelSuccessPayload implements PinwheelEventPayload, Built<PinwheelSuccessPayload, PinwheelSuccessPayloadBuilder> {
   String get accountId;
   String get platformId;

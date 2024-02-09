@@ -30,6 +30,9 @@ Serializer<PinwheelSelectedEmployerPayload>
 Serializer<PinwheelSelectedPlatformPayload>
     _$pinwheelSelectedPlatformPayloadSerializer =
     new _$PinwheelSelectedPlatformPayloadSerializer();
+Serializer<PinwheelDDFormCreatePayload>
+    _$pinwheelDDFormCreatePayloadSerializer =
+    new _$PinwheelDDFormCreatePayloadSerializer();
 Serializer<PinwheelSuccessPayload> _$pinwheelSuccessPayloadSerializer =
     new _$PinwheelSuccessPayloadSerializer();
 Serializer<PinwheelEventChannelArgument>
@@ -563,6 +566,51 @@ class _$PinwheelSelectedPlatformPayloadSerializer
   }
 }
 
+class _$PinwheelDDFormCreatePayloadSerializer
+    implements StructuredSerializer<PinwheelDDFormCreatePayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelDDFormCreatePayload,
+    _$PinwheelDDFormCreatePayload
+  ];
+  @override
+  final String wireName = 'PinwheelDDFormCreatePayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelDDFormCreatePayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'url',
+      serializers.serialize(object.url, specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelDDFormCreatePayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PinwheelDDFormCreatePayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'url':
+          result.url = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$PinwheelSuccessPayloadSerializer
     implements StructuredSerializer<PinwheelSuccessPayload> {
   @override
@@ -724,7 +772,11 @@ class _$PinhweelAllocation extends PinhweelAllocation {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, type.hashCode), value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, type.hashCode);
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -822,7 +874,11 @@ class _$PinwheelInputAllocationPayload extends PinwheelInputAllocationPayload {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, action.hashCode), allocation.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, action.hashCode);
+    _$hash = $jc(_$hash, allocation.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -938,7 +994,11 @@ class _$PinwheelAmountPayload extends PinwheelAmountPayload {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, unit.hashCode), value.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, unit.hashCode);
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1047,9 +1107,13 @@ class _$PinwheelError extends PinwheelError {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, type.hashCode), code.hashCode), message.hashCode),
-        pendingRetry.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, type.hashCode);
+    _$hash = $jc(_$hash, code.hashCode);
+    _$hash = $jc(_$hash, message.hashCode);
+    _$hash = $jc(_$hash, pendingRetry.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1157,7 +1221,10 @@ class _$PinwheelExitPayload extends PinwheelExitPayload {
 
   @override
   int get hashCode {
-    return $jf($jc(0, error.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, error.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1259,7 +1326,11 @@ class _$PinwheelLoginPayload extends PinwheelLoginPayload {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, accountId.hashCode), platformId.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, accountId.hashCode);
+    _$hash = $jc(_$hash, platformId.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1354,7 +1425,10 @@ class _$PinwheelLoginAttemptPayload extends PinwheelLoginAttemptPayload {
 
   @override
   int get hashCode {
-    return $jf($jc(0, platformId.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, platformId.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1437,7 +1511,10 @@ class _$PinwheelParams extends PinwheelParams {
 
   @override
   int get hashCode {
-    return $jf($jc(0, amount.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, amount.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1544,8 +1621,11 @@ class _$PinwheelSelectedEmployerPayload
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(0, selectedEmployerId.hashCode), selectedEmployerName.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, selectedEmployerId.hashCode);
+    _$hash = $jc(_$hash, selectedEmployerName.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1655,8 +1735,11 @@ class _$PinwheelSelectedPlatformPayload
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(0, selectedPlatformId.hashCode), selectedPlatformName.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, selectedPlatformId.hashCode);
+    _$hash = $jc(_$hash, selectedPlatformName.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1727,6 +1810,96 @@ class PinwheelSelectedPlatformPayloadBuilder
   }
 }
 
+class _$PinwheelDDFormCreatePayload extends PinwheelDDFormCreatePayload {
+  @override
+  final String url;
+
+  factory _$PinwheelDDFormCreatePayload(
+          [void Function(PinwheelDDFormCreatePayloadBuilder)? updates]) =>
+      (new PinwheelDDFormCreatePayloadBuilder()..update(updates))._build();
+
+  _$PinwheelDDFormCreatePayload._({required this.url}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        url, r'PinwheelDDFormCreatePayload', 'url');
+  }
+
+  @override
+  PinwheelDDFormCreatePayload rebuild(
+          void Function(PinwheelDDFormCreatePayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelDDFormCreatePayloadBuilder toBuilder() =>
+      new PinwheelDDFormCreatePayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelDDFormCreatePayload && url == other.url;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, url.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelDDFormCreatePayload')
+          ..add('url', url))
+        .toString();
+  }
+}
+
+class PinwheelDDFormCreatePayloadBuilder
+    implements
+        Builder<PinwheelDDFormCreatePayload,
+            PinwheelDDFormCreatePayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelDDFormCreatePayload? _$v;
+
+  String? _url;
+  String? get url => _$this._url;
+  set url(covariant String? url) => _$this._url = url;
+
+  PinwheelDDFormCreatePayloadBuilder();
+
+  PinwheelDDFormCreatePayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _url = $v.url;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelDDFormCreatePayload other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$PinwheelDDFormCreatePayload;
+  }
+
+  @override
+  void update(void Function(PinwheelDDFormCreatePayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelDDFormCreatePayload build() => _build();
+
+  _$PinwheelDDFormCreatePayload _build() {
+    final _$result = _$v ??
+        new _$PinwheelDDFormCreatePayload._(
+            url: BuiltValueNullFieldError.checkNotNull(
+                url, r'PinwheelDDFormCreatePayload', 'url'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
   @override
   final String accountId;
@@ -1778,9 +1951,13 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, accountId.hashCode), platformId.hashCode), job.hashCode),
-        params.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, accountId.hashCode);
+    _$hash = $jc(_$hash, platformId.hashCode);
+    _$hash = $jc(_$hash, job.hashCode);
+    _$hash = $jc(_$hash, params.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1910,7 +2087,11 @@ class _$PinwheelEventChannelArgument extends PinwheelEventChannelArgument {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, name.hashCode), payload.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, payload.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -1973,4 +2154,4 @@ class PinwheelEventChannelArgumentBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

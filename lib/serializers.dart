@@ -15,6 +15,7 @@ part 'serializers.g.dart';
   PinwheelParams,
   PinwheelSelectedEmployerPayload,
   PinwheelSelectedPlatformPayload,
+  PinwheelDDFormCreatePayload,
   PinwheelSuccessPayload,
   PinwheelEventChannelArgument
 ])

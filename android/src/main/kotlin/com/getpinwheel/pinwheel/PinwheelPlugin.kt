@@ -138,11 +138,26 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
         argument = gson.toJson(obj)
       }
 
-      PinwheelEventType.CARD_SWITCH_BEGIN -> TODO()
-      PinwheelEventType.DD_FORM_BEGIN -> TODO()
-      PinwheelEventType.DD_FORM_CREATE -> TODO()
-      PinwheelEventType.DD_FORM_DOWNLOAD -> TODO()
-      PinwheelEventType.SCREEN_TRANSITION -> TODO()
+      PinwheelEventType.CARD_SWITCH_BEGIN -> {
+        val obj = PinwheelEventChannelArgument("card_switch_begin", null)
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.DD_FORM_BEGIN -> {
+        val obj = PinwheelEventChannelArgument("dd_form_begin", null)
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.DD_FORM_CREATE -> {
+        val obj = PinwheelEventChannelArgument("dd_form_create", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.DD_FORM_DOWNLOAD -> {
+        val obj = PinwheelEventChannelArgument("dd_form_download", null)
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.SCREEN_TRANSITION -> {
+        val obj = PinwheelEventChannelArgument("screen_transition", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
     }
 
     Handler(Looper.getMainLooper()).post {
