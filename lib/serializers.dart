@@ -16,6 +16,8 @@ part 'serializers.g.dart';
   PinwheelSelectedEmployerPayload,
   PinwheelSelectedPlatformPayload,
   PinwheelSuccessPayload,
-  PinwheelEventChannelArgument
+  PinwheelEventChannelArgument,
+  PinwheelDDFormCreatePayload,
+  PinwheelScreenTransitionPayload
 ])
 final Serializers serializers = _$serializers;

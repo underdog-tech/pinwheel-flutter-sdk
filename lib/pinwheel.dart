@@ -88,6 +88,12 @@ class Pinwheel {
                 case 'error':
                   payload = _standardSerializers.deserializeWith(PinwheelError.serializer, json.decode(payloadString))!;
                   break;
+                case 'dd_form_create':
+                  payload = _standardSerializers.deserializeWith(PinwheelDDFormCreatePayload.serializer, json.decode(payloadString))!;
+                  break;
+                case 'screen_transition':
+                  payload = _standardSerializers.deserializeWith(PinwheelScreenTransitionPayload.serializer, json.decode(payloadString))!;
+                  break;
               }
             }
             if (_onEvent != null) {

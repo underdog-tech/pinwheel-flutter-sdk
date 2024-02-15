@@ -155,6 +155,25 @@ extension FLNativeView: PinwheelDelegate {
                 let eventData = try! JSONEncoder().encode(event)
                 eventString = String(data: eventData, encoding: .utf8)!
             }
+        case .screenTransition:
+            if let event = event as? PinwheelScreenTransitionPayload {
+                let eventData = try! JSONEncoder().encode(event)
+                eventString = String(data: eventData, encoding: .utf8)!
+            }
+        case .cardSwitchBegin:
+            // no payload
+            break
+        case .ddFormBegin:
+            // no payload
+            break
+        case .ddFormCreate:
+            if let event = event as? PinwheelDDFormCreatePayload {
+                let eventData = try! JSONEncoder().encode(event)
+                eventString = String(data: eventData, encoding: .utf8)!
+            }
+        case .ddFormDownload:
+            // no payload
+            break
         }
         
         let obj = PinwheelEventChannelArgument(name: name.rawValue, payload: eventString)
