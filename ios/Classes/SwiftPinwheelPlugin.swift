@@ -71,7 +71,6 @@ class FLNativeView: NSObject, FlutterPlatformView {
         super.init()
         if let dict = args as? NSDictionary,
            let token = dict["token"] as? String {
-            print(token)
             _token = token
         }
         createNativeView(view: _view)
@@ -88,7 +87,7 @@ class FLNativeView: NSObject, FlutterPlatformView {
             _view.addSubview(view)
             return
         }
-        let config = PinwheelConfig(mode: .sandbox, environment: .production, sdk: "flutter", version: "3.0.0")
+        let config = PinwheelConfig(mode: .sandbox, environment: .production, sdk: "flutter", version: "2.4.0")
         _pinwheelVC = PinwheelViewController(token: token, delegate: self, config: config)
         if let view = _pinwheelVC?.view {
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]

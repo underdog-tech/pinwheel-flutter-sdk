@@ -200,7 +200,7 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
       token = ""
     }
 
-    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener, "flutter", "3.0.0")
+    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener, "flutter", "2.4.0")
 
     textView = TextView(context)
     textView.textSize = 36f
