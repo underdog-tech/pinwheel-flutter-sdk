@@ -88,7 +88,8 @@ class FLNativeView: NSObject, FlutterPlatformView {
             _view.addSubview(view)
             return
         }
-        _pinwheelVC = PinwheelViewController(token: token, delegate: self)
+        let config = PinwheelConfig(mode: .sandbox, environment: .production, sdk: "flutter", version: "3.0.0")
+        _pinwheelVC = PinwheelViewController(token: token, delegate: self, config: config)
         if let view = _pinwheelVC?.view {
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             _view.addSubview(view)
