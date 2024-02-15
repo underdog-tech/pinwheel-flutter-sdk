@@ -160,6 +160,7 @@ class BankingState extends State<Banking> {
 
     if (response.statusCode == 200) {
       var endpointResponse = TokenResponse.fromJson(jsonDecode(response.body));
+      print(endpointResponse.data.id);
       return endpointResponse.data;
       
     } else {
