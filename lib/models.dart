@@ -10,31 +10,22 @@ abstract class PinwheelEventPayload extends Object {
   PinwheelEventPayloadBuilder toBuilder();
 }
 
-abstract class PinhweelAllocation implements PinwheelEventPayload, Built<PinhweelAllocation, PinhweelAllocationBuilder> {
+abstract class PinwheelAllocation implements PinwheelEventPayload, Built<PinwheelAllocation, PinwheelAllocationBuilder> {
   String get type;
   double? get value;
 
-  PinhweelAllocation._();
-  factory PinhweelAllocation([updates(PinhweelAllocationBuilder b)]) = _$PinhweelAllocation;
-  static Serializer<PinhweelAllocation> get serializer => _$pinhweelAllocationSerializer;
+  PinwheelAllocation._();
+  factory PinwheelAllocation([updates(PinwheelAllocationBuilder b)]) = _$PinwheelAllocation;
+  static Serializer<PinwheelAllocation> get serializer => _$pinwheelAllocationSerializer;
 }
 
 abstract class PinwheelInputAllocationPayload implements PinwheelEventPayload, Built<PinwheelInputAllocationPayload, PinwheelInputAllocationPayloadBuilder> {
-  String get action;
-  PinhweelAllocation? get allocation;
+  String? get action;
+  PinwheelAllocation? get allocation;
 
   PinwheelInputAllocationPayload._();
   factory PinwheelInputAllocationPayload([updates(PinwheelInputAllocationPayloadBuilder b)]) = _$PinwheelInputAllocationPayload;
   static Serializer<PinwheelInputAllocationPayload> get serializer => _$pinwheelInputAllocationPayloadSerializer;
-}
-
-abstract class PinwheelAmountPayload implements PinwheelEventPayload, Built<PinwheelAmountPayload, PinwheelAmountPayloadBuilder> {
-  String get unit;
-  double get value;
-
-  PinwheelAmountPayload._();
-  factory PinwheelAmountPayload([updates(PinwheelAmountPayloadBuilder b)]) = _$PinwheelAmountPayload;
-  static Serializer<PinwheelAmountPayload> get serializer => _$pinwheelAmountPayloadSerializer;
 }
 
 abstract class PinwheelError implements PinwheelEventPayload, Built<PinwheelError, PinwheelErrorBuilder> {
@@ -77,7 +68,8 @@ abstract class PinwheelLoginAttemptPayload implements PinwheelEventPayload, Buil
 }
 
 abstract class PinwheelParams implements PinwheelEventPayload, Built<PinwheelParams, PinwheelParamsBuilder> {
-  PinwheelAmountPayload? get amount;
+  String? get action;
+  PinwheelAllocation? get allocation;
 
   PinwheelParams._();
 
@@ -125,4 +117,26 @@ abstract class PinwheelEventChannelArgument implements Built<PinwheelEventChanne
 
   factory PinwheelEventChannelArgument([updates(PinwheelEventChannelArgumentBuilder b)]) = _$PinwheelEventChannelArgument;
   static Serializer<PinwheelEventChannelArgument> get serializer => _$pinwheelEventChannelArgumentSerializer;
+}
+
+abstract class PinwheelDDFormCreatePayload implements PinwheelEventPayload, Built<PinwheelDDFormCreatePayload, PinwheelDDFormCreatePayloadBuilder> {
+  String get url;
+
+  PinwheelDDFormCreatePayload._();
+
+  factory PinwheelDDFormCreatePayload([updates(PinwheelDDFormCreatePayloadBuilder b)]) = _$PinwheelDDFormCreatePayload;
+  static Serializer<PinwheelDDFormCreatePayload> get serializer => _$pinwheelDDFormCreatePayloadSerializer;
+}
+
+abstract class PinwheelScreenTransitionPayload implements PinwheelEventPayload, Built<PinwheelScreenTransitionPayload, PinwheelScreenTransitionPayloadBuilder> {
+  String get screenName;
+  String? get selectedEmployerId;
+  String? get selectedEmployerName;
+  String? get selectedPlatformId;
+  String? get selectedPlatformName;
+
+  PinwheelScreenTransitionPayload._();
+
+  factory PinwheelScreenTransitionPayload([updates(PinwheelScreenTransitionPayloadBuilder b)]) = _$PinwheelScreenTransitionPayload;
+  static Serializer<PinwheelScreenTransitionPayload> get serializer => _$pinwheelScreenTransitionPayloadSerializer;
 }
