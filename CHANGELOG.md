@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.4.x Releases
+- `2.4.x` Releases - [2.4.0](#240)
+
 ## 2.3.x Releases
 - `2.3.x` Releases - [2.3.0](#230) | [2.3.1](#231) | [2.3.2](#232)
 
@@ -9,6 +12,12 @@ All notable changes to this project will be documented in this file.
 - `0.0.x` Releases - [0.0.1](#001) | [0.0.2](#002) | [0.0.3](#003)
 
 ---
+
+### [2.3.6](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.3.6)
+
+#### Updated
+- Updated Android and iOS versions
+  - Added by [Robby Abaya](https://github.com/rawbee) in Pull Request [#31](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/31).
 
 ### [2.3.6](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.3.6)
 
