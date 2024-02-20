@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-### [2.3.6](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.3.6)
+### [2.4.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.4.0)
 
 #### Updated
 - Updated Android and iOS versions
