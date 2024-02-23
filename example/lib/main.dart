@@ -102,14 +102,22 @@ class BankingState extends State<Banking> {
 
   Future<void> handleButtonPress() async {
     TokenAttributes attributes = TokenAttributes(
-      account_number: "304119574487",
-      account_type: "checking",
-      job: "direct_deposit_switch",
       mode: "sandbox",
       org_name: "BK BNK",
-      routing_number: "091302966",
+      allocation: Allocation(
+        targets: [
+          AllocationTarget(
+            account_number: "304119574487",
+            type: "checking",
+            routing_number: "091302966",
+            name: "BK BNK Checking"
+          )
+        ]
+      ),
       skip_exit_survey: false, 
-      skip_intro_screen: false
+      skip_intro_screen: false,
+      end_user_id: "my_user_123",
+      required_jobs: ["direct_deposit_switch"],
     );
     TokenPayload? payload = await fetchToken(attributes);
     isLoading = false;
@@ -144,7 +152,8 @@ class BankingState extends State<Banking> {
     var body = attributes.toJson();
     var headers = {
       "Content-Type": "application/json",
-      "X-API-SECRET": API_SECRET
+      "X-API-SECRET": API_SECRET,
+      "pinwheel-version": '2023-11-22'
     };
     var url = Uri.parse('https://sandbox.getpinwheel.com/v1/link_tokens');
     Response? response;
