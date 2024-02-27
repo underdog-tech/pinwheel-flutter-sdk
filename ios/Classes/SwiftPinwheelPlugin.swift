@@ -71,7 +71,6 @@ class FLNativeView: NSObject, FlutterPlatformView {
         super.init()
         if let dict = args as? NSDictionary,
            let token = dict["token"] as? String {
-            print(token)
             _token = token
         }
         createNativeView(view: _view)
@@ -88,7 +87,8 @@ class FLNativeView: NSObject, FlutterPlatformView {
             _view.addSubview(view)
             return
         }
-        _pinwheelVC = PinwheelViewController(token: token, delegate: self)
+        let config = PinwheelConfig(mode: .sandbox, environment: .production, sdk: "flutter", version: "3.0.0")
+        _pinwheelVC = PinwheelViewController(token: token, delegate: self, config: config)
         if let view = _pinwheelVC?.view {
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             _view.addSubview(view)
@@ -128,10 +128,8 @@ extension FLNativeView: PinwheelDelegate {
                 eventString = String(data: eventData, encoding: .utf8)!
             }
         case .inputAmount:
-            if let event = event as? PinwheelAmountPayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
+            // deprecated
+            break
         case .inputAllocation:
             if let event = event as? PinwheelInputAllocationPayload {
                 let eventData = try! JSONEncoder().encode(event)
@@ -155,6 +153,25 @@ extension FLNativeView: PinwheelDelegate {
                 let eventData = try! JSONEncoder().encode(event)
                 eventString = String(data: eventData, encoding: .utf8)!
             }
+        case .screenTransition:
+            if let event = event as? PinwheelScreenTransitionPayload {
+                let eventData = try! JSONEncoder().encode(event)
+                eventString = String(data: eventData, encoding: .utf8)!
+            }
+        case .cardSwitchBegin:
+            // no payload
+            break
+        case .ddFormBegin:
+            // no payload
+            break
+        case .ddFormCreate:
+            if let event = event as? PinwheelDDFormCreatePayload {
+                let eventData = try! JSONEncoder().encode(event)
+                eventString = String(data: eventData, encoding: .utf8)!
+            }
+        case .ddFormDownload:
+            // no payload
+            break
         }
         
         let obj = PinwheelEventChannelArgument(name: name.rawValue, payload: eventString)

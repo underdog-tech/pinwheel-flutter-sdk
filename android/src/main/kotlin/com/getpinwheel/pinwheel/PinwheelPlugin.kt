@@ -9,8 +9,9 @@ import android.webkit.WebView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import com.google.gson.Gson
-import com.underdog_tech.pinwheel_android.Pinwheel
+import com.underdog_tech.pinwheel_android.PinwheelViewGroupManager
 import com.underdog_tech.pinwheel_android.PinwheelEventListener
+import com.underdog_tech.pinwheel_android.PinwheelFrameLayout
 import com.underdog_tech.pinwheel_android.model.*
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.*
@@ -112,10 +113,6 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
         val obj = PinwheelEventChannelArgument("login_attempt", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
-      PinwheelEventType.INPUT_AMOUNT -> {
-        val obj = PinwheelEventChannelArgument("input_amount", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
       PinwheelEventType.INPUT_ALLOCATION -> {
         val obj = PinwheelEventChannelArgument("input_allocation", gson.toJson(payload))
         argument = gson.toJson(obj)
@@ -136,6 +133,27 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
         val obj = PinwheelEventChannelArgument("error", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
+
+      PinwheelEventType.CARD_SWITCH_BEGIN -> {
+        val obj = PinwheelEventChannelArgument("card_switch_begin", null)
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.DD_FORM_BEGIN -> {
+        val obj = PinwheelEventChannelArgument("dd_form_begin", null)
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.DD_FORM_CREATE -> {
+        val obj = PinwheelEventChannelArgument("dd_form_create", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.DD_FORM_DOWNLOAD -> {
+        val obj = PinwheelEventChannelArgument("dd_form_download", null)
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.SCREEN_TRANSITION -> {
+        val obj = PinwheelEventChannelArgument("screen_transition", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
     }
 
     Handler(Looper.getMainLooper()).post {
@@ -153,12 +171,12 @@ class NativeViewFactory(private val messenger: BinaryMessenger) : PlatformViewFa
 
 internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int, creationParams: JSONObject?) : PlatformView {
   private val pinwheelEventListener: PinwheelEventListener
-  private var webView: WebView?
+  private var pinwheelView: PinwheelFrameLayout
   private var textView: TextView
   private var token: String?
 
   override fun getView(): View {
-    val result = webView
+    val result = pinwheelView
     if (result != null) {
       return result
     }
@@ -178,10 +196,7 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
       token = ""
     }
 
-    webView = WebView(context)
-    webView?.let {
-      Pinwheel.init(it, readLinkToken(), pinwheelEventListener)
-    }
+    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener, "flutter", "3.0.0")
 
     textView = TextView(context)
     textView.textSize = 36f

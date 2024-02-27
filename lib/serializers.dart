@@ -5,8 +5,7 @@ part 'serializers.g.dart';
 
 // ignore: unnecessary_const
 @SerializersFor(const [
-  PinhweelAllocation,
-  PinwheelAmountPayload,
+  PinwheelAllocation,
   PinwheelInputAllocationPayload,
   PinwheelError,
   PinwheelExitPayload,
@@ -16,6 +15,8 @@ part 'serializers.g.dart';
   PinwheelSelectedEmployerPayload,
   PinwheelSelectedPlatformPayload,
   PinwheelSuccessPayload,
-  PinwheelEventChannelArgument
+  PinwheelEventChannelArgument,
+  PinwheelDDFormCreatePayload,
+  PinwheelScreenTransitionPayload
 ])
 final Serializers serializers = _$serializers;
