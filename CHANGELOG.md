@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.x Releases
+- `3.0.x` Releases - [3.0.0](#300)
+
+## 2.4.x Releases
+- `2.4.x` Releases - [2.4.0](#240)
+
 ## 2.3.x Releases
 - `2.3.x` Releases - [2.3.0](#230) | [2.3.1](#231) | [2.3.2](#232)
 
@@ -9,6 +15,30 @@ All notable changes to this project will be documented in this file.
 - `0.0.x` Releases - [0.0.1](#001) | [0.0.2](#002) | [0.0.3](#003)
 
 ---
+
+### [3.0.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/3.0.0)
+
+This new major version bump introduces an updated API to support partner-based switches. Expands internal functionality to support a broader range of platforms and increase conversion rate.
+
+#### Changed
+- The `action` field in `input_allocation` event is now optional.
+- The `params` field in the `success` event uses the `input_allocation` schema with fields `action` and `allocation`.
+
+#### Removed
+- Removed `LinkResult` type export. This was the old `success` event payload. The new payload has the same format as the newly exported `SuccessEventPayload`.
+- Removed `EventPayload` type export. The event handler function will now be implicitly typed.
+- Removed `ScreenTransition` type export. Use `ScreenTransitionEventPayload` instead.
+- Removed `EmptyPayloadObject` type export.
+- Removed `Error` type export. Use `ErrorEventPayload` instead. (`Error` was marked as deprecated in version 2.)
+- Removed `ErrorType` type export. Use `PinwheelErrorType` instead. (`ErrorType` was marked as deprecated in version 2.)
+- Removed `input_amount` event. Use `input_allocation` even instead.
+- Removed `PINWHEEL_MESSAGE_TYPES`.
+
+### [2.4.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.4.0)
+
+#### Updated
+- Updated Android and iOS versions
+  - Added by [Robby Abaya](https://github.com/rawbee) in Pull Request [#31](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/31).
 
 ### [2.3.6](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/2.3.6)
 
