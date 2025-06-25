@@ -1,0 +1,2 @@
+/Users/allen/repos/pinwheel-flutter-sdk/example/android/app/.cxx/Debug/6s187245/x86_64/CMakeFiles/edit_cache.dir
+/Users/allen/repos/pinwheel-flutter-sdk/example/android/app/.cxx/Debug/6s187245/x86_64/CMakeFiles/rebuild_cache.dir
