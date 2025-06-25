@@ -1,12 +1,11 @@
 pluginManagement {
-    def flutterSdkPath = null
     def localProperties = new Properties()
     def localPropertiesFile = new File(settingsDir, "local.properties")
     if (localPropertiesFile.exists()) {
         localPropertiesFile.withReader("UTF-8") { reader -> localProperties.load(reader) }
-        flutterSdkPath = localProperties.getProperty("flutter.sdk")
     }
 
+    def flutterSdkPath = localProperties.getProperty("flutter.sdk")
     assert flutterSdkPath != null : "flutter.sdk not set in local.properties"
 
     includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
@@ -20,12 +19,12 @@ pluginManagement {
     plugins {
         id 'com.android.application' version '8.3.2'
         id 'org.jetbrains.kotlin.android' version '1.9.25'
-        id 'dev.flutter.flutter-gradle-plugin'
+        id 'dev.flutter.flutter-gradle-plugin' // do NOT specify a version
     }
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    // repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
