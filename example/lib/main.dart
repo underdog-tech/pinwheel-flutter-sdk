@@ -7,7 +7,7 @@ import 'package:pinwheel/pinwheel.dart';
 import 'package:http/http.dart' as http;
 import 'token.dart';
 
-const String API_SECRET = "";
+const String API_SECRET = "d89763771f70541b59ef63a3ded608272e1f584290b1213e58ea521a77f4b91a";
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
