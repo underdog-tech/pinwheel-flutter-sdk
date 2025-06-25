@@ -26,6 +26,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace 'com.getpinwheel.pinwheel'
     compileSdkVersion 31
 
     sourceSets {
@@ -35,6 +36,10 @@ android {
         minSdkVersion 22
         targetSdkVersion 31
         consumerProguardFiles "consumer-rules.pro"
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
