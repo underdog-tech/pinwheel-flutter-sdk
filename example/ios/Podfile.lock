@@ -1,0 +1,31 @@
+PODS:
+  - Flutter (1.0.0)
+  - pinwheel (0.0.3):
+    - Flutter
+    - PinwheelSDK (= 3.0.2)
+  - PinwheelSDK (3.0.2):
+    - PinwheelSDK/PinwheelLinkSDK (= 3.0.2)
+  - PinwheelSDK/PinwheelLinkSDK (3.0.2)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - pinwheel (from `.symlinks/plugins/pinwheel/ios`)
+
+SPEC REPOS:
+  trunk:
+    - PinwheelSDK
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  pinwheel:
+    :path: ".symlinks/plugins/pinwheel/ios"
+
+SPEC CHECKSUMS:
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  pinwheel: 753a112e9f545e0cb848a2d1b1c04668c05122f2
+  PinwheelSDK: 39a8fdce5f550956e402d10e93ff40612a65d85e
+
+PODFILE CHECKSUM: 3c63482e143d1b91d2d2560aee9fb04ecc74ac7e
+
+COCOAPODS: 1.16.2
