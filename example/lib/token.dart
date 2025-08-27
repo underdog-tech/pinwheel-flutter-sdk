@@ -9,26 +9,24 @@ class AllocationTarget {
     this.name,
     this.type,
     this.account_number,
-    this.routing_number
+    this.routing_number,
   });
 
   Map<String, dynamic> toJson() => {
     'name': name,
     'type': type,
     'account_number': account_number,
-    'routing_number': routing_number
+    'routing_number': routing_number,
   };
 }
 
 class Allocation {
   List<AllocationTarget>? targets;
 
-  Allocation({
-    this.targets
-  });
+  Allocation({this.targets});
 
   Map<String, dynamic> toJson() => {
-    'targets': targets?.map((e) => e.toJson()).toList()
+    'targets': targets?.map((e) => e.toJson()).toList(),
   };
 }
 
@@ -88,13 +86,9 @@ class TokenPayload {
 class TokenResponse {
   final TokenPayload data;
 
-  TokenResponse({
-    required this.data
-  });
+  TokenResponse({required this.data});
 
   factory TokenResponse.fromJson(Map<String, dynamic> json) {
-    return TokenResponse(
-      data: TokenPayload.fromJson(json['data']),
-    );
+    return TokenResponse(data: TokenPayload.fromJson(json['data']));
   }
 }

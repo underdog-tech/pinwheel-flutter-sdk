@@ -13,10 +13,9 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.grey[900]),
-      home: Banking()
+      home: Banking(),
     );
   }
 }
@@ -38,40 +37,41 @@ class BankingState extends State<Banking> {
   Future<void> initPlatformState() async {
     if (!mounted) return;
 
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   Widget _buildBody() {
     if (isLoading) {
-      return Container(color: Colors.white,child: Center(child: CircularProgressIndicator(),));
+      return Container(
+        color: Colors.white,
+        child: Center(child: CircularProgressIndicator()),
+      );
     }
     return Scaffold(
-      body: Center(child: 
-        Column(children: [
-          if (error != null) Text(error!),
-          Padding(padding: EdgeInsets.only(top: 40),
-            child: 
-              ElevatedButton(child: 
-                Text("Switch Direct Deposit"),
+      body: Center(
+        child: Column(
+          children: [
+            if (error != null) Text(error!),
+            Padding(
+              padding: EdgeInsets.only(top: 40),
+              child: ElevatedButton(
+                child: Text("Switch Direct Deposit"),
                 onPressed: () {
                   isLoading = true;
                   handleButtonPress();
-                }
-              )
-          ,)
-      ],)
-      )
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('BK BNK')
-      ),
-      body: _buildBody()
+      appBar: AppBar(title: Text('BK BNK')),
+      body: _buildBody(),
     );
   }
 
@@ -110,11 +110,11 @@ class BankingState extends State<Banking> {
             account_number: "304119574487",
             type: "checking",
             routing_number: "091302966",
-            name: "BK BNK Checking"
-          )
-        ]
+            name: "BK BNK Checking",
+          ),
+        ],
       ),
-      skip_exit_survey: false, 
+      skip_exit_survey: false,
       skip_intro_screen: false,
       end_user_id: "my_user_123",
       required_jobs: ["direct_deposit_switch"],
@@ -130,9 +130,9 @@ class BankingState extends State<Banking> {
     }
 
     PinwheelLink link = PinwheelLink(
-      token: payload.token, 
+      token: payload.token,
       onExit: _onExit,
-      onError: _onError, 
+      onError: _onError,
       onEvent: _onEvent,
       onSuccess: _onSuccess,
       onLogin: _onLogin,
@@ -140,11 +140,12 @@ class BankingState extends State<Banking> {
     );
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Container(
+      MaterialPageRoute(
+        builder: (context) => Container(
           color: Colors.white,
-          child: SafeArea(child: link,)
-        )
-      )
+          child: SafeArea(child: link),
+        ),
+      ),
     );
   }
 
@@ -153,13 +154,13 @@ class BankingState extends State<Banking> {
     var headers = {
       "Content-Type": "application/json",
       "X-API-SECRET": API_SECRET,
-      "pinwheel-version": '2023-11-22'
+      "pinwheel-version": '2023-11-22',
     };
     var url = Uri.parse('https://sandbox.getpinwheel.com/v1/link_tokens');
     Response? response;
     try {
       response = await http.post(url, headers: headers, body: jsonEncode(body));
-    } catch(exception) {
+    } catch (exception) {
       error = exception.toString();
     }
 
@@ -170,7 +171,6 @@ class BankingState extends State<Banking> {
     if (response.statusCode == 200) {
       var endpointResponse = TokenResponse.fromJson(jsonDecode(response.body));
       return endpointResponse.data;
-      
     } else {
       error = response.statusCode.toString() + ' - Failed to fetch token';
     }

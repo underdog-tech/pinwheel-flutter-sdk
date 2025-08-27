@@ -8,4 +8,4 @@ const String API_SECRET = "";
 
 **Do not include your API secret in your app. You should fetch the Link token from your server.** To learn more about Link tokens, see the [Implementation Overview](https://docs.getpinwheel.com/docs/api/docs/introduction/Getting-Started.md#implementation-overview) section of our docs site.
 
-For PinwheelLink implementation details, take a look at the repository's [README](../README.md). 
+For PinwheelLink implementation details, take a look at the repository's [README](../README.md).
