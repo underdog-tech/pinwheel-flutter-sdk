@@ -1,6 +1,6 @@
 import Flutter
-import UIKit
 import PinwheelSDK
+import UIKit
 
 public struct PinwheelEventChannelArgument: Codable {
     public let name: String
@@ -8,21 +8,20 @@ public struct PinwheelEventChannelArgument: Codable {
 }
 
 public class SwiftPinwheelPlugin: NSObject, FlutterPlugin {
-  public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "pinwheel", binaryMessenger: registrar.messenger())
-    let instance = SwiftPinwheelPlugin()
-    registrar.addMethodCallDelegate(instance, channel: channel)
+    public static func register(with registrar: FlutterPluginRegistrar) {
+        let channel = FlutterMethodChannel(name: "pinwheel", binaryMessenger: registrar.messenger())
+        let instance = SwiftPinwheelPlugin()
+        registrar.addMethodCallDelegate(instance, channel: channel)
 
+        let factory = FLNativeViewFactory(messenger: registrar.messenger())
+        registrar.register(
+            factory,
+            withId: "pinwheel-link-view")
+    }
 
-    let factory = FLNativeViewFactory(messenger: registrar.messenger())
-    registrar.register(
-        factory,
-        withId: "pinwheel-link-view")
-  }
+    public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
 
-  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-
-  }
+    }
 }
 
 class FLNativeViewFactory: NSObject, FlutterPlatformViewFactory {
@@ -45,7 +44,7 @@ class FLNativeViewFactory: NSObject, FlutterPlatformViewFactory {
             arguments: args,
             binaryMessenger: messenger)
     }
-    
+
     func createArgsCodec() -> FlutterMessageCodec & NSObjectProtocol {
         return FlutterJSONMessageCodec.sharedInstance()
     }
@@ -65,12 +64,15 @@ class FLNativeView: NSObject, FlutterPlatformView {
     ) {
         _view = UIView()
         if let messenger = messenger {
-            _channel = FlutterMethodChannel(name: "pinwheel", binaryMessenger: messenger, codec: FlutterJSONMethodCodec.sharedInstance())
+            _channel = FlutterMethodChannel(
+                name: "pinwheel", binaryMessenger: messenger,
+                codec: FlutterJSONMethodCodec.sharedInstance())
         }
-        
+
         super.init()
         if let dict = args as? NSDictionary,
-           let token = dict["token"] as? String {
+            let token = dict["token"] as? String
+        {
             _token = token
         }
         createNativeView(view: _view)
@@ -87,7 +89,8 @@ class FLNativeView: NSObject, FlutterPlatformView {
             _view.addSubview(view)
             return
         }
-        let config = PinwheelConfig(mode: .sandbox, environment: .production, sdk: "flutter", version: "3.0.0")
+        let config = PinwheelConfig(
+            mode: .sandbox, environment: .production, sdk: "flutter", version: "3.0.0")
         _pinwheelVC = PinwheelViewController(token: token, delegate: self, config: config)
         if let view = _pinwheelVC?.view {
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -97,7 +100,7 @@ class FLNativeView: NSObject, FlutterPlatformView {
 }
 
 extension FLNativeView: PinwheelDelegate {
-    
+
     public func onEvent(name: PinwheelEventType, event: PinwheelEventPayload?) {
         var eventString: String?
         var argument: String?
@@ -127,9 +130,6 @@ extension FLNativeView: PinwheelDelegate {
                 let eventData = try! JSONEncoder().encode(event)
                 eventString = String(data: eventData, encoding: .utf8)!
             }
-        case .inputAmount:
-            // deprecated
-            break
         case .inputAllocation:
             if let event = event as? PinwheelInputAllocationPayload {
                 let eventData = try! JSONEncoder().encode(event)
@@ -172,60 +172,70 @@ extension FLNativeView: PinwheelDelegate {
         case .ddFormDownload:
             // no payload
             break
+        case .otherEvent:
+            if let event = event as? PinwheelOtherEventPayload {
+                let eventData = try! JSONEncoder().encode(event)
+                eventString = String(data: eventData, encoding: .utf8)!
+            }
         }
-        
+
         let obj = PinwheelEventChannelArgument(name: name.rawValue, payload: eventString)
         let jsonData = try! JSONEncoder().encode(obj)
         argument = String(data: jsonData, encoding: .utf8)!
         _channel?.invokeMethod("onEvent", arguments: argument)
     }
-    
+
     public func onExit(_ error: PinwheelError?) {
         var payload: String?
         if let jsonData = try? JSONEncoder().encode(error),
-            let jsonString = String(data: jsonData, encoding: .utf8) {
-            
-                payload = jsonString
+            let jsonString = String(data: jsonData, encoding: .utf8)
+        {
+
+            payload = jsonString
         }
         _channel?.invokeMethod("onExit", arguments: payload)
     }
-    
+
     public func onError(_ error: PinwheelError) {
         var payload: String?
         if let jsonData = try? JSONEncoder().encode(error),
-            let jsonString = String(data: jsonData, encoding: .utf8) {
-            
-                payload = jsonString
+            let jsonString = String(data: jsonData, encoding: .utf8)
+        {
+
+            payload = jsonString
         }
         _channel?.invokeMethod("onError", arguments: payload)
     }
-    
+
     public func onSuccess(_ result: PinwheelSuccessPayload) {
         var payload: String?
         if let jsonData = try? JSONEncoder().encode(result),
-            let jsonString = String(data: jsonData, encoding: .utf8) {
-            
-                payload = jsonString
+            let jsonString = String(data: jsonData, encoding: .utf8)
+        {
+
+            payload = jsonString
         }
         _channel?.invokeMethod("onSuccess", arguments: payload)
     }
-    
+
     public func onLogin(_ result: PinwheelLoginPayload) {
         var payload: String?
         if let jsonData = try? JSONEncoder().encode(result),
-            let jsonString = String(data: jsonData, encoding: .utf8) {
-            
-                payload = jsonString
+            let jsonString = String(data: jsonData, encoding: .utf8)
+        {
+
+            payload = jsonString
         }
         _channel?.invokeMethod("onLogin", arguments: payload)
     }
-    
+
     public func onLoginAttempt(_ result: PinwheelLoginAttemptPayload) {
         var payload: String?
         if let jsonData = try? JSONEncoder().encode(result),
-            let jsonString = String(data: jsonData, encoding: .utf8) {
-            
-                payload = jsonString
+            let jsonString = String(data: jsonData, encoding: .utf8)
+        {
+
+            payload = jsonString
         }
         _channel?.invokeMethod("onLoginAttempt", arguments: payload)
     }
