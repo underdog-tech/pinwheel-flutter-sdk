@@ -154,6 +154,10 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
         val obj = PinwheelEventChannelArgument("screen_transition", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
+      PinwheelEventType.OTHER_EVENT -> {
+        val obj = PinwheelEventChannelArgument("other_event", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
     }
 
     Handler(Looper.getMainLooper()).post {
