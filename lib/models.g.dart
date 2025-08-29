@@ -6,39 +6,76 @@ part of 'models.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+const PinwheelOtherEventPayloadValueType _$string =
+    const PinwheelOtherEventPayloadValueType._('STRING');
+const PinwheelOtherEventPayloadValueType _$number =
+    const PinwheelOtherEventPayloadValueType._('NUMBER');
+const PinwheelOtherEventPayloadValueType _$boolean =
+    const PinwheelOtherEventPayloadValueType._('BOOLEAN');
+
+PinwheelOtherEventPayloadValueType _$pinwheelOtherEventPayloadValueTypeValueOf(
+    String name) {
+  switch (name) {
+    case 'STRING':
+      return _$string;
+    case 'NUMBER':
+      return _$number;
+    case 'BOOLEAN':
+      return _$boolean;
+    default:
+      throw ArgumentError(name);
+  }
+}
+
+final BuiltSet<PinwheelOtherEventPayloadValueType>
+    _$pinwheelOtherEventPayloadValueTypeValues = BuiltSet<
+        PinwheelOtherEventPayloadValueType>(const <PinwheelOtherEventPayloadValueType>[
+  _$string,
+  _$number,
+  _$boolean,
+]);
+
 Serializer<PinwheelAllocation> _$pinwheelAllocationSerializer =
-    new _$PinwheelAllocationSerializer();
+    _$PinwheelAllocationSerializer();
 Serializer<PinwheelInputAllocationPayload>
     _$pinwheelInputAllocationPayloadSerializer =
-    new _$PinwheelInputAllocationPayloadSerializer();
+    _$PinwheelInputAllocationPayloadSerializer();
 Serializer<PinwheelError> _$pinwheelErrorSerializer =
-    new _$PinwheelErrorSerializer();
+    _$PinwheelErrorSerializer();
 Serializer<PinwheelExitPayload> _$pinwheelExitPayloadSerializer =
-    new _$PinwheelExitPayloadSerializer();
+    _$PinwheelExitPayloadSerializer();
 Serializer<PinwheelLoginPayload> _$pinwheelLoginPayloadSerializer =
-    new _$PinwheelLoginPayloadSerializer();
+    _$PinwheelLoginPayloadSerializer();
 Serializer<PinwheelLoginAttemptPayload>
     _$pinwheelLoginAttemptPayloadSerializer =
-    new _$PinwheelLoginAttemptPayloadSerializer();
+    _$PinwheelLoginAttemptPayloadSerializer();
 Serializer<PinwheelParams> _$pinwheelParamsSerializer =
-    new _$PinwheelParamsSerializer();
+    _$PinwheelParamsSerializer();
 Serializer<PinwheelSelectedEmployerPayload>
     _$pinwheelSelectedEmployerPayloadSerializer =
-    new _$PinwheelSelectedEmployerPayloadSerializer();
+    _$PinwheelSelectedEmployerPayloadSerializer();
 Serializer<PinwheelSelectedPlatformPayload>
     _$pinwheelSelectedPlatformPayloadSerializer =
-    new _$PinwheelSelectedPlatformPayloadSerializer();
+    _$PinwheelSelectedPlatformPayloadSerializer();
 Serializer<PinwheelSuccessPayload> _$pinwheelSuccessPayloadSerializer =
-    new _$PinwheelSuccessPayloadSerializer();
+    _$PinwheelSuccessPayloadSerializer();
 Serializer<PinwheelEventChannelArgument>
     _$pinwheelEventChannelArgumentSerializer =
-    new _$PinwheelEventChannelArgumentSerializer();
+    _$PinwheelEventChannelArgumentSerializer();
 Serializer<PinwheelDDFormCreatePayload>
     _$pinwheelDDFormCreatePayloadSerializer =
-    new _$PinwheelDDFormCreatePayloadSerializer();
+    _$PinwheelDDFormCreatePayloadSerializer();
 Serializer<PinwheelScreenTransitionPayload>
     _$pinwheelScreenTransitionPayloadSerializer =
-    new _$PinwheelScreenTransitionPayloadSerializer();
+    _$PinwheelScreenTransitionPayloadSerializer();
+Serializer<PinwheelOtherEventPayloadValueType>
+    _$pinwheelOtherEventPayloadValueTypeSerializer =
+    _$PinwheelOtherEventPayloadValueTypeSerializer();
+Serializer<PinwheelOtherEventPayloadItem>
+    _$pinwheelOtherEventPayloadItemSerializer =
+    _$PinwheelOtherEventPayloadItemSerializer();
+Serializer<PinwheelOtherEventPayload> _$pinwheelOtherEventPayloadSerializer =
+    _$PinwheelOtherEventPayloadSerializer();
 
 class _$PinwheelAllocationSerializer
     implements StructuredSerializer<PinwheelAllocation> {
@@ -70,7 +107,7 @@ class _$PinwheelAllocationSerializer
   PinwheelAllocation deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelAllocationBuilder();
+    final result = PinwheelAllocationBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -130,7 +167,7 @@ class _$PinwheelInputAllocationPayloadSerializer
   PinwheelInputAllocationPayload deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelInputAllocationPayloadBuilder();
+    final result = PinwheelInputAllocationPayloadBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -183,7 +220,7 @@ class _$PinwheelErrorSerializer implements StructuredSerializer<PinwheelError> {
   PinwheelError deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelErrorBuilder();
+    final result = PinwheelErrorBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -244,7 +281,7 @@ class _$PinwheelExitPayloadSerializer
   PinwheelExitPayload deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelExitPayloadBuilder();
+    final result = PinwheelExitPayloadBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -297,7 +334,7 @@ class _$PinwheelLoginPayloadSerializer
   PinwheelLoginPayload deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelLoginPayloadBuilder();
+    final result = PinwheelLoginPayloadBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -347,7 +384,7 @@ class _$PinwheelLoginAttemptPayloadSerializer
   PinwheelLoginAttemptPayload deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelLoginAttemptPayloadBuilder();
+    final result = PinwheelLoginAttemptPayloadBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -399,7 +436,7 @@ class _$PinwheelParamsSerializer
   PinwheelParams deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelParamsBuilder();
+    final result = PinwheelParamsBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -453,7 +490,7 @@ class _$PinwheelSelectedEmployerPayloadSerializer
   PinwheelSelectedEmployerPayload deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelSelectedEmployerPayloadBuilder();
+    final result = PinwheelSelectedEmployerPayloadBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -506,7 +543,7 @@ class _$PinwheelSelectedPlatformPayloadSerializer
   PinwheelSelectedPlatformPayload deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelSelectedPlatformPayloadBuilder();
+    final result = PinwheelSelectedPlatformPayloadBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -564,7 +601,7 @@ class _$PinwheelSuccessPayloadSerializer
   PinwheelSuccessPayload deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelSuccessPayloadBuilder();
+    final result = PinwheelSuccessPayloadBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -629,7 +666,7 @@ class _$PinwheelEventChannelArgumentSerializer
   PinwheelEventChannelArgument deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelEventChannelArgumentBuilder();
+    final result = PinwheelEventChannelArgumentBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -678,7 +715,7 @@ class _$PinwheelDDFormCreatePayloadSerializer
   PinwheelDDFormCreatePayload deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelDDFormCreatePayloadBuilder();
+    final result = PinwheelDDFormCreatePayloadBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -752,7 +789,7 @@ class _$PinwheelScreenTransitionPayloadSerializer
   PinwheelScreenTransitionPayload deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PinwheelScreenTransitionPayloadBuilder();
+    final result = PinwheelScreenTransitionPayloadBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -787,6 +824,154 @@ class _$PinwheelScreenTransitionPayloadSerializer
   }
 }
 
+class _$PinwheelOtherEventPayloadValueTypeSerializer
+    implements PrimitiveSerializer<PinwheelOtherEventPayloadValueType> {
+  static const Map<String, Object> _toWire = const <String, Object>{
+    'STRING': 'string',
+    'NUMBER': 'number',
+    'BOOLEAN': 'boolean',
+  };
+  static const Map<Object, String> _fromWire = const <Object, String>{
+    'string': 'STRING',
+    'number': 'NUMBER',
+    'boolean': 'BOOLEAN',
+  };
+
+  @override
+  final Iterable<Type> types = const <Type>[PinwheelOtherEventPayloadValueType];
+  @override
+  final String wireName = 'PinwheelOtherEventPayloadValueType';
+
+  @override
+  Object serialize(
+          Serializers serializers, PinwheelOtherEventPayloadValueType object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      _toWire[object.name] ?? object.name;
+
+  @override
+  PinwheelOtherEventPayloadValueType deserialize(
+          Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      PinwheelOtherEventPayloadValueType.valueOf(
+          _fromWire[serialized] ?? (serialized is String ? serialized : ''));
+}
+
+class _$PinwheelOtherEventPayloadItemSerializer
+    implements StructuredSerializer<PinwheelOtherEventPayloadItem> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelOtherEventPayloadItem,
+    _$PinwheelOtherEventPayloadItem
+  ];
+  @override
+  final String wireName = 'PinwheelOtherEventPayloadItem';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelOtherEventPayloadItem object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'key',
+      serializers.serialize(object.key, specifiedType: const FullType(String)),
+      'value',
+      serializers.serialize(object.value,
+          specifiedType: const FullType(String)),
+      'type',
+      serializers.serialize(object.type,
+          specifiedType: const FullType(PinwheelOtherEventPayloadValueType)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelOtherEventPayloadItem deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelOtherEventPayloadItemBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'key':
+          result.key = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'type':
+          result.type = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(PinwheelOtherEventPayloadValueType))!
+              as PinwheelOtherEventPayloadValueType;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelOtherEventPayloadSerializer
+    implements StructuredSerializer<PinwheelOtherEventPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelOtherEventPayload,
+    _$PinwheelOtherEventPayload
+  ];
+  @override
+  final String wireName = 'PinwheelOtherEventPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelOtherEventPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'payload',
+      serializers.serialize(object.payload,
+          specifiedType: const FullType(BuiltList,
+              const [const FullType(PinwheelOtherEventPayloadItem)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelOtherEventPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelOtherEventPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'payload':
+          result.payload.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType(PinwheelOtherEventPayloadItem)
+              ]))! as BuiltList<Object?>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 abstract class PinwheelEventPayloadBuilder {
   void replace(PinwheelEventPayload other);
   void update(void Function(PinwheelEventPayloadBuilder) updates);
@@ -800,12 +985,9 @@ class _$PinwheelAllocation extends PinwheelAllocation {
 
   factory _$PinwheelAllocation(
           [void Function(PinwheelAllocationBuilder)? updates]) =>
-      (new PinwheelAllocationBuilder()..update(updates))._build();
+      (PinwheelAllocationBuilder()..update(updates))._build();
 
-  _$PinwheelAllocation._({required this.type, this.value}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(type, r'PinwheelAllocation', 'type');
-  }
-
+  _$PinwheelAllocation._({required this.type, this.value}) : super._();
   @override
   PinwheelAllocation rebuild(
           void Function(PinwheelAllocationBuilder) updates) =>
@@ -813,7 +995,7 @@ class _$PinwheelAllocation extends PinwheelAllocation {
 
   @override
   PinwheelAllocationBuilder toBuilder() =>
-      new PinwheelAllocationBuilder()..replace(this);
+      PinwheelAllocationBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -869,7 +1051,6 @@ class PinwheelAllocationBuilder
 
   @override
   void replace(covariant PinwheelAllocation other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelAllocation;
   }
 
@@ -883,10 +1064,11 @@ class PinwheelAllocationBuilder
 
   _$PinwheelAllocation _build() {
     final _$result = _$v ??
-        new _$PinwheelAllocation._(
-            type: BuiltValueNullFieldError.checkNotNull(
-                type, r'PinwheelAllocation', 'type'),
-            value: value);
+        _$PinwheelAllocation._(
+          type: BuiltValueNullFieldError.checkNotNull(
+              type, r'PinwheelAllocation', 'type'),
+          value: value,
+        );
     replace(_$result);
     return _$result;
   }
@@ -900,11 +1082,10 @@ class _$PinwheelInputAllocationPayload extends PinwheelInputAllocationPayload {
 
   factory _$PinwheelInputAllocationPayload(
           [void Function(PinwheelInputAllocationPayloadBuilder)? updates]) =>
-      (new PinwheelInputAllocationPayloadBuilder()..update(updates))._build();
+      (PinwheelInputAllocationPayloadBuilder()..update(updates))._build();
 
   _$PinwheelInputAllocationPayload._({this.action, this.allocation})
       : super._();
-
   @override
   PinwheelInputAllocationPayload rebuild(
           void Function(PinwheelInputAllocationPayloadBuilder) updates) =>
@@ -912,7 +1093,7 @@ class _$PinwheelInputAllocationPayload extends PinwheelInputAllocationPayload {
 
   @override
   PinwheelInputAllocationPayloadBuilder toBuilder() =>
-      new PinwheelInputAllocationPayloadBuilder()..replace(this);
+      PinwheelInputAllocationPayloadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -953,7 +1134,7 @@ class PinwheelInputAllocationPayloadBuilder
 
   PinwheelAllocationBuilder? _allocation;
   PinwheelAllocationBuilder get allocation =>
-      _$this._allocation ??= new PinwheelAllocationBuilder();
+      _$this._allocation ??= PinwheelAllocationBuilder();
   set allocation(covariant PinwheelAllocationBuilder? allocation) =>
       _$this._allocation = allocation;
 
@@ -971,7 +1152,6 @@ class PinwheelInputAllocationPayloadBuilder
 
   @override
   void replace(covariant PinwheelInputAllocationPayload other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelInputAllocationPayload;
   }
 
@@ -987,15 +1167,17 @@ class PinwheelInputAllocationPayloadBuilder
     _$PinwheelInputAllocationPayload _$result;
     try {
       _$result = _$v ??
-          new _$PinwheelInputAllocationPayload._(
-              action: action, allocation: _allocation?.build());
+          _$PinwheelInputAllocationPayload._(
+            action: action,
+            allocation: _allocation?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'allocation';
         _allocation?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'PinwheelInputAllocationPayload', _$failedField, e.toString());
       }
       rethrow;
@@ -1016,27 +1198,20 @@ class _$PinwheelError extends PinwheelError {
   final bool pendingRetry;
 
   factory _$PinwheelError([void Function(PinwheelErrorBuilder)? updates]) =>
-      (new PinwheelErrorBuilder()..update(updates))._build();
+      (PinwheelErrorBuilder()..update(updates))._build();
 
   _$PinwheelError._(
       {required this.type,
       required this.code,
       required this.message,
       required this.pendingRetry})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(type, r'PinwheelError', 'type');
-    BuiltValueNullFieldError.checkNotNull(code, r'PinwheelError', 'code');
-    BuiltValueNullFieldError.checkNotNull(message, r'PinwheelError', 'message');
-    BuiltValueNullFieldError.checkNotNull(
-        pendingRetry, r'PinwheelError', 'pendingRetry');
-  }
-
+      : super._();
   @override
   PinwheelError rebuild(void Function(PinwheelErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  PinwheelErrorBuilder toBuilder() => new PinwheelErrorBuilder()..replace(this);
+  PinwheelErrorBuilder toBuilder() => PinwheelErrorBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1109,7 +1284,6 @@ class PinwheelErrorBuilder
 
   @override
   void replace(covariant PinwheelError other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelError;
   }
 
@@ -1123,15 +1297,16 @@ class PinwheelErrorBuilder
 
   _$PinwheelError _build() {
     final _$result = _$v ??
-        new _$PinwheelError._(
-            type: BuiltValueNullFieldError.checkNotNull(
-                type, r'PinwheelError', 'type'),
-            code: BuiltValueNullFieldError.checkNotNull(
-                code, r'PinwheelError', 'code'),
-            message: BuiltValueNullFieldError.checkNotNull(
-                message, r'PinwheelError', 'message'),
-            pendingRetry: BuiltValueNullFieldError.checkNotNull(
-                pendingRetry, r'PinwheelError', 'pendingRetry'));
+        _$PinwheelError._(
+          type: BuiltValueNullFieldError.checkNotNull(
+              type, r'PinwheelError', 'type'),
+          code: BuiltValueNullFieldError.checkNotNull(
+              code, r'PinwheelError', 'code'),
+          message: BuiltValueNullFieldError.checkNotNull(
+              message, r'PinwheelError', 'message'),
+          pendingRetry: BuiltValueNullFieldError.checkNotNull(
+              pendingRetry, r'PinwheelError', 'pendingRetry'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1143,10 +1318,9 @@ class _$PinwheelExitPayload extends PinwheelExitPayload {
 
   factory _$PinwheelExitPayload(
           [void Function(PinwheelExitPayloadBuilder)? updates]) =>
-      (new PinwheelExitPayloadBuilder()..update(updates))._build();
+      (PinwheelExitPayloadBuilder()..update(updates))._build();
 
   _$PinwheelExitPayload._({this.error}) : super._();
-
   @override
   PinwheelExitPayload rebuild(
           void Function(PinwheelExitPayloadBuilder) updates) =>
@@ -1154,7 +1328,7 @@ class _$PinwheelExitPayload extends PinwheelExitPayload {
 
   @override
   PinwheelExitPayloadBuilder toBuilder() =>
-      new PinwheelExitPayloadBuilder()..replace(this);
+      PinwheelExitPayloadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1185,8 +1359,7 @@ class PinwheelExitPayloadBuilder
   _$PinwheelExitPayload? _$v;
 
   PinwheelErrorBuilder? _error;
-  PinwheelErrorBuilder get error =>
-      _$this._error ??= new PinwheelErrorBuilder();
+  PinwheelErrorBuilder get error => _$this._error ??= PinwheelErrorBuilder();
   set error(covariant PinwheelErrorBuilder? error) => _$this._error = error;
 
   PinwheelExitPayloadBuilder();
@@ -1202,7 +1375,6 @@ class PinwheelExitPayloadBuilder
 
   @override
   void replace(covariant PinwheelExitPayload other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelExitPayload;
   }
 
@@ -1217,14 +1389,17 @@ class PinwheelExitPayloadBuilder
   _$PinwheelExitPayload _build() {
     _$PinwheelExitPayload _$result;
     try {
-      _$result = _$v ?? new _$PinwheelExitPayload._(error: _error?.build());
+      _$result = _$v ??
+          _$PinwheelExitPayload._(
+            error: _error?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'error';
         _error?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'PinwheelExitPayload', _$failedField, e.toString());
       }
       rethrow;
@@ -1242,14 +1417,10 @@ class _$PinwheelLoginPayload extends PinwheelLoginPayload {
 
   factory _$PinwheelLoginPayload(
           [void Function(PinwheelLoginPayloadBuilder)? updates]) =>
-      (new PinwheelLoginPayloadBuilder()..update(updates))._build();
+      (PinwheelLoginPayloadBuilder()..update(updates))._build();
 
   _$PinwheelLoginPayload._({required this.accountId, this.platformId})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        accountId, r'PinwheelLoginPayload', 'accountId');
-  }
-
+      : super._();
   @override
   PinwheelLoginPayload rebuild(
           void Function(PinwheelLoginPayloadBuilder) updates) =>
@@ -1257,7 +1428,7 @@ class _$PinwheelLoginPayload extends PinwheelLoginPayload {
 
   @override
   PinwheelLoginPayloadBuilder toBuilder() =>
-      new PinwheelLoginPayloadBuilder()..replace(this);
+      PinwheelLoginPayloadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1314,7 +1485,6 @@ class PinwheelLoginPayloadBuilder
 
   @override
   void replace(covariant PinwheelLoginPayload other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelLoginPayload;
   }
 
@@ -1328,10 +1498,11 @@ class PinwheelLoginPayloadBuilder
 
   _$PinwheelLoginPayload _build() {
     final _$result = _$v ??
-        new _$PinwheelLoginPayload._(
-            accountId: BuiltValueNullFieldError.checkNotNull(
-                accountId, r'PinwheelLoginPayload', 'accountId'),
-            platformId: platformId);
+        _$PinwheelLoginPayload._(
+          accountId: BuiltValueNullFieldError.checkNotNull(
+              accountId, r'PinwheelLoginPayload', 'accountId'),
+          platformId: platformId,
+        );
     replace(_$result);
     return _$result;
   }
@@ -1343,13 +1514,9 @@ class _$PinwheelLoginAttemptPayload extends PinwheelLoginAttemptPayload {
 
   factory _$PinwheelLoginAttemptPayload(
           [void Function(PinwheelLoginAttemptPayloadBuilder)? updates]) =>
-      (new PinwheelLoginAttemptPayloadBuilder()..update(updates))._build();
+      (PinwheelLoginAttemptPayloadBuilder()..update(updates))._build();
 
-  _$PinwheelLoginAttemptPayload._({required this.platformId}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        platformId, r'PinwheelLoginAttemptPayload', 'platformId');
-  }
-
+  _$PinwheelLoginAttemptPayload._({required this.platformId}) : super._();
   @override
   PinwheelLoginAttemptPayload rebuild(
           void Function(PinwheelLoginAttemptPayloadBuilder) updates) =>
@@ -1357,7 +1524,7 @@ class _$PinwheelLoginAttemptPayload extends PinwheelLoginAttemptPayload {
 
   @override
   PinwheelLoginAttemptPayloadBuilder toBuilder() =>
-      new PinwheelLoginAttemptPayloadBuilder()..replace(this);
+      PinwheelLoginAttemptPayloadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1407,7 +1574,6 @@ class PinwheelLoginAttemptPayloadBuilder
 
   @override
   void replace(covariant PinwheelLoginAttemptPayload other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelLoginAttemptPayload;
   }
 
@@ -1421,9 +1587,10 @@ class PinwheelLoginAttemptPayloadBuilder
 
   _$PinwheelLoginAttemptPayload _build() {
     final _$result = _$v ??
-        new _$PinwheelLoginAttemptPayload._(
-            platformId: BuiltValueNullFieldError.checkNotNull(
-                platformId, r'PinwheelLoginAttemptPayload', 'platformId'));
+        _$PinwheelLoginAttemptPayload._(
+          platformId: BuiltValueNullFieldError.checkNotNull(
+              platformId, r'PinwheelLoginAttemptPayload', 'platformId'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1436,17 +1603,15 @@ class _$PinwheelParams extends PinwheelParams {
   final PinwheelAllocation? allocation;
 
   factory _$PinwheelParams([void Function(PinwheelParamsBuilder)? updates]) =>
-      (new PinwheelParamsBuilder()..update(updates))._build();
+      (PinwheelParamsBuilder()..update(updates))._build();
 
   _$PinwheelParams._({this.action, this.allocation}) : super._();
-
   @override
   PinwheelParams rebuild(void Function(PinwheelParamsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  PinwheelParamsBuilder toBuilder() =>
-      new PinwheelParamsBuilder()..replace(this);
+  PinwheelParamsBuilder toBuilder() => PinwheelParamsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1486,7 +1651,7 @@ class PinwheelParamsBuilder
 
   PinwheelAllocationBuilder? _allocation;
   PinwheelAllocationBuilder get allocation =>
-      _$this._allocation ??= new PinwheelAllocationBuilder();
+      _$this._allocation ??= PinwheelAllocationBuilder();
   set allocation(covariant PinwheelAllocationBuilder? allocation) =>
       _$this._allocation = allocation;
 
@@ -1504,7 +1669,6 @@ class PinwheelParamsBuilder
 
   @override
   void replace(covariant PinwheelParams other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelParams;
   }
 
@@ -1520,15 +1684,17 @@ class PinwheelParamsBuilder
     _$PinwheelParams _$result;
     try {
       _$result = _$v ??
-          new _$PinwheelParams._(
-              action: action, allocation: _allocation?.build());
+          _$PinwheelParams._(
+            action: action,
+            allocation: _allocation?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'allocation';
         _allocation?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'PinwheelParams', _$failedField, e.toString());
       }
       rethrow;
@@ -1547,17 +1713,11 @@ class _$PinwheelSelectedEmployerPayload
 
   factory _$PinwheelSelectedEmployerPayload(
           [void Function(PinwheelSelectedEmployerPayloadBuilder)? updates]) =>
-      (new PinwheelSelectedEmployerPayloadBuilder()..update(updates))._build();
+      (PinwheelSelectedEmployerPayloadBuilder()..update(updates))._build();
 
   _$PinwheelSelectedEmployerPayload._(
       {required this.selectedEmployerId, required this.selectedEmployerName})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(selectedEmployerId,
-        r'PinwheelSelectedEmployerPayload', 'selectedEmployerId');
-    BuiltValueNullFieldError.checkNotNull(selectedEmployerName,
-        r'PinwheelSelectedEmployerPayload', 'selectedEmployerName');
-  }
-
+      : super._();
   @override
   PinwheelSelectedEmployerPayload rebuild(
           void Function(PinwheelSelectedEmployerPayloadBuilder) updates) =>
@@ -1565,7 +1725,7 @@ class _$PinwheelSelectedEmployerPayload
 
   @override
   PinwheelSelectedEmployerPayloadBuilder toBuilder() =>
-      new PinwheelSelectedEmployerPayloadBuilder()..replace(this);
+      PinwheelSelectedEmployerPayloadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1624,7 +1784,6 @@ class PinwheelSelectedEmployerPayloadBuilder
 
   @override
   void replace(covariant PinwheelSelectedEmployerPayload other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelSelectedEmployerPayload;
   }
 
@@ -1638,15 +1797,16 @@ class PinwheelSelectedEmployerPayloadBuilder
 
   _$PinwheelSelectedEmployerPayload _build() {
     final _$result = _$v ??
-        new _$PinwheelSelectedEmployerPayload._(
-            selectedEmployerId: BuiltValueNullFieldError.checkNotNull(
-                selectedEmployerId,
-                r'PinwheelSelectedEmployerPayload',
-                'selectedEmployerId'),
-            selectedEmployerName: BuiltValueNullFieldError.checkNotNull(
-                selectedEmployerName,
-                r'PinwheelSelectedEmployerPayload',
-                'selectedEmployerName'));
+        _$PinwheelSelectedEmployerPayload._(
+          selectedEmployerId: BuiltValueNullFieldError.checkNotNull(
+              selectedEmployerId,
+              r'PinwheelSelectedEmployerPayload',
+              'selectedEmployerId'),
+          selectedEmployerName: BuiltValueNullFieldError.checkNotNull(
+              selectedEmployerName,
+              r'PinwheelSelectedEmployerPayload',
+              'selectedEmployerName'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1661,17 +1821,11 @@ class _$PinwheelSelectedPlatformPayload
 
   factory _$PinwheelSelectedPlatformPayload(
           [void Function(PinwheelSelectedPlatformPayloadBuilder)? updates]) =>
-      (new PinwheelSelectedPlatformPayloadBuilder()..update(updates))._build();
+      (PinwheelSelectedPlatformPayloadBuilder()..update(updates))._build();
 
   _$PinwheelSelectedPlatformPayload._(
       {required this.selectedPlatformId, required this.selectedPlatformName})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(selectedPlatformId,
-        r'PinwheelSelectedPlatformPayload', 'selectedPlatformId');
-    BuiltValueNullFieldError.checkNotNull(selectedPlatformName,
-        r'PinwheelSelectedPlatformPayload', 'selectedPlatformName');
-  }
-
+      : super._();
   @override
   PinwheelSelectedPlatformPayload rebuild(
           void Function(PinwheelSelectedPlatformPayloadBuilder) updates) =>
@@ -1679,7 +1833,7 @@ class _$PinwheelSelectedPlatformPayload
 
   @override
   PinwheelSelectedPlatformPayloadBuilder toBuilder() =>
-      new PinwheelSelectedPlatformPayloadBuilder()..replace(this);
+      PinwheelSelectedPlatformPayloadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1738,7 +1892,6 @@ class PinwheelSelectedPlatformPayloadBuilder
 
   @override
   void replace(covariant PinwheelSelectedPlatformPayload other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelSelectedPlatformPayload;
   }
 
@@ -1752,15 +1905,16 @@ class PinwheelSelectedPlatformPayloadBuilder
 
   _$PinwheelSelectedPlatformPayload _build() {
     final _$result = _$v ??
-        new _$PinwheelSelectedPlatformPayload._(
-            selectedPlatformId: BuiltValueNullFieldError.checkNotNull(
-                selectedPlatformId,
-                r'PinwheelSelectedPlatformPayload',
-                'selectedPlatformId'),
-            selectedPlatformName: BuiltValueNullFieldError.checkNotNull(
-                selectedPlatformName,
-                r'PinwheelSelectedPlatformPayload',
-                'selectedPlatformName'));
+        _$PinwheelSelectedPlatformPayload._(
+          selectedPlatformId: BuiltValueNullFieldError.checkNotNull(
+              selectedPlatformId,
+              r'PinwheelSelectedPlatformPayload',
+              'selectedPlatformId'),
+          selectedPlatformName: BuiltValueNullFieldError.checkNotNull(
+              selectedPlatformName,
+              r'PinwheelSelectedPlatformPayload',
+              'selectedPlatformName'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -1778,24 +1932,14 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
 
   factory _$PinwheelSuccessPayload(
           [void Function(PinwheelSuccessPayloadBuilder)? updates]) =>
-      (new PinwheelSuccessPayloadBuilder()..update(updates))._build();
+      (PinwheelSuccessPayloadBuilder()..update(updates))._build();
 
   _$PinwheelSuccessPayload._(
       {required this.accountId,
       required this.platformId,
       required this.job,
       required this.params})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        accountId, r'PinwheelSuccessPayload', 'accountId');
-    BuiltValueNullFieldError.checkNotNull(
-        platformId, r'PinwheelSuccessPayload', 'platformId');
-    BuiltValueNullFieldError.checkNotNull(
-        job, r'PinwheelSuccessPayload', 'job');
-    BuiltValueNullFieldError.checkNotNull(
-        params, r'PinwheelSuccessPayload', 'params');
-  }
-
+      : super._();
   @override
   PinwheelSuccessPayload rebuild(
           void Function(PinwheelSuccessPayloadBuilder) updates) =>
@@ -1803,7 +1947,7 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
 
   @override
   PinwheelSuccessPayloadBuilder toBuilder() =>
-      new PinwheelSuccessPayloadBuilder()..replace(this);
+      PinwheelSuccessPayloadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1858,7 +2002,7 @@ class PinwheelSuccessPayloadBuilder
 
   PinwheelParamsBuilder? _params;
   PinwheelParamsBuilder get params =>
-      _$this._params ??= new PinwheelParamsBuilder();
+      _$this._params ??= PinwheelParamsBuilder();
   set params(covariant PinwheelParamsBuilder? params) =>
       _$this._params = params;
 
@@ -1878,7 +2022,6 @@ class PinwheelSuccessPayloadBuilder
 
   @override
   void replace(covariant PinwheelSuccessPayload other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelSuccessPayload;
   }
 
@@ -1894,21 +2037,22 @@ class PinwheelSuccessPayloadBuilder
     _$PinwheelSuccessPayload _$result;
     try {
       _$result = _$v ??
-          new _$PinwheelSuccessPayload._(
-              accountId: BuiltValueNullFieldError.checkNotNull(
-                  accountId, r'PinwheelSuccessPayload', 'accountId'),
-              platformId: BuiltValueNullFieldError.checkNotNull(
-                  platformId, r'PinwheelSuccessPayload', 'platformId'),
-              job: BuiltValueNullFieldError.checkNotNull(
-                  job, r'PinwheelSuccessPayload', 'job'),
-              params: params.build());
+          _$PinwheelSuccessPayload._(
+            accountId: BuiltValueNullFieldError.checkNotNull(
+                accountId, r'PinwheelSuccessPayload', 'accountId'),
+            platformId: BuiltValueNullFieldError.checkNotNull(
+                platformId, r'PinwheelSuccessPayload', 'platformId'),
+            job: BuiltValueNullFieldError.checkNotNull(
+                job, r'PinwheelSuccessPayload', 'job'),
+            params: params.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'params';
         params.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             r'PinwheelSuccessPayload', _$failedField, e.toString());
       }
       rethrow;
@@ -1926,14 +2070,10 @@ class _$PinwheelEventChannelArgument extends PinwheelEventChannelArgument {
 
   factory _$PinwheelEventChannelArgument(
           [void Function(PinwheelEventChannelArgumentBuilder)? updates]) =>
-      (new PinwheelEventChannelArgumentBuilder()..update(updates))._build();
+      (PinwheelEventChannelArgumentBuilder()..update(updates))._build();
 
   _$PinwheelEventChannelArgument._({required this.name, this.payload})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        name, r'PinwheelEventChannelArgument', 'name');
-  }
-
+      : super._();
   @override
   PinwheelEventChannelArgument rebuild(
           void Function(PinwheelEventChannelArgumentBuilder) updates) =>
@@ -1941,7 +2081,7 @@ class _$PinwheelEventChannelArgument extends PinwheelEventChannelArgument {
 
   @override
   PinwheelEventChannelArgumentBuilder toBuilder() =>
-      new PinwheelEventChannelArgumentBuilder()..replace(this);
+      PinwheelEventChannelArgumentBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -1997,7 +2137,6 @@ class PinwheelEventChannelArgumentBuilder
 
   @override
   void replace(PinwheelEventChannelArgument other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelEventChannelArgument;
   }
 
@@ -2011,10 +2150,11 @@ class PinwheelEventChannelArgumentBuilder
 
   _$PinwheelEventChannelArgument _build() {
     final _$result = _$v ??
-        new _$PinwheelEventChannelArgument._(
-            name: BuiltValueNullFieldError.checkNotNull(
-                name, r'PinwheelEventChannelArgument', 'name'),
-            payload: payload);
+        _$PinwheelEventChannelArgument._(
+          name: BuiltValueNullFieldError.checkNotNull(
+              name, r'PinwheelEventChannelArgument', 'name'),
+          payload: payload,
+        );
     replace(_$result);
     return _$result;
   }
@@ -2026,13 +2166,9 @@ class _$PinwheelDDFormCreatePayload extends PinwheelDDFormCreatePayload {
 
   factory _$PinwheelDDFormCreatePayload(
           [void Function(PinwheelDDFormCreatePayloadBuilder)? updates]) =>
-      (new PinwheelDDFormCreatePayloadBuilder()..update(updates))._build();
+      (PinwheelDDFormCreatePayloadBuilder()..update(updates))._build();
 
-  _$PinwheelDDFormCreatePayload._({required this.url}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        url, r'PinwheelDDFormCreatePayload', 'url');
-  }
-
+  _$PinwheelDDFormCreatePayload._({required this.url}) : super._();
   @override
   PinwheelDDFormCreatePayload rebuild(
           void Function(PinwheelDDFormCreatePayloadBuilder) updates) =>
@@ -2040,7 +2176,7 @@ class _$PinwheelDDFormCreatePayload extends PinwheelDDFormCreatePayload {
 
   @override
   PinwheelDDFormCreatePayloadBuilder toBuilder() =>
-      new PinwheelDDFormCreatePayloadBuilder()..replace(this);
+      PinwheelDDFormCreatePayloadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -2088,7 +2224,6 @@ class PinwheelDDFormCreatePayloadBuilder
 
   @override
   void replace(covariant PinwheelDDFormCreatePayload other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelDDFormCreatePayload;
   }
 
@@ -2102,9 +2237,10 @@ class PinwheelDDFormCreatePayloadBuilder
 
   _$PinwheelDDFormCreatePayload _build() {
     final _$result = _$v ??
-        new _$PinwheelDDFormCreatePayload._(
-            url: BuiltValueNullFieldError.checkNotNull(
-                url, r'PinwheelDDFormCreatePayload', 'url'));
+        _$PinwheelDDFormCreatePayload._(
+          url: BuiltValueNullFieldError.checkNotNull(
+              url, r'PinwheelDDFormCreatePayload', 'url'),
+        );
     replace(_$result);
     return _$result;
   }
@@ -2125,7 +2261,7 @@ class _$PinwheelScreenTransitionPayload
 
   factory _$PinwheelScreenTransitionPayload(
           [void Function(PinwheelScreenTransitionPayloadBuilder)? updates]) =>
-      (new PinwheelScreenTransitionPayloadBuilder()..update(updates))._build();
+      (PinwheelScreenTransitionPayloadBuilder()..update(updates))._build();
 
   _$PinwheelScreenTransitionPayload._(
       {required this.screenName,
@@ -2133,11 +2269,7 @@ class _$PinwheelScreenTransitionPayload
       this.selectedEmployerName,
       this.selectedPlatformId,
       this.selectedPlatformName})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        screenName, r'PinwheelScreenTransitionPayload', 'screenName');
-  }
-
+      : super._();
   @override
   PinwheelScreenTransitionPayload rebuild(
           void Function(PinwheelScreenTransitionPayloadBuilder) updates) =>
@@ -2145,7 +2277,7 @@ class _$PinwheelScreenTransitionPayload
 
   @override
   PinwheelScreenTransitionPayloadBuilder toBuilder() =>
-      new PinwheelScreenTransitionPayloadBuilder()..replace(this);
+      PinwheelScreenTransitionPayloadBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -2231,7 +2363,6 @@ class PinwheelScreenTransitionPayloadBuilder
 
   @override
   void replace(covariant PinwheelScreenTransitionPayload other) {
-    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$PinwheelScreenTransitionPayload;
   }
 
@@ -2245,13 +2376,239 @@ class PinwheelScreenTransitionPayloadBuilder
 
   _$PinwheelScreenTransitionPayload _build() {
     final _$result = _$v ??
-        new _$PinwheelScreenTransitionPayload._(
-            screenName: BuiltValueNullFieldError.checkNotNull(
-                screenName, r'PinwheelScreenTransitionPayload', 'screenName'),
-            selectedEmployerId: selectedEmployerId,
-            selectedEmployerName: selectedEmployerName,
-            selectedPlatformId: selectedPlatformId,
-            selectedPlatformName: selectedPlatformName);
+        _$PinwheelScreenTransitionPayload._(
+          screenName: BuiltValueNullFieldError.checkNotNull(
+              screenName, r'PinwheelScreenTransitionPayload', 'screenName'),
+          selectedEmployerId: selectedEmployerId,
+          selectedEmployerName: selectedEmployerName,
+          selectedPlatformId: selectedPlatformId,
+          selectedPlatformName: selectedPlatformName,
+        );
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelOtherEventPayloadItem extends PinwheelOtherEventPayloadItem {
+  @override
+  final String key;
+  @override
+  final String value;
+  @override
+  final PinwheelOtherEventPayloadValueType type;
+
+  factory _$PinwheelOtherEventPayloadItem(
+          [void Function(PinwheelOtherEventPayloadItemBuilder)? updates]) =>
+      (PinwheelOtherEventPayloadItemBuilder()..update(updates))._build();
+
+  _$PinwheelOtherEventPayloadItem._(
+      {required this.key, required this.value, required this.type})
+      : super._();
+  @override
+  PinwheelOtherEventPayloadItem rebuild(
+          void Function(PinwheelOtherEventPayloadItemBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelOtherEventPayloadItemBuilder toBuilder() =>
+      PinwheelOtherEventPayloadItemBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelOtherEventPayloadItem &&
+        key == other.key &&
+        value == other.value &&
+        type == other.type;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, key.hashCode);
+    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, type.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelOtherEventPayloadItem')
+          ..add('key', key)
+          ..add('value', value)
+          ..add('type', type))
+        .toString();
+  }
+}
+
+class PinwheelOtherEventPayloadItemBuilder
+    implements
+        Builder<PinwheelOtherEventPayloadItem,
+            PinwheelOtherEventPayloadItemBuilder> {
+  _$PinwheelOtherEventPayloadItem? _$v;
+
+  String? _key;
+  String? get key => _$this._key;
+  set key(String? key) => _$this._key = key;
+
+  String? _value;
+  String? get value => _$this._value;
+  set value(String? value) => _$this._value = value;
+
+  PinwheelOtherEventPayloadValueType? _type;
+  PinwheelOtherEventPayloadValueType? get type => _$this._type;
+  set type(PinwheelOtherEventPayloadValueType? type) => _$this._type = type;
+
+  PinwheelOtherEventPayloadItemBuilder();
+
+  PinwheelOtherEventPayloadItemBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _key = $v.key;
+      _value = $v.value;
+      _type = $v.type;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(PinwheelOtherEventPayloadItem other) {
+    _$v = other as _$PinwheelOtherEventPayloadItem;
+  }
+
+  @override
+  void update(void Function(PinwheelOtherEventPayloadItemBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelOtherEventPayloadItem build() => _build();
+
+  _$PinwheelOtherEventPayloadItem _build() {
+    final _$result = _$v ??
+        _$PinwheelOtherEventPayloadItem._(
+          key: BuiltValueNullFieldError.checkNotNull(
+              key, r'PinwheelOtherEventPayloadItem', 'key'),
+          value: BuiltValueNullFieldError.checkNotNull(
+              value, r'PinwheelOtherEventPayloadItem', 'value'),
+          type: BuiltValueNullFieldError.checkNotNull(
+              type, r'PinwheelOtherEventPayloadItem', 'type'),
+        );
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelOtherEventPayload extends PinwheelOtherEventPayload {
+  @override
+  final String name;
+  @override
+  final BuiltList<PinwheelOtherEventPayloadItem> payload;
+
+  factory _$PinwheelOtherEventPayload(
+          [void Function(PinwheelOtherEventPayloadBuilder)? updates]) =>
+      (PinwheelOtherEventPayloadBuilder()..update(updates))._build();
+
+  _$PinwheelOtherEventPayload._({required this.name, required this.payload})
+      : super._();
+  @override
+  PinwheelOtherEventPayload rebuild(
+          void Function(PinwheelOtherEventPayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelOtherEventPayloadBuilder toBuilder() =>
+      PinwheelOtherEventPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelOtherEventPayload &&
+        name == other.name &&
+        payload == other.payload;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, payload.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelOtherEventPayload')
+          ..add('name', name)
+          ..add('payload', payload))
+        .toString();
+  }
+}
+
+class PinwheelOtherEventPayloadBuilder
+    implements
+        Builder<PinwheelOtherEventPayload, PinwheelOtherEventPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelOtherEventPayload? _$v;
+
+  String? _name;
+  String? get name => _$this._name;
+  set name(covariant String? name) => _$this._name = name;
+
+  ListBuilder<PinwheelOtherEventPayloadItem>? _payload;
+  ListBuilder<PinwheelOtherEventPayloadItem> get payload =>
+      _$this._payload ??= ListBuilder<PinwheelOtherEventPayloadItem>();
+  set payload(covariant ListBuilder<PinwheelOtherEventPayloadItem>? payload) =>
+      _$this._payload = payload;
+
+  PinwheelOtherEventPayloadBuilder();
+
+  PinwheelOtherEventPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _payload = $v.payload.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelOtherEventPayload other) {
+    _$v = other as _$PinwheelOtherEventPayload;
+  }
+
+  @override
+  void update(void Function(PinwheelOtherEventPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelOtherEventPayload build() => _build();
+
+  _$PinwheelOtherEventPayload _build() {
+    _$PinwheelOtherEventPayload _$result;
+    try {
+      _$result = _$v ??
+          _$PinwheelOtherEventPayload._(
+            name: BuiltValueNullFieldError.checkNotNull(
+                name, r'PinwheelOtherEventPayload', 'name'),
+            payload: payload.build(),
+          );
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'payload';
+        payload.build();
+      } catch (e) {
+        throw BuiltValueNestedFieldError(
+            r'PinwheelOtherEventPayload', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
