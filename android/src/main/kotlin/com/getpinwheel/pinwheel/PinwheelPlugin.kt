@@ -178,6 +178,7 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
   private var pinwheelView: PinwheelFrameLayout
   private var textView: TextView
   private var token: String?
+  private var useDarkMode: Boolean?
 
   override fun getView(): View {
     val result = pinwheelView
@@ -200,7 +201,9 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
       token = ""
     }
 
-    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener, "flutter", "3.0.0")
+    useDarkMode = creationParams?.optBoolean("useDarkMode", false) ?: false
+
+    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener, "flutter", "3.0.0", useDarkMode=useDarkMode ?: false)
 
     textView = TextView(context)
     textView.textSize = 36f
