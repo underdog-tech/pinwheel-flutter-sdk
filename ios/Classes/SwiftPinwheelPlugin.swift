@@ -96,7 +96,7 @@ class FLNativeView: NSObject, FlutterPlatformView {
             return
         }
         let config = PinwheelConfig(
-            mode: .sandbox, environment: .production, sdk: "flutter", version: "3.0.0")
+            mode: .sandbox, environment: .production, sdk: "flutter", version: "3.1.0")
         let useDarkMode = _useDarkMode ?? false
         _pinwheelVC = PinwheelViewController(
             token: token, delegate: self, config: config, useDarkMode: useDarkMode)
