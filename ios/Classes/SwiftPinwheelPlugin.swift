@@ -53,6 +53,7 @@ class FLNativeViewFactory: NSObject, FlutterPlatformViewFactory {
 class FLNativeView: NSObject, FlutterPlatformView {
     private var _view: UIView
     private var _token: String?
+    private var _useDarkMode: Bool?
     private var _pinwheelVC: PinwheelViewController?
     private var _channel: FlutterMethodChannel?
 
@@ -75,6 +76,11 @@ class FLNativeView: NSObject, FlutterPlatformView {
         {
             _token = token
         }
+        if let dict = args as? NSDictionary,
+            let useDarkMode = dict["useDarkMode"] as? Bool
+        {
+            _useDarkMode = useDarkMode
+        }
         createNativeView(view: _view)
     }
 
@@ -91,7 +97,9 @@ class FLNativeView: NSObject, FlutterPlatformView {
         }
         let config = PinwheelConfig(
             mode: .sandbox, environment: .production, sdk: "flutter", version: "3.0.0")
-        _pinwheelVC = PinwheelViewController(token: token, delegate: self, config: config)
+        let useDarkMode = _useDarkMode ?? false
+        _pinwheelVC = PinwheelViewController(
+            token: token, delegate: self, config: config, useDarkMode: useDarkMode)
         if let view = _pinwheelVC?.view {
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             _view.addSubview(view)
