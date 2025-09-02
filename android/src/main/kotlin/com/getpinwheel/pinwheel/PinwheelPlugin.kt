@@ -203,7 +203,7 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
 
     useDarkMode = creationParams?.optBoolean("useDarkMode", false) ?: false
 
-    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener, "flutter", "3.0.0", useDarkMode=useDarkMode ?: false)
+    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener, "flutter", "3.1.0", useDarkMode=useDarkMode ?: false)
 
     textView = TextView(context)
     textView.textSize = 36f
