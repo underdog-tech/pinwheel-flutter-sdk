@@ -7,7 +7,10 @@ import 'package:pinwheel/pinwheel.dart';
 import 'package:http/http.dart' as http;
 import 'token.dart';
 
-const String API_SECRET = "";
+/// Provide via:
+/// `flutter run --dart-define=PINWHEEL_API_SECRET=...`
+const String API_SECRET = String.fromEnvironment('PINWHEEL_API_SECRET');
+const bool ENABLE_SECURE_ORIGIN = true;
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -29,6 +32,11 @@ class BankingState extends State<Banking> {
   bool isLoading = false;
   String? error;
 
+  void _log(String message) {
+    // ignore: avoid_print
+    print("[pinwheel-example] $message");
+  }
+
   @override
   void initState() {
     super.initState();
@@ -47,23 +55,61 @@ class BankingState extends State<Banking> {
         child: Center(child: CircularProgressIndicator()),
       );
     }
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            if (error != null) Text(error!),
+    return Center(
+      child: Column(
+        children: [
+          const SizedBox(height: 24),
+          Text(
+            "API_SECRET set: ${API_SECRET.isNotEmpty}",
+            style: const TextStyle(color: Colors.black54),
+          ),
+          Text(
+            "useSecureOrigin: $ENABLE_SECURE_ORIGIN",
+            style: const TextStyle(color: Colors.black54),
+          ),
+          if (error != null) ...[
+            const SizedBox(height: 16),
             Padding(
-              padding: EdgeInsets.only(top: 40),
-              child: ElevatedButton(
-                child: Text("Switch Direct Deposit"),
-                onPressed: () {
-                  isLoading = true;
-                  handleButtonPress();
-                },
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                error!,
+                style: const TextStyle(color: Colors.red),
               ),
             ),
           ],
-        ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: ElevatedButton(
+              child: const Text("Switch Direct Deposit"),
+              onPressed: () async {
+                _log("Button pressed");
+                if (API_SECRET.isEmpty) {
+                  setState(() {
+                    error =
+                        "Missing PINWHEEL_API_SECRET. Run with --dart-define=PINWHEEL_API_SECRET=...";
+                  });
+                  _log("Aborting: API secret missing");
+                  return;
+                }
+
+                setState(() {
+                  error = null;
+                  isLoading = true;
+                });
+
+                try {
+                  await handleButtonPress();
+                } finally {
+                  if (mounted) {
+                    setState(() {
+                      isLoading = false;
+                    });
+                  }
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -101,6 +147,7 @@ class BankingState extends State<Banking> {
   }
 
   Future<void> handleButtonPress() async {
+    _log("Starting token request flow");
     TokenAttributes attributes = TokenAttributes(
       mode: "sandbox",
       org_name: "BK BNK",
@@ -120,17 +167,23 @@ class BankingState extends State<Banking> {
       required_jobs: ["direct_deposit_switch"],
     );
     TokenPayload? payload = await fetchToken(attributes);
-    isLoading = false;
+    if (!mounted) return;
     if (error != null) {
+      _log("Token request error: $error");
       return;
     }
     if (payload == null) {
-      error = "Failed to fetch token";
+      setState(() {
+        error = "Failed to fetch token";
+      });
+      _log("Token payload was null");
       return;
     }
 
+    _log("Token received (len=${payload.token.length}). Opening modal.");
     PinwheelLink link = PinwheelLink(
       token: payload.token,
+      useSecureOrigin: ENABLE_SECURE_ORIGIN,
       onExit: _onExit,
       onError: _onError,
       onEvent: _onEvent,
@@ -157,22 +210,32 @@ class BankingState extends State<Banking> {
       "pinwheel-version": '2023-11-22',
     };
     var url = Uri.parse('https://sandbox.getpinwheel.com/v1/link_tokens');
+    _log("POST $url");
+    _log(
+        "Headers: Content-Type=application/json, pinwheel-version=2023-11-22, X-API-SECRET=(len=${API_SECRET.length})");
     Response? response;
     try {
       response = await http.post(url, headers: headers, body: jsonEncode(body));
     } catch (exception) {
-      error = exception.toString();
+      setState(() {
+        error = exception.toString();
+      });
     }
 
-    if (response == null) {
+    final resp = response;
+    if (resp == null) {
       return null;
     }
 
-    if (response.statusCode == 200) {
-      var endpointResponse = TokenResponse.fromJson(jsonDecode(response.body));
+    if (resp.statusCode == 200) {
+      _log("Token request succeeded (200)");
+      var endpointResponse = TokenResponse.fromJson(jsonDecode(resp.body));
       return endpointResponse.data;
     } else {
-      error = response.statusCode.toString() + ' - Failed to fetch token';
+      _log("Token request failed (${resp.statusCode}): ${resp.body}");
+      setState(() {
+        error = "${resp.statusCode} - Failed to fetch token\n${resp.body}";
+      });
     }
   }
 }

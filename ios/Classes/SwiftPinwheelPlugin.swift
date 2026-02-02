@@ -54,6 +54,7 @@ class FLNativeView: NSObject, FlutterPlatformView {
     private var _view: UIView
     private var _token: String?
     private var _useDarkMode: Bool?
+    private var _useSecureOrigin: Bool?
     private var _pinwheelVC: PinwheelViewController?
     private var _channel: FlutterMethodChannel?
 
@@ -81,6 +82,11 @@ class FLNativeView: NSObject, FlutterPlatformView {
         {
             _useDarkMode = useDarkMode
         }
+        if let dict = args as? NSDictionary,
+            let useSecureOrigin = dict["useSecureOrigin"] as? Bool
+        {
+            _useSecureOrigin = useSecureOrigin
+        }
         createNativeView(view: _view)
     }
 
@@ -95,8 +101,9 @@ class FLNativeView: NSObject, FlutterPlatformView {
             _view.addSubview(view)
             return
         }
-        let config = PinwheelConfig(
+        var config = PinwheelConfig(
             mode: .sandbox, environment: .production, sdk: "flutter", version: "3.1.0")
+        config.useSecureOrigin = _useSecureOrigin ?? false
         let useDarkMode = _useDarkMode ?? false
         _pinwheelVC = PinwheelViewController(
             token: token, delegate: self, config: config, useDarkMode: useDarkMode)
@@ -185,6 +192,9 @@ extension FLNativeView: PinwheelDelegate {
                 let eventData = try! JSONEncoder().encode(event)
                 eventString = String(data: eventData, encoding: .utf8)!
             }
+        @unknown default:
+            // Forward the event name but omit payload if we don't recognize the type yet.
+            break
         }
 
         let obj = PinwheelEventChannelArgument(name: name.rawValue, payload: eventString)
