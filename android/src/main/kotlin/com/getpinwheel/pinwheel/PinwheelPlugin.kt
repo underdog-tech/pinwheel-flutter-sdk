@@ -210,7 +210,7 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
       readLinkToken(),
       pinwheelEventListener,
       "flutter",
-      "3.1.0",
+      "3.2.0",
       useDarkMode = useDarkMode ?: false,
       useSecureOrigin = useSecureOrigin ?: false
     )
