@@ -192,6 +192,7 @@ class PinwheelLink extends StatefulWidget {
   final PinwheelLoginCallback? onLogin;
   final PinwheelLoginAttemptCallback? onLoginAttempt;
   final bool? useDarkMode;
+  final bool? useSecureOrigin;
 
   const PinwheelLink(
       {Key? key,
@@ -202,7 +203,8 @@ class PinwheelLink extends StatefulWidget {
       this.onSuccess,
       this.onLogin,
       this.onLoginAttempt,
-      this.useDarkMode})
+      this.useDarkMode,
+      this.useSecureOrigin})
       : super(key: key);
 
   @override
@@ -217,6 +219,7 @@ class PinwheelLinkState extends State<PinwheelLink> {
     final Map<String, dynamic> creationParams = {
       "token": widget.token,
       "useDarkMode": widget.useDarkMode,
+      "useSecureOrigin": widget.useSecureOrigin,
     };
 
     switch (defaultTargetPlatform) {

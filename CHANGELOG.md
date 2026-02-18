@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 3.x Releases
 
-- `3.x` Releases - [3.0.0](#300) | [3.1.0](#310)
+- `3.x` Releases - [3.0.0](#300) | [3.1.0](#310) | [3.2.0](#320)
 
 ## 2.4.x Releases
 
@@ -19,6 +19,13 @@ All notable changes to this project will be documented in this file.
 - `0.0.x` Releases - [0.0.1](#001) | [0.0.2](#002) | [0.0.3](#003)
 
 ---
+
+### [3.2.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/3.2.0)
+
+#### Added
+
+- Added support for `input_allocation` event
+  - Added by [Wes Garlock](https://github.com/wes-garlock) in Pull Request [#18](https://github.com/underdog-tech/pinwheel-flutter-sdk/pull/43).
 
 ### [3.1.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/3.1.0)
 

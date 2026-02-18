@@ -179,6 +179,7 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
   private var textView: TextView
   private var token: String?
   private var useDarkMode: Boolean?
+  private var useSecureOrigin: Boolean?
 
   override fun getView(): View {
     val result = pinwheelView
@@ -202,8 +203,17 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
     }
 
     useDarkMode = creationParams?.optBoolean("useDarkMode", false) ?: false
+    useSecureOrigin = creationParams?.optBoolean("useSecureOrigin", false) ?: false
 
-    pinwheelView = PinwheelViewGroupManager.init(context, readLinkToken(), pinwheelEventListener, "flutter", "3.1.0", useDarkMode=useDarkMode ?: false)
+    pinwheelView = PinwheelViewGroupManager.init(
+      context,
+      readLinkToken(),
+      pinwheelEventListener,
+      "flutter",
+      "3.2.0",
+      useDarkMode = useDarkMode ?: false,
+      useSecureOrigin = useSecureOrigin ?: false
+    )
 
     textView = TextView(context)
     textView.textSize = 36f
