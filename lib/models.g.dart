@@ -37,6 +37,8 @@ final BuiltSet<PinwheelOtherEventPayloadValueType>
 
 Serializer<PinwheelAllocation> _$pinwheelAllocationSerializer =
     _$PinwheelAllocationSerializer();
+Serializer<PinwheelTarget> _$pinwheelTargetSerializer =
+    _$PinwheelTargetSerializer();
 Serializer<PinwheelInputAllocationPayload>
     _$pinwheelInputAllocationPayloadSerializer =
     _$PinwheelInputAllocationPayloadSerializer();
@@ -76,6 +78,30 @@ Serializer<PinwheelOtherEventPayloadItem>
     _$PinwheelOtherEventPayloadItemSerializer();
 Serializer<PinwheelOtherEventPayload> _$pinwheelOtherEventPayloadSerializer =
     _$PinwheelOtherEventPayloadSerializer();
+Serializer<PinwheelDocumentUploadsBeginPayload>
+    _$pinwheelDocumentUploadsBeginPayloadSerializer =
+    _$PinwheelDocumentUploadsBeginPayloadSerializer();
+Serializer<PinwheelDocumentUploadsSubmittedPayload>
+    _$pinwheelDocumentUploadsSubmittedPayloadSerializer =
+    _$PinwheelDocumentUploadsSubmittedPayloadSerializer();
+Serializer<PinwheelBillSwitchPayload> _$pinwheelBillSwitchPayloadSerializer =
+    _$PinwheelBillSwitchPayloadSerializer();
+Serializer<PinwheelBillPayload> _$pinwheelBillPayloadSerializer =
+    _$PinwheelBillPayloadSerializer();
+Serializer<PinwheelBillSwitchPlatform> _$pinwheelBillSwitchPlatformSerializer =
+    _$PinwheelBillSwitchPlatformSerializer();
+Serializer<PinwheelBillSwitchPlatformsPayload>
+    _$pinwheelBillSwitchPlatformsPayloadSerializer =
+    _$PinwheelBillSwitchPlatformsPayloadSerializer();
+Serializer<PinwheelExternalAccountConnectedPayload>
+    _$pinwheelExternalAccountConnectedPayloadSerializer =
+    _$PinwheelExternalAccountConnectedPayloadSerializer();
+Serializer<PinwheelCalendarSyncPayload>
+    _$pinwheelCalendarSyncPayloadSerializer =
+    _$PinwheelCalendarSyncPayloadSerializer();
+Serializer<PinwheelUserActivatedPayload>
+    _$pinwheelUserActivatedPayloadSerializer =
+    _$PinwheelUserActivatedPayloadSerializer();
 
 class _$PinwheelAllocationSerializer
     implements StructuredSerializer<PinwheelAllocation> {
@@ -100,6 +126,13 @@ class _$PinwheelAllocationSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
+    value = object.target;
+    if (value != null) {
+      result
+        ..add('target')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(PinwheelTarget)));
+    }
     return result;
   }
 
@@ -122,6 +155,64 @@ class _$PinwheelAllocationSerializer
         case 'value':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
+          break;
+        case 'target':
+          result.target.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(PinwheelTarget))!
+              as PinwheelTarget);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelTargetSerializer
+    implements StructuredSerializer<PinwheelTarget> {
+  @override
+  final Iterable<Type> types = const [PinwheelTarget, _$PinwheelTarget];
+  @override
+  final String wireName = 'PinwheelTarget';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, PinwheelTarget object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'accountType',
+      serializers.serialize(object.accountType,
+          specifiedType: const FullType(String)),
+    ];
+    Object? value;
+    value = object.accountName;
+    if (value != null) {
+      result
+        ..add('accountName')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  PinwheelTarget deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelTargetBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'accountType':
+          result.accountType = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'accountName':
+          result.accountName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -589,11 +680,15 @@ class _$PinwheelSuccessPayloadSerializer
           specifiedType: const FullType(String)),
       'job',
       serializers.serialize(object.job, specifiedType: const FullType(String)),
-      'params',
-      serializers.serialize(object.params,
-          specifiedType: const FullType(PinwheelParams)),
     ];
-
+    Object? value;
+    value = object.params;
+    if (value != null) {
+      result
+        ..add('params')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(PinwheelParams)));
+    }
     return result;
   }
 
@@ -972,6 +1067,511 @@ class _$PinwheelOtherEventPayloadSerializer
   }
 }
 
+class _$PinwheelDocumentUploadsBeginPayloadSerializer
+    implements StructuredSerializer<PinwheelDocumentUploadsBeginPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelDocumentUploadsBeginPayload,
+    _$PinwheelDocumentUploadsBeginPayload
+  ];
+  @override
+  final String wireName = 'PinwheelDocumentUploadsBeginPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelDocumentUploadsBeginPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[];
+    Object? value;
+    value = object.uploadedDocumentsSubmittedCount;
+    if (value != null) {
+      result
+        ..add('uploadedDocumentsSubmittedCount')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    return result;
+  }
+
+  @override
+  PinwheelDocumentUploadsBeginPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelDocumentUploadsBeginPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'uploadedDocumentsSubmittedCount':
+          result.uploadedDocumentsSubmittedCount = serializers
+              .deserialize(value, specifiedType: const FullType(int)) as int?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelDocumentUploadsSubmittedPayloadSerializer
+    implements StructuredSerializer<PinwheelDocumentUploadsSubmittedPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelDocumentUploadsSubmittedPayload,
+    _$PinwheelDocumentUploadsSubmittedPayload
+  ];
+  @override
+  final String wireName = 'PinwheelDocumentUploadsSubmittedPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelDocumentUploadsSubmittedPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'uploadedDocumentSubmittedCount',
+      serializers.serialize(object.uploadedDocumentSubmittedCount,
+          specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelDocumentUploadsSubmittedPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelDocumentUploadsSubmittedPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'uploadedDocumentSubmittedCount':
+          result.uploadedDocumentSubmittedCount = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelBillSwitchPayloadSerializer
+    implements StructuredSerializer<PinwheelBillSwitchPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelBillSwitchPayload,
+    _$PinwheelBillSwitchPayload
+  ];
+  @override
+  final String wireName = 'PinwheelBillSwitchPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelBillSwitchPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'platformId',
+      serializers.serialize(object.platformId,
+          specifiedType: const FullType(String)),
+      'platformName',
+      serializers.serialize(object.platformName,
+          specifiedType: const FullType(String)),
+      'isIntegratedSwitch',
+      serializers.serialize(object.isIntegratedSwitch,
+          specifiedType: const FullType(bool)),
+      'frequency',
+      serializers.serialize(object.frequency,
+          specifiedType: const FullType(String)),
+      'nextPaymentDate',
+      serializers.serialize(object.nextPaymentDate,
+          specifiedType: const FullType(String)),
+      'amountCents',
+      serializers.serialize(object.amountCents,
+          specifiedType: const FullType(int)),
+    ];
+    Object? value;
+    value = object.accountId;
+    if (value != null) {
+      result
+        ..add('accountId')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  PinwheelBillSwitchPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelBillSwitchPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'platformId':
+          result.platformId = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'platformName':
+          result.platformName = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'isIntegratedSwitch':
+          result.isIntegratedSwitch = serializers.deserialize(value,
+              specifiedType: const FullType(bool))! as bool;
+          break;
+        case 'frequency':
+          result.frequency = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'nextPaymentDate':
+          result.nextPaymentDate = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'amountCents':
+          result.amountCents = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'accountId':
+          result.accountId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelBillPayloadSerializer
+    implements StructuredSerializer<PinwheelBillPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelBillPayload,
+    _$PinwheelBillPayload
+  ];
+  @override
+  final String wireName = 'PinwheelBillPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelBillPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'platformId',
+      serializers.serialize(object.platformId,
+          specifiedType: const FullType(String)),
+      'platformName',
+      serializers.serialize(object.platformName,
+          specifiedType: const FullType(String)),
+      'frequency',
+      serializers.serialize(object.frequency,
+          specifiedType: const FullType(String)),
+      'nextPaymentDate',
+      serializers.serialize(object.nextPaymentDate,
+          specifiedType: const FullType(String)),
+      'amountCents',
+      serializers.serialize(object.amountCents,
+          specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelBillPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelBillPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'platformId':
+          result.platformId = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'platformName':
+          result.platformName = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'frequency':
+          result.frequency = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'nextPaymentDate':
+          result.nextPaymentDate = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'amountCents':
+          result.amountCents = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelBillSwitchPlatformSerializer
+    implements StructuredSerializer<PinwheelBillSwitchPlatform> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelBillSwitchPlatform,
+    _$PinwheelBillSwitchPlatform
+  ];
+  @override
+  final String wireName = 'PinwheelBillSwitchPlatform';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelBillSwitchPlatform object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(String)),
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelBillSwitchPlatform deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelBillSwitchPlatformBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelBillSwitchPlatformsPayloadSerializer
+    implements StructuredSerializer<PinwheelBillSwitchPlatformsPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelBillSwitchPlatformsPayload,
+    _$PinwheelBillSwitchPlatformsPayload
+  ];
+  @override
+  final String wireName = 'PinwheelBillSwitchPlatformsPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelBillSwitchPlatformsPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'platforms',
+      serializers.serialize(object.platforms,
+          specifiedType: const FullType(
+              BuiltList, const [const FullType(PinwheelBillSwitchPlatform)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelBillSwitchPlatformsPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelBillSwitchPlatformsPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'platforms':
+          result.platforms.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltList, const [
+                const FullType(PinwheelBillSwitchPlatform)
+              ]))! as BuiltList<Object?>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelExternalAccountConnectedPayloadSerializer
+    implements StructuredSerializer<PinwheelExternalAccountConnectedPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelExternalAccountConnectedPayload,
+    _$PinwheelExternalAccountConnectedPayload
+  ];
+  @override
+  final String wireName = 'PinwheelExternalAccountConnectedPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelExternalAccountConnectedPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'institutionName',
+      serializers.serialize(object.institutionName,
+          specifiedType: const FullType(String)),
+      'accountName',
+      serializers.serialize(object.accountName,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelExternalAccountConnectedPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelExternalAccountConnectedPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'institutionName':
+          result.institutionName = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'accountName':
+          result.accountName = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelCalendarSyncPayloadSerializer
+    implements StructuredSerializer<PinwheelCalendarSyncPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelCalendarSyncPayload,
+    _$PinwheelCalendarSyncPayload
+  ];
+  @override
+  final String wireName = 'PinwheelCalendarSyncPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelCalendarSyncPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'calendarType',
+      serializers.serialize(object.calendarType,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelCalendarSyncPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelCalendarSyncPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'calendarType':
+          result.calendarType = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PinwheelUserActivatedPayloadSerializer
+    implements StructuredSerializer<PinwheelUserActivatedPayload> {
+  @override
+  final Iterable<Type> types = const [
+    PinwheelUserActivatedPayload,
+    _$PinwheelUserActivatedPayload
+  ];
+  @override
+  final String wireName = 'PinwheelUserActivatedPayload';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, PinwheelUserActivatedPayload object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'solutionName',
+      serializers.serialize(object.solutionName,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PinwheelUserActivatedPayload deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = PinwheelUserActivatedPayloadBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'solutionName':
+          result.solutionName = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 abstract class PinwheelEventPayloadBuilder {
   void replace(PinwheelEventPayload other);
   void update(void Function(PinwheelEventPayloadBuilder) updates);
@@ -982,12 +1582,15 @@ class _$PinwheelAllocation extends PinwheelAllocation {
   final String type;
   @override
   final double? value;
+  @override
+  final PinwheelTarget? target;
 
   factory _$PinwheelAllocation(
           [void Function(PinwheelAllocationBuilder)? updates]) =>
       (PinwheelAllocationBuilder()..update(updates))._build();
 
-  _$PinwheelAllocation._({required this.type, this.value}) : super._();
+  _$PinwheelAllocation._({required this.type, this.value, this.target})
+      : super._();
   @override
   PinwheelAllocation rebuild(
           void Function(PinwheelAllocationBuilder) updates) =>
@@ -1002,7 +1605,8 @@ class _$PinwheelAllocation extends PinwheelAllocation {
     if (identical(other, this)) return true;
     return other is PinwheelAllocation &&
         type == other.type &&
-        value == other.value;
+        value == other.value &&
+        target == other.target;
   }
 
   @override
@@ -1010,6 +1614,7 @@ class _$PinwheelAllocation extends PinwheelAllocation {
     var _$hash = 0;
     _$hash = $jc(_$hash, type.hashCode);
     _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, target.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -1018,7 +1623,8 @@ class _$PinwheelAllocation extends PinwheelAllocation {
   String toString() {
     return (newBuiltValueToStringHelper(r'PinwheelAllocation')
           ..add('type', type)
-          ..add('value', value))
+          ..add('value', value)
+          ..add('target', target))
         .toString();
   }
 }
@@ -1037,6 +1643,12 @@ class PinwheelAllocationBuilder
   double? get value => _$this._value;
   set value(covariant double? value) => _$this._value = value;
 
+  PinwheelTargetBuilder? _target;
+  PinwheelTargetBuilder get target =>
+      _$this._target ??= PinwheelTargetBuilder();
+  set target(covariant PinwheelTargetBuilder? target) =>
+      _$this._target = target;
+
   PinwheelAllocationBuilder();
 
   PinwheelAllocationBuilder get _$this {
@@ -1044,6 +1656,7 @@ class PinwheelAllocationBuilder
     if ($v != null) {
       _type = $v.type;
       _value = $v.value;
+      _target = $v.target?.toBuilder();
       _$v = null;
     }
     return this;
@@ -1063,11 +1676,121 @@ class PinwheelAllocationBuilder
   PinwheelAllocation build() => _build();
 
   _$PinwheelAllocation _build() {
+    _$PinwheelAllocation _$result;
+    try {
+      _$result = _$v ??
+          _$PinwheelAllocation._(
+            type: BuiltValueNullFieldError.checkNotNull(
+                type, r'PinwheelAllocation', 'type'),
+            value: value,
+            target: _target?.build(),
+          );
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'target';
+        _target?.build();
+      } catch (e) {
+        throw BuiltValueNestedFieldError(
+            r'PinwheelAllocation', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelTarget extends PinwheelTarget {
+  @override
+  final String accountType;
+  @override
+  final String? accountName;
+
+  factory _$PinwheelTarget([void Function(PinwheelTargetBuilder)? updates]) =>
+      (PinwheelTargetBuilder()..update(updates))._build();
+
+  _$PinwheelTarget._({required this.accountType, this.accountName}) : super._();
+  @override
+  PinwheelTarget rebuild(void Function(PinwheelTargetBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelTargetBuilder toBuilder() => PinwheelTargetBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelTarget &&
+        accountType == other.accountType &&
+        accountName == other.accountName;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, accountType.hashCode);
+    _$hash = $jc(_$hash, accountName.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelTarget')
+          ..add('accountType', accountType)
+          ..add('accountName', accountName))
+        .toString();
+  }
+}
+
+class PinwheelTargetBuilder
+    implements
+        Builder<PinwheelTarget, PinwheelTargetBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelTarget? _$v;
+
+  String? _accountType;
+  String? get accountType => _$this._accountType;
+  set accountType(covariant String? accountType) =>
+      _$this._accountType = accountType;
+
+  String? _accountName;
+  String? get accountName => _$this._accountName;
+  set accountName(covariant String? accountName) =>
+      _$this._accountName = accountName;
+
+  PinwheelTargetBuilder();
+
+  PinwheelTargetBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _accountType = $v.accountType;
+      _accountName = $v.accountName;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelTarget other) {
+    _$v = other as _$PinwheelTarget;
+  }
+
+  @override
+  void update(void Function(PinwheelTargetBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelTarget build() => _build();
+
+  _$PinwheelTarget _build() {
     final _$result = _$v ??
-        _$PinwheelAllocation._(
-          type: BuiltValueNullFieldError.checkNotNull(
-              type, r'PinwheelAllocation', 'type'),
-          value: value,
+        _$PinwheelTarget._(
+          accountType: BuiltValueNullFieldError.checkNotNull(
+              accountType, r'PinwheelTarget', 'accountType'),
+          accountName: accountName,
         );
     replace(_$result);
     return _$result;
@@ -1928,7 +2651,7 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
   @override
   final String job;
   @override
-  final PinwheelParams params;
+  final PinwheelParams? params;
 
   factory _$PinwheelSuccessPayload(
           [void Function(PinwheelSuccessPayloadBuilder)? updates]) =>
@@ -1938,7 +2661,7 @@ class _$PinwheelSuccessPayload extends PinwheelSuccessPayload {
       {required this.accountId,
       required this.platformId,
       required this.job,
-      required this.params})
+      this.params})
       : super._();
   @override
   PinwheelSuccessPayload rebuild(
@@ -2014,7 +2737,7 @@ class PinwheelSuccessPayloadBuilder
       _accountId = $v.accountId;
       _platformId = $v.platformId;
       _job = $v.job;
-      _params = $v.params.toBuilder();
+      _params = $v.params?.toBuilder();
       _$v = null;
     }
     return this;
@@ -2044,13 +2767,13 @@ class PinwheelSuccessPayloadBuilder
                 platformId, r'PinwheelSuccessPayload', 'platformId'),
             job: BuiltValueNullFieldError.checkNotNull(
                 job, r'PinwheelSuccessPayload', 'job'),
-            params: params.build(),
+            params: _params?.build(),
           );
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'params';
-        params.build();
+        _params?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
             r'PinwheelSuccessPayload', _$failedField, e.toString());
@@ -2609,6 +3332,1008 @@ class PinwheelOtherEventPayloadBuilder
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelDocumentUploadsBeginPayload
+    extends PinwheelDocumentUploadsBeginPayload {
+  @override
+  final int? uploadedDocumentsSubmittedCount;
+
+  factory _$PinwheelDocumentUploadsBeginPayload(
+          [void Function(PinwheelDocumentUploadsBeginPayloadBuilder)?
+              updates]) =>
+      (PinwheelDocumentUploadsBeginPayloadBuilder()..update(updates))._build();
+
+  _$PinwheelDocumentUploadsBeginPayload._(
+      {this.uploadedDocumentsSubmittedCount})
+      : super._();
+  @override
+  PinwheelDocumentUploadsBeginPayload rebuild(
+          void Function(PinwheelDocumentUploadsBeginPayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelDocumentUploadsBeginPayloadBuilder toBuilder() =>
+      PinwheelDocumentUploadsBeginPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelDocumentUploadsBeginPayload &&
+        uploadedDocumentsSubmittedCount ==
+            other.uploadedDocumentsSubmittedCount;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, uploadedDocumentsSubmittedCount.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelDocumentUploadsBeginPayload')
+          ..add('uploadedDocumentsSubmittedCount',
+              uploadedDocumentsSubmittedCount))
+        .toString();
+  }
+}
+
+class PinwheelDocumentUploadsBeginPayloadBuilder
+    implements
+        Builder<PinwheelDocumentUploadsBeginPayload,
+            PinwheelDocumentUploadsBeginPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelDocumentUploadsBeginPayload? _$v;
+
+  int? _uploadedDocumentsSubmittedCount;
+  int? get uploadedDocumentsSubmittedCount =>
+      _$this._uploadedDocumentsSubmittedCount;
+  set uploadedDocumentsSubmittedCount(
+          covariant int? uploadedDocumentsSubmittedCount) =>
+      _$this._uploadedDocumentsSubmittedCount = uploadedDocumentsSubmittedCount;
+
+  PinwheelDocumentUploadsBeginPayloadBuilder();
+
+  PinwheelDocumentUploadsBeginPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _uploadedDocumentsSubmittedCount = $v.uploadedDocumentsSubmittedCount;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelDocumentUploadsBeginPayload other) {
+    _$v = other as _$PinwheelDocumentUploadsBeginPayload;
+  }
+
+  @override
+  void update(
+      void Function(PinwheelDocumentUploadsBeginPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelDocumentUploadsBeginPayload build() => _build();
+
+  _$PinwheelDocumentUploadsBeginPayload _build() {
+    final _$result = _$v ??
+        _$PinwheelDocumentUploadsBeginPayload._(
+          uploadedDocumentsSubmittedCount: uploadedDocumentsSubmittedCount,
+        );
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelDocumentUploadsSubmittedPayload
+    extends PinwheelDocumentUploadsSubmittedPayload {
+  @override
+  final int uploadedDocumentSubmittedCount;
+
+  factory _$PinwheelDocumentUploadsSubmittedPayload(
+          [void Function(PinwheelDocumentUploadsSubmittedPayloadBuilder)?
+              updates]) =>
+      (PinwheelDocumentUploadsSubmittedPayloadBuilder()..update(updates))
+          ._build();
+
+  _$PinwheelDocumentUploadsSubmittedPayload._(
+      {required this.uploadedDocumentSubmittedCount})
+      : super._();
+  @override
+  PinwheelDocumentUploadsSubmittedPayload rebuild(
+          void Function(PinwheelDocumentUploadsSubmittedPayloadBuilder)
+              updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelDocumentUploadsSubmittedPayloadBuilder toBuilder() =>
+      PinwheelDocumentUploadsSubmittedPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelDocumentUploadsSubmittedPayload &&
+        uploadedDocumentSubmittedCount == other.uploadedDocumentSubmittedCount;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, uploadedDocumentSubmittedCount.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(
+            r'PinwheelDocumentUploadsSubmittedPayload')
+          ..add(
+              'uploadedDocumentSubmittedCount', uploadedDocumentSubmittedCount))
+        .toString();
+  }
+}
+
+class PinwheelDocumentUploadsSubmittedPayloadBuilder
+    implements
+        Builder<PinwheelDocumentUploadsSubmittedPayload,
+            PinwheelDocumentUploadsSubmittedPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelDocumentUploadsSubmittedPayload? _$v;
+
+  int? _uploadedDocumentSubmittedCount;
+  int? get uploadedDocumentSubmittedCount =>
+      _$this._uploadedDocumentSubmittedCount;
+  set uploadedDocumentSubmittedCount(
+          covariant int? uploadedDocumentSubmittedCount) =>
+      _$this._uploadedDocumentSubmittedCount = uploadedDocumentSubmittedCount;
+
+  PinwheelDocumentUploadsSubmittedPayloadBuilder();
+
+  PinwheelDocumentUploadsSubmittedPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _uploadedDocumentSubmittedCount = $v.uploadedDocumentSubmittedCount;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelDocumentUploadsSubmittedPayload other) {
+    _$v = other as _$PinwheelDocumentUploadsSubmittedPayload;
+  }
+
+  @override
+  void update(
+      void Function(PinwheelDocumentUploadsSubmittedPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelDocumentUploadsSubmittedPayload build() => _build();
+
+  _$PinwheelDocumentUploadsSubmittedPayload _build() {
+    final _$result = _$v ??
+        _$PinwheelDocumentUploadsSubmittedPayload._(
+          uploadedDocumentSubmittedCount: BuiltValueNullFieldError.checkNotNull(
+              uploadedDocumentSubmittedCount,
+              r'PinwheelDocumentUploadsSubmittedPayload',
+              'uploadedDocumentSubmittedCount'),
+        );
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelBillSwitchPayload extends PinwheelBillSwitchPayload {
+  @override
+  final String platformId;
+  @override
+  final String platformName;
+  @override
+  final bool isIntegratedSwitch;
+  @override
+  final String frequency;
+  @override
+  final String nextPaymentDate;
+  @override
+  final int amountCents;
+  @override
+  final String? accountId;
+
+  factory _$PinwheelBillSwitchPayload(
+          [void Function(PinwheelBillSwitchPayloadBuilder)? updates]) =>
+      (PinwheelBillSwitchPayloadBuilder()..update(updates))._build();
+
+  _$PinwheelBillSwitchPayload._(
+      {required this.platformId,
+      required this.platformName,
+      required this.isIntegratedSwitch,
+      required this.frequency,
+      required this.nextPaymentDate,
+      required this.amountCents,
+      this.accountId})
+      : super._();
+  @override
+  PinwheelBillSwitchPayload rebuild(
+          void Function(PinwheelBillSwitchPayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelBillSwitchPayloadBuilder toBuilder() =>
+      PinwheelBillSwitchPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelBillSwitchPayload &&
+        platformId == other.platformId &&
+        platformName == other.platformName &&
+        isIntegratedSwitch == other.isIntegratedSwitch &&
+        frequency == other.frequency &&
+        nextPaymentDate == other.nextPaymentDate &&
+        amountCents == other.amountCents &&
+        accountId == other.accountId;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, platformId.hashCode);
+    _$hash = $jc(_$hash, platformName.hashCode);
+    _$hash = $jc(_$hash, isIntegratedSwitch.hashCode);
+    _$hash = $jc(_$hash, frequency.hashCode);
+    _$hash = $jc(_$hash, nextPaymentDate.hashCode);
+    _$hash = $jc(_$hash, amountCents.hashCode);
+    _$hash = $jc(_$hash, accountId.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelBillSwitchPayload')
+          ..add('platformId', platformId)
+          ..add('platformName', platformName)
+          ..add('isIntegratedSwitch', isIntegratedSwitch)
+          ..add('frequency', frequency)
+          ..add('nextPaymentDate', nextPaymentDate)
+          ..add('amountCents', amountCents)
+          ..add('accountId', accountId))
+        .toString();
+  }
+}
+
+class PinwheelBillSwitchPayloadBuilder
+    implements
+        Builder<PinwheelBillSwitchPayload, PinwheelBillSwitchPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelBillSwitchPayload? _$v;
+
+  String? _platformId;
+  String? get platformId => _$this._platformId;
+  set platformId(covariant String? platformId) =>
+      _$this._platformId = platformId;
+
+  String? _platformName;
+  String? get platformName => _$this._platformName;
+  set platformName(covariant String? platformName) =>
+      _$this._platformName = platformName;
+
+  bool? _isIntegratedSwitch;
+  bool? get isIntegratedSwitch => _$this._isIntegratedSwitch;
+  set isIntegratedSwitch(covariant bool? isIntegratedSwitch) =>
+      _$this._isIntegratedSwitch = isIntegratedSwitch;
+
+  String? _frequency;
+  String? get frequency => _$this._frequency;
+  set frequency(covariant String? frequency) => _$this._frequency = frequency;
+
+  String? _nextPaymentDate;
+  String? get nextPaymentDate => _$this._nextPaymentDate;
+  set nextPaymentDate(covariant String? nextPaymentDate) =>
+      _$this._nextPaymentDate = nextPaymentDate;
+
+  int? _amountCents;
+  int? get amountCents => _$this._amountCents;
+  set amountCents(covariant int? amountCents) =>
+      _$this._amountCents = amountCents;
+
+  String? _accountId;
+  String? get accountId => _$this._accountId;
+  set accountId(covariant String? accountId) => _$this._accountId = accountId;
+
+  PinwheelBillSwitchPayloadBuilder();
+
+  PinwheelBillSwitchPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _platformId = $v.platformId;
+      _platformName = $v.platformName;
+      _isIntegratedSwitch = $v.isIntegratedSwitch;
+      _frequency = $v.frequency;
+      _nextPaymentDate = $v.nextPaymentDate;
+      _amountCents = $v.amountCents;
+      _accountId = $v.accountId;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelBillSwitchPayload other) {
+    _$v = other as _$PinwheelBillSwitchPayload;
+  }
+
+  @override
+  void update(void Function(PinwheelBillSwitchPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelBillSwitchPayload build() => _build();
+
+  _$PinwheelBillSwitchPayload _build() {
+    final _$result = _$v ??
+        _$PinwheelBillSwitchPayload._(
+          platformId: BuiltValueNullFieldError.checkNotNull(
+              platformId, r'PinwheelBillSwitchPayload', 'platformId'),
+          platformName: BuiltValueNullFieldError.checkNotNull(
+              platformName, r'PinwheelBillSwitchPayload', 'platformName'),
+          isIntegratedSwitch: BuiltValueNullFieldError.checkNotNull(
+              isIntegratedSwitch,
+              r'PinwheelBillSwitchPayload',
+              'isIntegratedSwitch'),
+          frequency: BuiltValueNullFieldError.checkNotNull(
+              frequency, r'PinwheelBillSwitchPayload', 'frequency'),
+          nextPaymentDate: BuiltValueNullFieldError.checkNotNull(
+              nextPaymentDate, r'PinwheelBillSwitchPayload', 'nextPaymentDate'),
+          amountCents: BuiltValueNullFieldError.checkNotNull(
+              amountCents, r'PinwheelBillSwitchPayload', 'amountCents'),
+          accountId: accountId,
+        );
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelBillPayload extends PinwheelBillPayload {
+  @override
+  final String platformId;
+  @override
+  final String platformName;
+  @override
+  final String frequency;
+  @override
+  final String nextPaymentDate;
+  @override
+  final int amountCents;
+
+  factory _$PinwheelBillPayload(
+          [void Function(PinwheelBillPayloadBuilder)? updates]) =>
+      (PinwheelBillPayloadBuilder()..update(updates))._build();
+
+  _$PinwheelBillPayload._(
+      {required this.platformId,
+      required this.platformName,
+      required this.frequency,
+      required this.nextPaymentDate,
+      required this.amountCents})
+      : super._();
+  @override
+  PinwheelBillPayload rebuild(
+          void Function(PinwheelBillPayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelBillPayloadBuilder toBuilder() =>
+      PinwheelBillPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelBillPayload &&
+        platformId == other.platformId &&
+        platformName == other.platformName &&
+        frequency == other.frequency &&
+        nextPaymentDate == other.nextPaymentDate &&
+        amountCents == other.amountCents;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, platformId.hashCode);
+    _$hash = $jc(_$hash, platformName.hashCode);
+    _$hash = $jc(_$hash, frequency.hashCode);
+    _$hash = $jc(_$hash, nextPaymentDate.hashCode);
+    _$hash = $jc(_$hash, amountCents.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelBillPayload')
+          ..add('platformId', platformId)
+          ..add('platformName', platformName)
+          ..add('frequency', frequency)
+          ..add('nextPaymentDate', nextPaymentDate)
+          ..add('amountCents', amountCents))
+        .toString();
+  }
+}
+
+class PinwheelBillPayloadBuilder
+    implements
+        Builder<PinwheelBillPayload, PinwheelBillPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelBillPayload? _$v;
+
+  String? _platformId;
+  String? get platformId => _$this._platformId;
+  set platformId(covariant String? platformId) =>
+      _$this._platformId = platformId;
+
+  String? _platformName;
+  String? get platformName => _$this._platformName;
+  set platformName(covariant String? platformName) =>
+      _$this._platformName = platformName;
+
+  String? _frequency;
+  String? get frequency => _$this._frequency;
+  set frequency(covariant String? frequency) => _$this._frequency = frequency;
+
+  String? _nextPaymentDate;
+  String? get nextPaymentDate => _$this._nextPaymentDate;
+  set nextPaymentDate(covariant String? nextPaymentDate) =>
+      _$this._nextPaymentDate = nextPaymentDate;
+
+  int? _amountCents;
+  int? get amountCents => _$this._amountCents;
+  set amountCents(covariant int? amountCents) =>
+      _$this._amountCents = amountCents;
+
+  PinwheelBillPayloadBuilder();
+
+  PinwheelBillPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _platformId = $v.platformId;
+      _platformName = $v.platformName;
+      _frequency = $v.frequency;
+      _nextPaymentDate = $v.nextPaymentDate;
+      _amountCents = $v.amountCents;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelBillPayload other) {
+    _$v = other as _$PinwheelBillPayload;
+  }
+
+  @override
+  void update(void Function(PinwheelBillPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelBillPayload build() => _build();
+
+  _$PinwheelBillPayload _build() {
+    final _$result = _$v ??
+        _$PinwheelBillPayload._(
+          platformId: BuiltValueNullFieldError.checkNotNull(
+              platformId, r'PinwheelBillPayload', 'platformId'),
+          platformName: BuiltValueNullFieldError.checkNotNull(
+              platformName, r'PinwheelBillPayload', 'platformName'),
+          frequency: BuiltValueNullFieldError.checkNotNull(
+              frequency, r'PinwheelBillPayload', 'frequency'),
+          nextPaymentDate: BuiltValueNullFieldError.checkNotNull(
+              nextPaymentDate, r'PinwheelBillPayload', 'nextPaymentDate'),
+          amountCents: BuiltValueNullFieldError.checkNotNull(
+              amountCents, r'PinwheelBillPayload', 'amountCents'),
+        );
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelBillSwitchPlatform extends PinwheelBillSwitchPlatform {
+  @override
+  final String id;
+  @override
+  final String name;
+
+  factory _$PinwheelBillSwitchPlatform(
+          [void Function(PinwheelBillSwitchPlatformBuilder)? updates]) =>
+      (PinwheelBillSwitchPlatformBuilder()..update(updates))._build();
+
+  _$PinwheelBillSwitchPlatform._({required this.id, required this.name})
+      : super._();
+  @override
+  PinwheelBillSwitchPlatform rebuild(
+          void Function(PinwheelBillSwitchPlatformBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelBillSwitchPlatformBuilder toBuilder() =>
+      PinwheelBillSwitchPlatformBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelBillSwitchPlatform &&
+        id == other.id &&
+        name == other.name;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelBillSwitchPlatform')
+          ..add('id', id)
+          ..add('name', name))
+        .toString();
+  }
+}
+
+class PinwheelBillSwitchPlatformBuilder
+    implements
+        Builder<PinwheelBillSwitchPlatform, PinwheelBillSwitchPlatformBuilder> {
+  _$PinwheelBillSwitchPlatform? _$v;
+
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
+
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
+
+  PinwheelBillSwitchPlatformBuilder();
+
+  PinwheelBillSwitchPlatformBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _id = $v.id;
+      _name = $v.name;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(PinwheelBillSwitchPlatform other) {
+    _$v = other as _$PinwheelBillSwitchPlatform;
+  }
+
+  @override
+  void update(void Function(PinwheelBillSwitchPlatformBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelBillSwitchPlatform build() => _build();
+
+  _$PinwheelBillSwitchPlatform _build() {
+    final _$result = _$v ??
+        _$PinwheelBillSwitchPlatform._(
+          id: BuiltValueNullFieldError.checkNotNull(
+              id, r'PinwheelBillSwitchPlatform', 'id'),
+          name: BuiltValueNullFieldError.checkNotNull(
+              name, r'PinwheelBillSwitchPlatform', 'name'),
+        );
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelBillSwitchPlatformsPayload
+    extends PinwheelBillSwitchPlatformsPayload {
+  @override
+  final BuiltList<PinwheelBillSwitchPlatform> platforms;
+
+  factory _$PinwheelBillSwitchPlatformsPayload(
+          [void Function(PinwheelBillSwitchPlatformsPayloadBuilder)?
+              updates]) =>
+      (PinwheelBillSwitchPlatformsPayloadBuilder()..update(updates))._build();
+
+  _$PinwheelBillSwitchPlatformsPayload._({required this.platforms}) : super._();
+  @override
+  PinwheelBillSwitchPlatformsPayload rebuild(
+          void Function(PinwheelBillSwitchPlatformsPayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelBillSwitchPlatformsPayloadBuilder toBuilder() =>
+      PinwheelBillSwitchPlatformsPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelBillSwitchPlatformsPayload &&
+        platforms == other.platforms;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, platforms.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelBillSwitchPlatformsPayload')
+          ..add('platforms', platforms))
+        .toString();
+  }
+}
+
+class PinwheelBillSwitchPlatformsPayloadBuilder
+    implements
+        Builder<PinwheelBillSwitchPlatformsPayload,
+            PinwheelBillSwitchPlatformsPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelBillSwitchPlatformsPayload? _$v;
+
+  ListBuilder<PinwheelBillSwitchPlatform>? _platforms;
+  ListBuilder<PinwheelBillSwitchPlatform> get platforms =>
+      _$this._platforms ??= ListBuilder<PinwheelBillSwitchPlatform>();
+  set platforms(covariant ListBuilder<PinwheelBillSwitchPlatform>? platforms) =>
+      _$this._platforms = platforms;
+
+  PinwheelBillSwitchPlatformsPayloadBuilder();
+
+  PinwheelBillSwitchPlatformsPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _platforms = $v.platforms.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelBillSwitchPlatformsPayload other) {
+    _$v = other as _$PinwheelBillSwitchPlatformsPayload;
+  }
+
+  @override
+  void update(
+      void Function(PinwheelBillSwitchPlatformsPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelBillSwitchPlatformsPayload build() => _build();
+
+  _$PinwheelBillSwitchPlatformsPayload _build() {
+    _$PinwheelBillSwitchPlatformsPayload _$result;
+    try {
+      _$result = _$v ??
+          _$PinwheelBillSwitchPlatformsPayload._(
+            platforms: platforms.build(),
+          );
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'platforms';
+        platforms.build();
+      } catch (e) {
+        throw BuiltValueNestedFieldError(
+            r'PinwheelBillSwitchPlatformsPayload', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelExternalAccountConnectedPayload
+    extends PinwheelExternalAccountConnectedPayload {
+  @override
+  final String institutionName;
+  @override
+  final String accountName;
+
+  factory _$PinwheelExternalAccountConnectedPayload(
+          [void Function(PinwheelExternalAccountConnectedPayloadBuilder)?
+              updates]) =>
+      (PinwheelExternalAccountConnectedPayloadBuilder()..update(updates))
+          ._build();
+
+  _$PinwheelExternalAccountConnectedPayload._(
+      {required this.institutionName, required this.accountName})
+      : super._();
+  @override
+  PinwheelExternalAccountConnectedPayload rebuild(
+          void Function(PinwheelExternalAccountConnectedPayloadBuilder)
+              updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelExternalAccountConnectedPayloadBuilder toBuilder() =>
+      PinwheelExternalAccountConnectedPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelExternalAccountConnectedPayload &&
+        institutionName == other.institutionName &&
+        accountName == other.accountName;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, institutionName.hashCode);
+    _$hash = $jc(_$hash, accountName.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(
+            r'PinwheelExternalAccountConnectedPayload')
+          ..add('institutionName', institutionName)
+          ..add('accountName', accountName))
+        .toString();
+  }
+}
+
+class PinwheelExternalAccountConnectedPayloadBuilder
+    implements
+        Builder<PinwheelExternalAccountConnectedPayload,
+            PinwheelExternalAccountConnectedPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelExternalAccountConnectedPayload? _$v;
+
+  String? _institutionName;
+  String? get institutionName => _$this._institutionName;
+  set institutionName(covariant String? institutionName) =>
+      _$this._institutionName = institutionName;
+
+  String? _accountName;
+  String? get accountName => _$this._accountName;
+  set accountName(covariant String? accountName) =>
+      _$this._accountName = accountName;
+
+  PinwheelExternalAccountConnectedPayloadBuilder();
+
+  PinwheelExternalAccountConnectedPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _institutionName = $v.institutionName;
+      _accountName = $v.accountName;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelExternalAccountConnectedPayload other) {
+    _$v = other as _$PinwheelExternalAccountConnectedPayload;
+  }
+
+  @override
+  void update(
+      void Function(PinwheelExternalAccountConnectedPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelExternalAccountConnectedPayload build() => _build();
+
+  _$PinwheelExternalAccountConnectedPayload _build() {
+    final _$result = _$v ??
+        _$PinwheelExternalAccountConnectedPayload._(
+          institutionName: BuiltValueNullFieldError.checkNotNull(
+              institutionName,
+              r'PinwheelExternalAccountConnectedPayload',
+              'institutionName'),
+          accountName: BuiltValueNullFieldError.checkNotNull(accountName,
+              r'PinwheelExternalAccountConnectedPayload', 'accountName'),
+        );
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelCalendarSyncPayload extends PinwheelCalendarSyncPayload {
+  @override
+  final String calendarType;
+
+  factory _$PinwheelCalendarSyncPayload(
+          [void Function(PinwheelCalendarSyncPayloadBuilder)? updates]) =>
+      (PinwheelCalendarSyncPayloadBuilder()..update(updates))._build();
+
+  _$PinwheelCalendarSyncPayload._({required this.calendarType}) : super._();
+  @override
+  PinwheelCalendarSyncPayload rebuild(
+          void Function(PinwheelCalendarSyncPayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelCalendarSyncPayloadBuilder toBuilder() =>
+      PinwheelCalendarSyncPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelCalendarSyncPayload &&
+        calendarType == other.calendarType;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, calendarType.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelCalendarSyncPayload')
+          ..add('calendarType', calendarType))
+        .toString();
+  }
+}
+
+class PinwheelCalendarSyncPayloadBuilder
+    implements
+        Builder<PinwheelCalendarSyncPayload,
+            PinwheelCalendarSyncPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelCalendarSyncPayload? _$v;
+
+  String? _calendarType;
+  String? get calendarType => _$this._calendarType;
+  set calendarType(covariant String? calendarType) =>
+      _$this._calendarType = calendarType;
+
+  PinwheelCalendarSyncPayloadBuilder();
+
+  PinwheelCalendarSyncPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _calendarType = $v.calendarType;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelCalendarSyncPayload other) {
+    _$v = other as _$PinwheelCalendarSyncPayload;
+  }
+
+  @override
+  void update(void Function(PinwheelCalendarSyncPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelCalendarSyncPayload build() => _build();
+
+  _$PinwheelCalendarSyncPayload _build() {
+    final _$result = _$v ??
+        _$PinwheelCalendarSyncPayload._(
+          calendarType: BuiltValueNullFieldError.checkNotNull(
+              calendarType, r'PinwheelCalendarSyncPayload', 'calendarType'),
+        );
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$PinwheelUserActivatedPayload extends PinwheelUserActivatedPayload {
+  @override
+  final String solutionName;
+
+  factory _$PinwheelUserActivatedPayload(
+          [void Function(PinwheelUserActivatedPayloadBuilder)? updates]) =>
+      (PinwheelUserActivatedPayloadBuilder()..update(updates))._build();
+
+  _$PinwheelUserActivatedPayload._({required this.solutionName}) : super._();
+  @override
+  PinwheelUserActivatedPayload rebuild(
+          void Function(PinwheelUserActivatedPayloadBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  PinwheelUserActivatedPayloadBuilder toBuilder() =>
+      PinwheelUserActivatedPayloadBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is PinwheelUserActivatedPayload &&
+        solutionName == other.solutionName;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, solutionName.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'PinwheelUserActivatedPayload')
+          ..add('solutionName', solutionName))
+        .toString();
+  }
+}
+
+class PinwheelUserActivatedPayloadBuilder
+    implements
+        Builder<PinwheelUserActivatedPayload,
+            PinwheelUserActivatedPayloadBuilder>,
+        PinwheelEventPayloadBuilder {
+  _$PinwheelUserActivatedPayload? _$v;
+
+  String? _solutionName;
+  String? get solutionName => _$this._solutionName;
+  set solutionName(covariant String? solutionName) =>
+      _$this._solutionName = solutionName;
+
+  PinwheelUserActivatedPayloadBuilder();
+
+  PinwheelUserActivatedPayloadBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _solutionName = $v.solutionName;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(covariant PinwheelUserActivatedPayload other) {
+    _$v = other as _$PinwheelUserActivatedPayload;
+  }
+
+  @override
+  void update(void Function(PinwheelUserActivatedPayloadBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  PinwheelUserActivatedPayload build() => _build();
+
+  _$PinwheelUserActivatedPayload _build() {
+    final _$result = _$v ??
+        _$PinwheelUserActivatedPayload._(
+          solutionName: BuiltValueNullFieldError.checkNotNull(
+              solutionName, r'PinwheelUserActivatedPayload', 'solutionName'),
+        );
     replace(_$result);
     return _$result;
   }

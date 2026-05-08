@@ -89,8 +89,7 @@ class Pinwheel {
                   break;
                 case 'exit':
                   payload = _standardSerializers.deserializeWith(
-                      PinwheelSelectedEmployerPayload.serializer,
-                      json.decode(payloadString))!;
+                      PinwheelError.serializer, json.decode(payloadString));
                   break;
                 case 'success':
                   payload = _standardSerializers.deserializeWith(
@@ -109,6 +108,63 @@ class Pinwheel {
                 case 'screen_transition':
                   payload = _standardSerializers.deserializeWith(
                       PinwheelScreenTransitionPayload.serializer,
+                      json.decode(payloadString))!;
+                  break;
+                case 'other_event':
+                  payload = _standardSerializers.deserializeWith(
+                      PinwheelOtherEventPayload.serializer,
+                      json.decode(payloadString))!;
+                  break;
+                case 'external_account_connected':
+                  payload = _standardSerializers.deserializeWith(
+                      PinwheelExternalAccountConnectedPayload.serializer,
+                      json.decode(payloadString))!;
+                  break;
+                case 'merchant_login_success':
+                  payload = _standardSerializers.deserializeWith(
+                      PinwheelLoginPayload.serializer,
+                      json.decode(payloadString))!;
+                  break;
+                case 'doc_uploads_begin':
+                  payload = _standardSerializers.deserializeWith(
+                      PinwheelDocumentUploadsBeginPayload.serializer,
+                      json.decode(payloadString))!;
+                  break;
+                case 'doc_uploads_submitted':
+                  payload = _standardSerializers.deserializeWith(
+                      PinwheelDocumentUploadsSubmittedPayload.serializer,
+                      json.decode(payloadString))!;
+                  break;
+                case 'bill_switch_success':
+                case 'bill_switch_failure':
+                case 'bill_cancel_success':
+                case 'bill_cancel_failure':
+                  payload = _standardSerializers.deserializeWith(
+                      PinwheelBillSwitchPayload.serializer,
+                      json.decode(payloadString))!;
+                  break;
+                case 'bill_removed':
+                case 'bill_added':
+                case 'bill_edited':
+                case 'bill_marked_inactive':
+                  payload = _standardSerializers.deserializeWith(
+                      PinwheelBillPayload.serializer,
+                      json.decode(payloadString))!;
+                  break;
+                case 'bill_switch_platforms_added':
+                case 'bill_switch_platforms_removed':
+                  payload = _standardSerializers.deserializeWith(
+                      PinwheelBillSwitchPlatformsPayload.serializer,
+                      json.decode(payloadString))!;
+                  break;
+                case 'calendar_sync':
+                  payload = _standardSerializers.deserializeWith(
+                      PinwheelCalendarSyncPayload.serializer,
+                      json.decode(payloadString))!;
+                  break;
+                case 'user_activated':
+                  payload = _standardSerializers.deserializeWith(
+                      PinwheelUserActivatedPayload.serializer,
                       json.decode(payloadString))!;
                   break;
               }

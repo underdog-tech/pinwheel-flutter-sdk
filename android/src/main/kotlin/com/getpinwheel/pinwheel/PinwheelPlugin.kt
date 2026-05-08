@@ -87,78 +87,12 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
   }
 
   override fun onEvent(eventName: PinwheelEventType, payload: PinwheelEventPayload?) {
-    var argument: String? = null
-    when (eventName) {
-      PinwheelEventType.OPEN -> {
-        val obj = PinwheelEventChannelArgument("open", null)
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.SELECT_EMPLOYER -> {
-        val obj = PinwheelEventChannelArgument("select_employer", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.SELECT_PLATFORM -> {
-        val obj = PinwheelEventChannelArgument("select_platform", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.INCORRECT_PLATFORM_GIVEN -> {
-        val obj = PinwheelEventChannelArgument("incorrect_platform_given", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.LOGIN -> {
-        val obj = PinwheelEventChannelArgument("login", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.LOGIN_ATTEMPT -> {
-        val obj = PinwheelEventChannelArgument("login_attempt", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.INPUT_ALLOCATION -> {
-        val obj = PinwheelEventChannelArgument("input_allocation", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.INPUT_REQUIRED -> {
-        val obj = PinwheelEventChannelArgument("input_required", null)
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.EXIT -> {
-        val obj = PinwheelEventChannelArgument("exit", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.SUCCESS -> {
-        val obj = PinwheelEventChannelArgument("success", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.ERROR -> {
-        val obj = PinwheelEventChannelArgument("error", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-
-      PinwheelEventType.CARD_SWITCH_BEGIN -> {
-        val obj = PinwheelEventChannelArgument("card_switch_begin", null)
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.DD_FORM_BEGIN -> {
-        val obj = PinwheelEventChannelArgument("dd_form_begin", null)
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.DD_FORM_CREATE -> {
-        val obj = PinwheelEventChannelArgument("dd_form_create", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.DD_FORM_DOWNLOAD -> {
-        val obj = PinwheelEventChannelArgument("dd_form_download", null)
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.SCREEN_TRANSITION -> {
-        val obj = PinwheelEventChannelArgument("screen_transition", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-      PinwheelEventType.OTHER_EVENT -> {
-        val obj = PinwheelEventChannelArgument("other_event", gson.toJson(payload))
-        argument = gson.toJson(obj)
-      }
-    }
+    val argument = gson.toJson(
+      PinwheelEventChannelArgument(
+        eventName.toString().lowercase(),
+        payload?.let { gson.toJson(it) }
+      )
+    )
 
     Handler(Looper.getMainLooper()).post {
       channel.invokeMethod("onEvent", argument)
@@ -210,7 +144,7 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
       readLinkToken(),
       pinwheelEventListener,
       "flutter",
-      "3.2.0",
+      "4.0.0",
       useDarkMode = useDarkMode ?: false,
       useSecureOrigin = useSecureOrigin ?: false
     )

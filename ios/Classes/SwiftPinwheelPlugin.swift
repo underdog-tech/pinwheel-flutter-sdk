@@ -102,7 +102,7 @@ class FLNativeView: NSObject, FlutterPlatformView {
             return
         }
         var config = PinwheelConfig(
-            mode: .sandbox, environment: .production, sdk: "flutter", version: "3.2.0")
+            mode: .sandbox, environment: .production, sdk: "flutter", version: "4.0.0")
         config.useSecureOrigin = _useSecureOrigin ?? false
         let useDarkMode = _useDarkMode ?? false
         _pinwheelVC = PinwheelViewController(
@@ -117,89 +117,10 @@ class FLNativeView: NSObject, FlutterPlatformView {
 extension FLNativeView: PinwheelDelegate {
 
     public func onEvent(name: PinwheelEventType, event: PinwheelEventPayload?) {
-        var eventString: String?
-        var argument: String?
-        switch name {
-        case .open:
-            // no payload
-            break
-        case .selectEmployer:
-            if let event = event as? PinwheelSelectedEmployerPayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        case .selectPlatform:
-            if let event = event as? PinwheelSelectedPlatformPayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        case .incorrectPlatformGiven:
-            break
-        case .login:
-            if let event = event as? PinwheelLoginPayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        case .loginAttempt:
-            if let event = event as? PinwheelLoginAttemptPayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        case .inputAllocation:
-            if let event = event as? PinwheelInputAllocationPayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        case .inputRequired:
-            // no payload
-            break
-        case .exit:
-            if let event = event as? PinwheelExitPayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        case .success:
-            if let event = event as? PinwheelSuccessPayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        case .error:
-            if let event = event as? PinwheelError {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        case .screenTransition:
-            if let event = event as? PinwheelScreenTransitionPayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        case .cardSwitchBegin:
-            // no payload
-            break
-        case .ddFormBegin:
-            // no payload
-            break
-        case .ddFormCreate:
-            if let event = event as? PinwheelDDFormCreatePayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        case .ddFormDownload:
-            // no payload
-            break
-        case .otherEvent:
-            if let event = event as? PinwheelOtherEventPayload {
-                let eventData = try! JSONEncoder().encode(event)
-                eventString = String(data: eventData, encoding: .utf8)!
-            }
-        @unknown default:
-            // Forward the event name but omit payload if we don't recognize the type yet.
-            break
-        }
-
+        let eventString = self.encodePayload(event)
         let obj = PinwheelEventChannelArgument(name: name.rawValue, payload: eventString)
         let jsonData = try! JSONEncoder().encode(obj)
-        argument = String(data: jsonData, encoding: .utf8)!
+        let argument = String(data: jsonData, encoding: .utf8)!
         _channel?.invokeMethod("onEvent", arguments: argument)
     }
 
@@ -256,5 +177,10 @@ extension FLNativeView: PinwheelDelegate {
             payload = jsonString
         }
         _channel?.invokeMethod("onLoginAttempt", arguments: payload)
+    }
+
+    private func encodePayload(_ payload: PinwheelEventPayload?) -> String? {
+        guard let payload else { return nil }
+        return try? payload.jsonString()
     }
 }
