@@ -26,10 +26,32 @@ All notable changes to this project will be documented in this file.
 
 ### [4.0.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/4.0.0)
 
-#### Updated
+#### Notes
 
-- Updated Android and iOS native Pinwheel SDK dependencies to 4.0.0.
-- Added full event payload parity with the React Native SDK, including Bill Switch, document upload, external account, calendar sync, customer terms, and user activation events.
+- Upgrades the SDK to target the latest verison of Link: v4.
+- Adds support for a new set of bill and account lifecycle events.
+
+#### Breaking Changes
+
+- The `billRemoved` event handler now uses `PinwheelBillEvent` instead of `PinwheelBillSwitchEvent`.
+
+#### Non-breaking Changes
+
+- An optional `accountId` field has been added to `PinwheelBillSwitchPayload`.
+
+#### New event types
+
+- `billSwitchFailure`
+- `billAdded`
+- `billEdited`
+- `billMarkedInactive`
+- `billSwitchPlatformsAdded`
+- `billSwitchPlatformsRemoved`
+- `billCancelSuccess`
+- `billCancelFailure`
+- `calendarSync`
+- `customerTermsAccepted`
+- `userActivated`
 
 ### [3.2.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/3.2.0)
 
