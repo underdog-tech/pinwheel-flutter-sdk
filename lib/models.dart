@@ -17,12 +17,26 @@ abstract class PinwheelAllocation
         Built<PinwheelAllocation, PinwheelAllocationBuilder> {
   String get type;
   double? get value;
+  PinwheelTarget? get target;
 
   PinwheelAllocation._();
   factory PinwheelAllocation([updates(PinwheelAllocationBuilder b)]) =
       _$PinwheelAllocation;
   static Serializer<PinwheelAllocation> get serializer =>
       _$pinwheelAllocationSerializer;
+}
+
+abstract class PinwheelTarget
+    implements
+        PinwheelEventPayload,
+        Built<PinwheelTarget, PinwheelTargetBuilder> {
+  String get accountType;
+  String? get accountName;
+
+  PinwheelTarget._();
+  factory PinwheelTarget([updates(PinwheelTargetBuilder b)]) = _$PinwheelTarget;
+  static Serializer<PinwheelTarget> get serializer =>
+      _$pinwheelTargetSerializer;
 }
 
 abstract class PinwheelInputAllocationPayload
@@ -154,7 +168,7 @@ abstract class PinwheelSuccessPayload
   String get accountId;
   String get platformId;
   String get job;
-  PinwheelParams get params;
+  PinwheelParams? get params;
 
   PinwheelSuccessPayload._();
 
@@ -268,4 +282,155 @@ abstract class PinwheelOtherEventPayload
 
   static Serializer<PinwheelOtherEventPayload> get serializer =>
       _$pinwheelOtherEventPayloadSerializer;
+}
+
+abstract class PinwheelDocumentUploadsBeginPayload
+    implements
+        PinwheelEventPayload,
+        Built<PinwheelDocumentUploadsBeginPayload,
+            PinwheelDocumentUploadsBeginPayloadBuilder> {
+  int? get uploadedDocumentsSubmittedCount;
+
+  PinwheelDocumentUploadsBeginPayload._();
+  factory PinwheelDocumentUploadsBeginPayload(
+          [void Function(PinwheelDocumentUploadsBeginPayloadBuilder) updates]) =
+      _$PinwheelDocumentUploadsBeginPayload;
+
+  static Serializer<PinwheelDocumentUploadsBeginPayload> get serializer =>
+      _$pinwheelDocumentUploadsBeginPayloadSerializer;
+}
+
+abstract class PinwheelDocumentUploadsSubmittedPayload
+    implements
+        PinwheelEventPayload,
+        Built<PinwheelDocumentUploadsSubmittedPayload,
+            PinwheelDocumentUploadsSubmittedPayloadBuilder> {
+  int get uploadedDocumentSubmittedCount;
+
+  PinwheelDocumentUploadsSubmittedPayload._();
+  factory PinwheelDocumentUploadsSubmittedPayload(
+      [void Function(PinwheelDocumentUploadsSubmittedPayloadBuilder)
+          updates]) = _$PinwheelDocumentUploadsSubmittedPayload;
+
+  static Serializer<PinwheelDocumentUploadsSubmittedPayload> get serializer =>
+      _$pinwheelDocumentUploadsSubmittedPayloadSerializer;
+}
+
+abstract class PinwheelBillSwitchPayload
+    implements
+        PinwheelEventPayload,
+        Built<PinwheelBillSwitchPayload, PinwheelBillSwitchPayloadBuilder> {
+  String get platformId;
+  String get platformName;
+  bool get isIntegratedSwitch;
+  String get frequency;
+  String get nextPaymentDate;
+  int get amountCents;
+  String? get accountId;
+
+  PinwheelBillSwitchPayload._();
+  factory PinwheelBillSwitchPayload(
+          [void Function(PinwheelBillSwitchPayloadBuilder) updates]) =
+      _$PinwheelBillSwitchPayload;
+
+  static Serializer<PinwheelBillSwitchPayload> get serializer =>
+      _$pinwheelBillSwitchPayloadSerializer;
+}
+
+abstract class PinwheelBillPayload
+    implements
+        PinwheelEventPayload,
+        Built<PinwheelBillPayload, PinwheelBillPayloadBuilder> {
+  String get platformId;
+  String get platformName;
+  String get frequency;
+  String get nextPaymentDate;
+  int get amountCents;
+
+  PinwheelBillPayload._();
+  factory PinwheelBillPayload(
+          [void Function(PinwheelBillPayloadBuilder) updates]) =
+      _$PinwheelBillPayload;
+
+  static Serializer<PinwheelBillPayload> get serializer =>
+      _$pinwheelBillPayloadSerializer;
+}
+
+abstract class PinwheelBillSwitchPlatform
+    implements
+        Built<PinwheelBillSwitchPlatform, PinwheelBillSwitchPlatformBuilder> {
+  String get id;
+  String get name;
+
+  PinwheelBillSwitchPlatform._();
+  factory PinwheelBillSwitchPlatform(
+          [void Function(PinwheelBillSwitchPlatformBuilder) updates]) =
+      _$PinwheelBillSwitchPlatform;
+
+  static Serializer<PinwheelBillSwitchPlatform> get serializer =>
+      _$pinwheelBillSwitchPlatformSerializer;
+}
+
+abstract class PinwheelBillSwitchPlatformsPayload
+    implements
+        PinwheelEventPayload,
+        Built<PinwheelBillSwitchPlatformsPayload,
+            PinwheelBillSwitchPlatformsPayloadBuilder> {
+  BuiltList<PinwheelBillSwitchPlatform> get platforms;
+
+  PinwheelBillSwitchPlatformsPayload._();
+  factory PinwheelBillSwitchPlatformsPayload(
+          [void Function(PinwheelBillSwitchPlatformsPayloadBuilder) updates]) =
+      _$PinwheelBillSwitchPlatformsPayload;
+
+  static Serializer<PinwheelBillSwitchPlatformsPayload> get serializer =>
+      _$pinwheelBillSwitchPlatformsPayloadSerializer;
+}
+
+abstract class PinwheelExternalAccountConnectedPayload
+    implements
+        PinwheelEventPayload,
+        Built<PinwheelExternalAccountConnectedPayload,
+            PinwheelExternalAccountConnectedPayloadBuilder> {
+  String get institutionName;
+  String get accountName;
+
+  PinwheelExternalAccountConnectedPayload._();
+  factory PinwheelExternalAccountConnectedPayload(
+      [void Function(PinwheelExternalAccountConnectedPayloadBuilder)
+          updates]) = _$PinwheelExternalAccountConnectedPayload;
+
+  static Serializer<PinwheelExternalAccountConnectedPayload> get serializer =>
+      _$pinwheelExternalAccountConnectedPayloadSerializer;
+}
+
+abstract class PinwheelCalendarSyncPayload
+    implements
+        PinwheelEventPayload,
+        Built<PinwheelCalendarSyncPayload, PinwheelCalendarSyncPayloadBuilder> {
+  String get calendarType;
+
+  PinwheelCalendarSyncPayload._();
+  factory PinwheelCalendarSyncPayload(
+          [void Function(PinwheelCalendarSyncPayloadBuilder) updates]) =
+      _$PinwheelCalendarSyncPayload;
+
+  static Serializer<PinwheelCalendarSyncPayload> get serializer =>
+      _$pinwheelCalendarSyncPayloadSerializer;
+}
+
+abstract class PinwheelUserActivatedPayload
+    implements
+        PinwheelEventPayload,
+        Built<PinwheelUserActivatedPayload,
+            PinwheelUserActivatedPayloadBuilder> {
+  String get solutionName;
+
+  PinwheelUserActivatedPayload._();
+  factory PinwheelUserActivatedPayload(
+          [void Function(PinwheelUserActivatedPayloadBuilder) updates]) =
+      _$PinwheelUserActivatedPayload;
+
+  static Serializer<PinwheelUserActivatedPayload> get serializer =>
+      _$pinwheelUserActivatedPayloadSerializer;
 }

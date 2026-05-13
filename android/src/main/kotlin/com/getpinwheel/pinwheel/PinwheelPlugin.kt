@@ -133,7 +133,6 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
         val obj = PinwheelEventChannelArgument("error", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
-
       PinwheelEventType.CARD_SWITCH_BEGIN -> {
         val obj = PinwheelEventChannelArgument("card_switch_begin", null)
         argument = gson.toJson(obj)
@@ -156,6 +155,66 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
       }
       PinwheelEventType.OTHER_EVENT -> {
         val obj = PinwheelEventChannelArgument("other_event", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.BILL_SWITCH_SUCCESS -> {
+        val obj = PinwheelEventChannelArgument("bill_switch_success", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.BILL_SWITCH_FAILURE -> {
+        val obj = PinwheelEventChannelArgument("bill_switch_failure", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.BILL_REMOVED -> {
+        val obj = PinwheelEventChannelArgument("bill_removed", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.BILL_ADDED -> {
+        val obj = PinwheelEventChannelArgument("bill_added", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.BILL_EDITED -> {
+        val obj = PinwheelEventChannelArgument("bill_edited", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.BILL_MARKED_INACTIVE -> {
+        val obj = PinwheelEventChannelArgument("bill_marked_inactive", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.BILL_SWITCH_PLATFORMS_ADDED -> {
+        val obj = PinwheelEventChannelArgument("bill_switch_platforms_added", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.BILL_SWITCH_PLATFORMS_REMOVED -> {
+        val obj = PinwheelEventChannelArgument("bill_switch_platforms_removed", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.BILL_CANCEL_SUCCESS -> {
+        val obj = PinwheelEventChannelArgument("bill_cancel_success", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.BILL_CANCEL_FAILURE -> {
+        val obj = PinwheelEventChannelArgument("bill_cancel_failure", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.CALENDAR_SYNC -> {
+        val obj = PinwheelEventChannelArgument("calendar_sync", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.CUSTOMER_TERMS_ACCEPTED -> {
+        val obj = PinwheelEventChannelArgument("customer_terms_accepted", null)
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.USER_ACTIVATED -> {
+        val obj = PinwheelEventChannelArgument("user_activated", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.EXTERNAL_ACCOUNT_CONNECTED -> {
+        val obj = PinwheelEventChannelArgument("external_account_connected", gson.toJson(payload))
+        argument = gson.toJson(obj)
+      }
+      PinwheelEventType.MERCHANT_LOGIN_SUCCESS -> {
+        val obj = PinwheelEventChannelArgument("merchant_login_success", gson.toJson(payload))
         argument = gson.toJson(obj)
       }
     }
@@ -210,7 +269,7 @@ internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int,
       readLinkToken(),
       pinwheelEventListener,
       "flutter",
-      "3.2.0",
+      "4.0.0",
       useDarkMode = useDarkMode ?: false,
       useSecureOrigin = useSecureOrigin ?: false
     )

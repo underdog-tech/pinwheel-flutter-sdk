@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 4.x Releases
+
+- `4.x` Releases - [4.0.0](#400)
+
 ## 3.x Releases
 
 - `3.x` Releases - [3.0.0](#300) | [3.1.0](#310) | [3.2.0](#320)
@@ -19,6 +23,35 @@ All notable changes to this project will be documented in this file.
 - `0.0.x` Releases - [0.0.1](#001) | [0.0.2](#002) | [0.0.3](#003)
 
 ---
+
+### [4.0.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/4.0.0)
+
+#### Notes
+
+- Upgrades the SDK to target the latest verison of Link: v4.
+- Adds support for a new set of bill and account lifecycle events.
+
+#### Breaking Changes
+
+- The `billRemoved` event handler now uses `PinwheelBillEvent` instead of `PinwheelBillSwitchEvent`.
+
+#### Non-breaking Changes
+
+- An optional `accountId` field has been added to `PinwheelBillSwitchPayload`.
+
+#### New event types
+
+- `billSwitchFailure`
+- `billAdded`
+- `billEdited`
+- `billMarkedInactive`
+- `billSwitchPlatformsAdded`
+- `billSwitchPlatformsRemoved`
+- `billCancelSuccess`
+- `billCancelFailure`
+- `calendarSync`
+- `customerTermsAccepted`
+- `userActivated`
 
 ### [3.2.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/3.2.0)
 
