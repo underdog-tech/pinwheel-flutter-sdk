@@ -6,7 +6,35 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
+  check_not_already_published:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Refuse to republish existing versions
+        run: |
+          set -euo pipefail
+
+          VERSION="$(grep -E '^version:' pubspec.yaml | head -n 1 | sed -E 's/^version:[[:space:]]*//')"
+          TAG="${GITHUB_REF_NAME}"
+          EXPECTED_TAG="v${VERSION}"
+
+          echo ">> Tag: ${TAG}"
+          echo ">> pubspec.yaml version: ${VERSION}"
+
+          if [[ "${TAG}" != "${EXPECTED_TAG}" ]]; then
+            echo "ERROR: Tag ${TAG} does not match pubspec.yaml version ${VERSION} (expected ${EXPECTED_TAG})."
+            exit 1
+          fi
+
+          if curl -sf "https://pub.dev/api/packages/pinwheel/versions/${VERSION}" > /dev/null; then
+            echo "ERROR: pinwheel ${VERSION} is already published on pub.dev. Refusing to republish."
+            exit 1
+          fi
+
+          echo ">> Version ${VERSION} is not yet on pub.dev. Proceeding to publish."
+
   publish:
+    needs: check_not_already_published
     permissions:
       id-token: write
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
