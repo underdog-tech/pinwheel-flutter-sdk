@@ -1,0 +1,116 @@
+version: 2.1
+
+# ---------------------------------------------------------------------------
+# Reusable references
+# ---------------------------------------------------------------------------
+references:
+  workspace: &workspace ~/src
+
+  flutter_image: &flutter_image cimg/flutter:3.29.3
+
+  restore_pub_cache: &restore_pub_cache
+    restore_cache:
+      keys:
+        - pub-v1-{{ checksum "pubspec.lock" }}-{{ checksum "example/pubspec.lock" }}
+        - pub-v1-
+
+  save_pub_cache: &save_pub_cache
+    save_cache:
+      key: pub-v1-{{ checksum "pubspec.lock" }}-{{ checksum "example/pubspec.lock" }}
+      paths:
+        - ~/.pub-cache
+
+  install_dependencies: &install_dependencies
+    run:
+      name: Install dependencies
+      command: |
+        flutter pub get
+        cd example && flutter pub get
+
+# ---------------------------------------------------------------------------
+# Jobs
+# ---------------------------------------------------------------------------
+jobs:
+  # Validates that pubspec.yaml version, CHANGELOG.md, and podspec are in sync.
+  check_mergable:
+    working_directory: *workspace
+    docker:
+      - image: *flutter_image
+    steps:
+      - checkout
+      - run:
+          name: Check version consistency
+          command: bash scripts/predeploy/check-version.sh
+
+  # Installs deps, formats, analyzes, tests, and dry-run publishes.
+  build_and_test:
+    working_directory: *workspace
+    docker:
+      - image: *flutter_image
+    steps:
+      - checkout
+      - *restore_pub_cache
+      - *install_dependencies
+      - *save_pub_cache
+      - run:
+          name: Check formatting
+          command: dart format --set-exit-if-changed lib test
+      - run:
+          name: Analyze
+          command: flutter analyze lib test
+      - run:
+          name: Test
+          command: flutter test
+      - run:
+          name: Dry-run publish
+          command: flutter pub publish --dry-run
+
+  # Manual approval gate — a human must approve in the CircleCI UI before
+  # any release tag is created. Defined as a workflow step (type: approval).
+
+  # Creates and pushes v<version> tag to trigger GitHub Actions pub.dev publishing.
+  # GITHUB_RELEASE_TOKEN comes from the frontend-production context.
+  create_release_tag:
+    working_directory: *workspace
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Create and push release tag
+          command: bash scripts/predeploy/create-release-tag.sh
+
+# ---------------------------------------------------------------------------
+# Workflows
+# ---------------------------------------------------------------------------
+workflows:
+  version: 2
+
+  pipeline:
+    jobs:
+      # Always run on every push
+      - check_mergable
+      - build_and_test
+
+      # main and deploy/* branches only: require human approval before tagging
+      - hold_for_approval:
+          type: approval
+          requires:
+            - check_mergable
+            - build_and_test
+          filters:
+            branches:
+              only:
+                - main
+                - /^deploy\/.*/
+
+      # Push release tag after approval; GitHub Actions publishes to pub.dev
+      - create_release_tag:
+          context: frontend-production
+          requires:
+            - hold_for_approval
+          filters:
+            branches:
+              only:
+                - main
+                - /^deploy\/.*/
