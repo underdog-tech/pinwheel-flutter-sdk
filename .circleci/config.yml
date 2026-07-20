@@ -6,7 +6,7 @@ version: 2.1
 references:
   workspace: &workspace ~/src
 
-  flutter_image: &flutter_image cimg/flutter:3.29.3
+  flutter_image: &flutter_image ghcr.io/cirruslabs/flutter:3.38.9
 
   restore_pub_cache: &restore_pub_cache
     restore_cache:
