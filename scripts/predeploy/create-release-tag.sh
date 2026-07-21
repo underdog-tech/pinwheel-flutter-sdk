@@ -5,8 +5,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
-if [[ -z "${GITHUB_RELEASE_TOKEN:-}" ]]; then
-  echo "ERROR: GITHUB_RELEASE_TOKEN environment variable is not set."
+if [[ -z "${GITHUB_TOKEN_CTX:-}" ]]; then
+  echo "ERROR: GITHUB_TOKEN_CTX environment variable is not set."
   echo "Add a GitHub token with contents:write access to the CircleCI context."
   exit 1
 fi
@@ -41,7 +41,7 @@ git config user.name "CircleCI"
 
 git tag -a "$TAG" -m "Release ${VERSION}"
 
-git remote set-url origin "https://x-access-token:${GITHUB_RELEASE_TOKEN}@github.com/${REPO}.git"
+git remote set-url origin "https://x-access-token:${GITHUB_TOKEN_CTX}@github.com/${REPO}.git"
 git push origin "$TAG"
 
 echo ">> Pushed tag $TAG to origin."
