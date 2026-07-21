@@ -121,6 +121,10 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
         val obj = PinwheelEventChannelArgument("input_required", null)
         argument = gson.toJson(obj)
       }
+      PinwheelEventType.CARD_SWITCH_BEGIN -> {
+        val obj = PinwheelEventChannelArgument("card_switch_begin", null)
+        argument = gson.toJson(obj)
+      }
       PinwheelEventType.EXIT -> {
         val obj = PinwheelEventChannelArgument("exit", gson.toJson(payload))
         argument = gson.toJson(obj)
