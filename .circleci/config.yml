@@ -69,7 +69,7 @@ jobs:
   # any release tag is created. Defined as a workflow step (type: approval).
 
   # Creates and pushes v<version> tag to trigger GitHub Actions pub.dev publishing.
-  # GITHUB_RELEASE_TOKEN comes from the frontend-production context.
+  # GITHUB_TOKEN_CTX comes from the frontend-production context.
   create_release_tag:
     working_directory: *workspace
     docker:
