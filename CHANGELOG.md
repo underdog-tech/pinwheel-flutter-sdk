@@ -24,6 +24,13 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+### Unreleased
+
+- Android: hosts Link in a `PinwheelFragment` when the host activity is a `FragmentActivity` (e.g. `FlutterFragmentActivity`), so camera permission requests from identity verification flows are handled. Apps using `FlutterActivity` keep the previous behavior, without camera support.
+- Docs: adds camera access requirements for Android and iOS.
+
+---
+
 ### [4.0.1](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/4.0.1)
 
 - Adds CircleCI release validation and GitHub Actions tag-triggered pub.dev publishing.
