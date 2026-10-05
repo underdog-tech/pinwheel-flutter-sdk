@@ -46,6 +46,7 @@ class PinwheelPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
   override fun onAttachedToActivity(binding: ActivityPluginBinding) {
     activity = binding.activity
+    removeStaleFragments(binding.activity)
   }
 
   override fun onDetachedFromActivityForConfigChanges() {
@@ -54,10 +55,18 @@ class PinwheelPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
   override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
     activity = binding.activity
+    removeStaleFragments(binding.activity)
   }
 
   override fun onDetachedFromActivity() {
     activity = null
+  }
+
+  // A recreated activity restores Link fragments from a previous session even when Flutter does
+  // not recreate their platform views, so they must be removed here as well.
+  private fun removeStaleFragments(activity: Activity) {
+    val fragmentActivity = activity as? FragmentActivity ?: return
+    NativeView.removeStaleFragments(fragmentActivity.supportFragmentManager)
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -341,21 +350,6 @@ internal class NativeView(
     return container
   }
 
-  // Fragments restored by the FragmentManager after process death are no longer backed by a
-  // platform view. Remove them so they don't intercept back presses or camera permission requests.
-  private fun removeStaleFragments(fragmentManager: FragmentManager) {
-    val staleFragments = fragmentManager.fragments.filter {
-      it is PinwheelFragment && isStaleFragmentTag(it.tag, liveFragmentTags)
-    }
-    if (staleFragments.isEmpty()) {
-      return
-    }
-
-    val transaction = fragmentManager.beginTransaction()
-    staleFragments.forEach { transaction.remove(it) }
-    transaction.commitAllowingStateLoss()
-  }
-
   companion object {
     private const val TAG = "PinwheelFlutter"
     private const val SDK_NAME = "flutter"
@@ -364,6 +358,26 @@ internal class NativeView(
 
     // Platform views are created and disposed on the main thread.
     private val liveFragmentTags = mutableSetOf<String>()
+
+    // Fragments restored by the FragmentManager after the activity is recreated are no longer
+    // backed by a platform view. Remove them so they don't intercept back presses or camera
+    // permission requests.
+    internal fun removeStaleFragments(fragmentManager: FragmentManager) {
+      if (fragmentManager.isDestroyed) {
+        return
+      }
+
+      val staleFragments = fragmentManager.fragments.filter {
+        it is PinwheelFragment && isStaleFragmentTag(it.tag, liveFragmentTags)
+      }
+      if (staleFragments.isEmpty()) {
+        return
+      }
+
+      val transaction = fragmentManager.beginTransaction()
+      staleFragments.forEach { transaction.remove(it) }
+      transaction.commitAllowingStateLoss()
+    }
 
     internal fun isStaleFragmentTag(tag: String?, liveTags: Set<String>): Boolean {
       return tag != null && tag.startsWith(FRAGMENT_TAG_PREFIX) && tag !in liveTags
