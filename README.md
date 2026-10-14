@@ -77,6 +77,31 @@ PinwheelLink link = PinwheelLink(
 
 `PinwheelLink` is a `StatefulWidget` that you can display and hide in your app's view hierarchy.
 
+## Camera access
+
+Some platform integrations may require camera access for identity verification.
+
+### Android
+
+Your app's `MainActivity` must extend `FlutterFragmentActivity` instead of `FlutterActivity`. The plugin hosts Link in a `PinwheelFragment` so that it can request camera permission, which requires a `FragmentActivity`. If your app uses `FlutterActivity`, Link still loads, but camera-based verification flows will not work.
+
+```kotlin
+import io.flutter.embedding.android.FlutterFragmentActivity
+
+class MainActivity : FlutterFragmentActivity()
+```
+
+The `android.permission.CAMERA` permission is declared by the Pinwheel Android SDK and merged into your app's manifest automatically.
+
+### iOS
+
+Add the `NSCameraUsageDescription` key to your app's `Info.plist`. iOS terminates apps that access the camera without it.
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>We need access to your camera for verification purposes.</string>
+```
+
 ## Build requirements
 
 ### Android
