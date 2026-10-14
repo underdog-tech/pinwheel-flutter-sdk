@@ -26,8 +26,15 @@ All notable changes to this project will be documented in this file.
 
 ### Unreleased
 
-- Android: hosts Link in a `PinwheelFragment` when the host activity is a `FragmentActivity` (e.g. `FlutterFragmentActivity`), so camera permission requests from identity verification flows are handled. Apps using `FlutterActivity` keep the previous behavior, without camera support.
-- Docs: adds camera access requirements for Android and iOS.
+#### Notes
+
+- Android: camera-based identity verification flows (e.g. DoorDash) are now supported when the host activity is a `FragmentActivity`. The plugin hosts Link in a `PinwheelFragment` so that it can request camera permission.
+- Docs: adds camera access requirements for Android and iOS. See [Camera access](README.md#camera-access).
+
+#### Action Required
+
+- Android: camera-based verification flows require the `android.permission.CAMERA` permission. It is declared by the Pinwheel Android SDK and merged into your app's manifest automatically, and the SDK requests it at runtime when a flow needs the camera.
+- iOS: add the `NSCameraUsageDescription` key to your app's `Info.plist`. iOS terminates apps that access the camera without it.
 
 ---
 
