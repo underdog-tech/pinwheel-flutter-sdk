@@ -30,7 +30,7 @@ All notable changes to this project will be documented in this file.
 
 - Updates the iOS dependency to [Pinwheel iOS 4.1.0](https://github.com/underdog-tech/pinwheel-ios-sdk/releases/tag/4.1.0).
 - Updates the Android dependency to [Pinwheel Android 4.2.0](https://github.com/underdog-tech/pinwheel-android-sdk/releases/tag/4.2.0).
-- Pulls in the Homer SDK update that removes Datadog in favor of custom logging and crash monitoring.
+- Removes DataDog from the SDK, reducing bundle size.
 
 #### Breaking Changes
 
