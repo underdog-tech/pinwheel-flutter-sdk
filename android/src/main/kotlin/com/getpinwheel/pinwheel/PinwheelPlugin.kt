@@ -1,19 +1,23 @@
 package com.getpinwheel.pinwheel
 
+import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
-import android.webkit.WebView
-import android.widget.TextView
+import android.widget.FrameLayout
 import androidx.annotation.NonNull
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.google.gson.Gson
 import com.underdog_tech.pinwheel_android.PinwheelViewGroupManager
 import com.underdog_tech.pinwheel_android.PinwheelEventListener
-import com.underdog_tech.pinwheel_android.PinwheelFrameLayout
+import com.underdog_tech.pinwheel_android.PinwheelFragment
 import com.underdog_tech.pinwheel_android.model.*
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.*
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
@@ -27,8 +31,9 @@ data class PinwheelEventChannelArgument(
 )
 
 /** PinwheelPlugin */
-class PinwheelPlugin : FlutterPlugin, MethodCallHandler {
+class PinwheelPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
   private lateinit var channel: MethodChannel
+  private var activity: Activity? = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "pinwheel", JSONMethodCodec.INSTANCE)
@@ -36,7 +41,32 @@ class PinwheelPlugin : FlutterPlugin, MethodCallHandler {
 
     flutterPluginBinding
       .platformViewRegistry
-      .registerViewFactory("pinwheel-link-view", NativeViewFactory(flutterPluginBinding.binaryMessenger))
+      .registerViewFactory("pinwheel-link-view", NativeViewFactory(flutterPluginBinding.binaryMessenger) { activity })
+  }
+
+  override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+    activity = binding.activity
+    removeStaleFragments(binding.activity)
+  }
+
+  override fun onDetachedFromActivityForConfigChanges() {
+    activity = null
+  }
+
+  override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+    activity = binding.activity
+    removeStaleFragments(binding.activity)
+  }
+
+  override fun onDetachedFromActivity() {
+    activity = null
+  }
+
+  // A recreated activity restores Link fragments from a previous session even when Flutter does
+  // not recreate their platform views, so they must be removed here as well.
+  private fun removeStaleFragments(activity: Activity) {
+    val fragmentActivity = activity as? FragmentActivity ?: return
+    NativeView.removeStaleFragments(fragmentActivity.supportFragmentManager)
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -225,66 +255,132 @@ class PluginListener(messenger: BinaryMessenger) : PinwheelEventListener {
   }
 }
 
-class NativeViewFactory(private val messenger: BinaryMessenger) : PlatformViewFactory(JSONMessageCodec.INSTANCE) {
+class NativeViewFactory(
+  private val messenger: BinaryMessenger,
+  private val activityProvider: () -> Activity?
+) : PlatformViewFactory(JSONMessageCodec.INSTANCE) {
   override fun create(context: Context?, viewId: Int, args: Any?): PlatformView {
     val creationParams = args as JSONObject?
-    return NativeView(context!!, messenger, viewId, creationParams)
+    return NativeView(context!!, activityProvider(), messenger, viewId, creationParams)
   }
 }
 
-internal class NativeView(context: Context, messenger: BinaryMessenger, id: Int, creationParams: JSONObject?) : PlatformView {
-  private val pinwheelEventListener: PinwheelEventListener
-  private var pinwheelView: PinwheelFrameLayout
-  private var textView: TextView
-  private var token: String?
-  private var useDarkMode: Boolean?
-  private var useSecureOrigin: Boolean?
-
-  override fun getView(): View {
-    val result = pinwheelView
-    if (result != null) {
-      return result
-    }
-
-    return textView
-  }
-
-  override fun dispose() {}
+internal class NativeView(
+  context: Context,
+  activity: Activity?,
+  messenger: BinaryMessenger,
+  id: Int,
+  creationParams: JSONObject?
+) : PlatformView {
+  private val pinwheelEventListener: PinwheelEventListener = PluginListener(messenger)
+  private val token: String = creationParams?.get("token") as String? ?: ""
+  private val useDarkMode: Boolean = creationParams?.optBoolean("useDarkMode", false) ?: false
+  private val useSecureOrigin: Boolean = creationParams?.optBoolean("useSecureOrigin", false) ?: false
+  private val fragmentActivity: FragmentActivity? = activity as? FragmentActivity
+  private val fragmentTag = "$FRAGMENT_TAG_PREFIX$id"
+  private var pinwheelFragment: PinwheelFragment? = null
+  private val pinwheelView: View
 
   init {
-    pinwheelEventListener = PluginListener(messenger)
-
-    val aToken = creationParams?.get("token") as String?
-    if (aToken != null) {
-      token = aToken
+    // The native Android SDK only handles webview camera permission requests (used by identity
+    // verification flows) when Link is hosted in a `PinwheelFragment`, which requires a
+    // `FragmentActivity` host such as `FlutterFragmentActivity`.
+    pinwheelView = if (fragmentActivity != null) {
+      initFragmentView(context, fragmentActivity)
     } else {
-      token = ""
+      Log.w(
+        TAG,
+        "Host activity is not a FragmentActivity. Camera-based verification flows will not work. " +
+          "Extend FlutterFragmentActivity instead of FlutterActivity to enable them."
+      )
+      PinwheelViewGroupManager.init(
+        context,
+        token,
+        pinwheelEventListener,
+        SDK_NAME,
+        SDK_VERSION,
+        useDarkMode = useDarkMode,
+        useSecureOrigin = useSecureOrigin
+      )
     }
-
-    useDarkMode = creationParams?.optBoolean("useDarkMode", false) ?: false
-    useSecureOrigin = creationParams?.optBoolean("useSecureOrigin", false) ?: false
-
-    pinwheelView = PinwheelViewGroupManager.init(
-      context,
-      readLinkToken(),
-      pinwheelEventListener,
-      "flutter",
-      "4.0.1",
-      useDarkMode = useDarkMode ?: false,
-      useSecureOrigin = useSecureOrigin ?: false
-    )
-
-    textView = TextView(context)
-    textView.textSize = 36f
-    textView.setBackgroundColor(Color.rgb(255, 255, 255))
-    textView.text = "Oops! We ran into an error."
-
   }
 
-  private fun readLinkToken(): String {
-    token?.let {
-      return it
+  override fun getView(): View {
+    return pinwheelView
+  }
+
+  override fun dispose() {
+    val fragment = pinwheelFragment ?: return
+    pinwheelFragment = null
+    liveFragmentTags.remove(fragmentTag)
+    fragment.pinwheelEventListener = null
+    (pinwheelView as? FrameLayout)?.removeAllViews()
+
+    val fragmentManager = fragmentActivity?.supportFragmentManager ?: return
+    if (!fragmentManager.isDestroyed) {
+      fragmentManager.beginTransaction().remove(fragment).commitAllowingStateLoss()
     }
-    return ""
+  }
+
+  private fun initFragmentView(context: Context, activity: FragmentActivity): View {
+    val container = FrameLayout(context)
+    val fragmentManager = activity.supportFragmentManager
+    removeStaleFragments(fragmentManager)
+
+    val fragment = PinwheelFragment.newInstanceWithAdvancedOptions(
+      token,
+      SDK_NAME,
+      SDK_VERSION,
+      null,
+      true,
+      useDarkMode,
+      useSecureOrigin
+    )
+    fragment.pinwheelEventListener = pinwheelEventListener
+
+    // The fragment is added without a container because the platform view is not attached to the
+    // window yet; its view is moved into our container once the transaction commits.
+    fragmentManager.beginTransaction()
+      .add(fragment, fragmentTag)
+      .runOnCommit { fragment.view?.let { container.addView(it) } }
+      .commitAllowingStateLoss()
+
+    liveFragmentTags.add(fragmentTag)
+    pinwheelFragment = fragment
+    return container
+  }
+
+  companion object {
+    private const val TAG = "PinwheelFlutter"
+    private const val SDK_NAME = "flutter"
+    private const val SDK_VERSION = "4.1.0"
+    internal const val FRAGMENT_TAG_PREFIX = "PinwheelFlutterFragment-"
+
+    // Platform views are created and disposed on the main thread.
+    private val liveFragmentTags = mutableSetOf<String>()
+
+    // Fragments restored by the FragmentManager after the activity is recreated are no longer
+    // backed by a platform view. Remove them so they don't intercept back presses or camera
+    // permission requests.
+    internal fun removeStaleFragments(fragmentManager: FragmentManager) {
+      if (fragmentManager.isDestroyed) {
+        return
+      }
+
+      val staleFragments = fragmentManager.fragments.filter {
+        it is PinwheelFragment && isStaleFragmentTag(it.tag, liveFragmentTags)
+      }
+      if (staleFragments.isEmpty()) {
+        return
+      }
+
+      val transaction = fragmentManager.beginTransaction()
+      staleFragments.forEach { transaction.remove(it) }
+      transaction.commitAllowingStateLoss()
+    }
+
+    internal fun isStaleFragmentTag(tag: String?, liveTags: Set<String>): Boolean {
+      return tag != null && tag.startsWith(FRAGMENT_TAG_PREFIX) && tag !in liveTags
+    }
   }
 }
