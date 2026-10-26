@@ -353,7 +353,7 @@ internal class NativeView(
   companion object {
     private const val TAG = "PinwheelFlutter"
     private const val SDK_NAME = "flutter"
-    private const val SDK_VERSION = "4.0.1"
+    private const val SDK_VERSION = "4.1.0"
     internal const val FRAGMENT_TAG_PREFIX = "PinwheelFlutterFragment-"
 
     // Platform views are created and disposed on the main thread.

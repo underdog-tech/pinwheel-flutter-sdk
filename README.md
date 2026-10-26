@@ -106,7 +106,7 @@ Add the `NSCameraUsageDescription` key to your app's `Info.plist`. iOS terminate
 
 ### Android
 
-- Android minSdkVersion: API 22 or higher.
+- Android minSdkVersion: API 23 or higher.
 - Android compileSdkVersion: API 34 or higher.
 
 ### iOS
