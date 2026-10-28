@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 4.x Releases
 
-- `4.x` Releases - [4.1.0](#410) | [4.0.1](#401) | [4.0.0](#400)
+- `4.x` Releases - [4.2.0](#420) | [4.1.0](#410) | [4.0.1](#401) | [4.0.0](#400)
 
 ## 3.x Releases
 
@@ -24,17 +24,32 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+### [4.2.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/4.2.0)
+
+- Removes DataDog from the SDK, reducing bundle size.
+
 ### [4.1.0](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/4.1.0)
 
 #### Updated
 
 - Updates the iOS dependency to [Pinwheel iOS 4.1.0](https://github.com/underdog-tech/pinwheel-ios-sdk/releases/tag/4.1.0).
-- Updates the Android dependency to [Pinwheel Android 4.2.0](https://github.com/underdog-tech/pinwheel-android-sdk/releases/tag/4.2.0).
-- Removes DataDog from the SDK, reducing bundle size.
+- Updates the Android dependency to [Pinwheel Android 4.1.3](https://github.com/underdog-tech/pinwheel-android-sdk/releases/tag/4.1.3).
+
+#### Notes
+
+- Android: camera-based identity verification flows (e.g. DoorDash) are now supported when the host activity is a `FragmentActivity`. The plugin hosts Link in a `PinwheelFragment` so that it can request camera permission.
+- Docs: adds camera access requirements for Android and iOS. See [Camera access](README.md#camera-access).
 
 #### Breaking Changes
 
 - Android `minSdkVersion` is now 23. API 22 is no longer supported, matching the Pinwheel Android SDK.
+
+#### Action Required
+
+- Android: camera-based verification flows require the `android.permission.CAMERA` permission. It is declared by the Pinwheel Android SDK and merged into your app's manifest automatically, and the SDK requests it at runtime when a flow needs the camera.
+- iOS: add the `NSCameraUsageDescription` key to your app's `Info.plist`. iOS terminates apps that access the camera without it.
+
+---
 
 ### [4.0.1](https://github.com/underdog-tech/pinwheel-flutter-sdk/releases/tag/4.0.1)
 

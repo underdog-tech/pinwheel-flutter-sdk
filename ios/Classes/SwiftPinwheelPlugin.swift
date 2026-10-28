@@ -102,7 +102,7 @@ class FLNativeView: NSObject, FlutterPlatformView {
             return
         }
         var config = PinwheelConfig(
-            mode: .sandbox, environment: .production, sdk: "flutter", version: "4.1.0")
+            mode: .sandbox, environment: .production, sdk: "flutter", version: "4.2.0")
         config.useSecureOrigin = _useSecureOrigin ?? false
         let useDarkMode = _useDarkMode ?? false
         _pinwheelVC = PinwheelViewController(
