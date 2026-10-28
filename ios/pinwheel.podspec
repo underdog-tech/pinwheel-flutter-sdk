@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'pinwheel'
-  s.version          = '4.1.0'
+  s.version          = '4.2.0'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
 A new flutter plugin project.
